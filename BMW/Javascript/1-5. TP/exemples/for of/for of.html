@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Variables javascript</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<script>
+			let evenementList = [
+                ['Foot',10],
+                ['Tennis',30],
+                ['Course',20],
+				['Velo',120],
+                ['Petanque',5]
+            ];
+
+			
+			for (evenement of evenementList) {
+				for (detail of evenement) {
+					console.log(detail);
+				}
+			}
+			
+			// evenement inferieur à 50
+			for (evenement of evenementList) {
+				if(evenement[1]<50){
+					for (detail of evenement) {
+						console.log(detail);
+					}
+				}
+			}
+			
+		</script>
+	</body>
+</html>
+
+
+
+			
+
+

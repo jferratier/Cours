@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Variables javascript</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<script>
+			var localisationGard = new Object();
+			localisationGard.adresse= '1 rue du pont du Gard';
+			localisationGard.codePosate = "30000"  ;
+			localisationGard.ville = "Nimes";
+			
+			var localisationHerault = new Object();
+			localisationGard.adresse= '1 place de la commedie';
+			localisationGard.codePosate = "34000"  ;
+			localisationGard.ville = "Montpellier";
+
+			var evenement1 = new Object();
+			evenement1.titre = "Foot" ;
+			evenement1.description = "Evenementy de foot" ;
+			evenement1.prix = "10€" ; 
+			evenement1.localisation = new Object();
+			evenement1.localisation= localisationGard ;
+			
+			var evenement2 = new Object();
+			evenement2.titre = "Tennis" ;
+			evenement2.description = "Evenement de Tennis" ;
+			evenement2.prix = "30€" ; 
+			evenement2.localisation = new Object();
+			evenement2.localisation= localisationHerault ;
+			
+			console.log(evenement1);
+			
+			console.log(evenement2);
+			
+		</script>
+	</body>
+</html>
+
+
+
+			
+
+

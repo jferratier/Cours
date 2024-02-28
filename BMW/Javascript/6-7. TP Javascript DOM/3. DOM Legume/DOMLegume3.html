@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head> </head>
+
+	<body>
+		<style type="text/css">
+			#table {
+				font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			td,
+			th {
+				border: 1px solid #ddd;
+				padding: 8px;
+				width: 400px;
+			}
+
+			tr:nth-child(even) {
+				background-color: #f2f2f2;
+			}
+
+			tr:hover {
+				background-color: #82d36e;
+			}
+
+			th {
+				padding-top: 12px;
+				padding-bottom: 12px;
+				text-align: left;
+				background-color: #4caf50;
+				color: white;
+			}
+		</style>
+
+		<table id="table1">
+			<tr>
+				<th>Type</th>
+				<th>Element</th>
+			</tr>
+		</table>
+
+		<br />
+		<table id="table2">
+			<tr>
+				<th>Type</th>
+				<th>Element</th>
+			</tr>
+		</table>
+
+		<script>
+			let alimentationListe = [];
+			alimentationListe.push(['fruit', 'pomme']);
+			alimentationListe.push(['fruit', 'poire']);
+			alimentationListe.push(['legume', 'poireau']);
+			// On récupèle l'élélement html souhaité, ici notre zone de texte ayant l'id txt100
+			let tableau1 = document.getElementById('table1');
+			let tableau2 = document.getElementById('table2');
+			afficherTableau(tableau1, alimentationListe, 'fruit');
+			afficherTableau(tableau2, alimentationListe, 'legume');
+
+			function afficherTableau(tableauHTML, tableau, typeAlimentation) {
+				//...
+			}
+		</script>
+	</body>
+</html>

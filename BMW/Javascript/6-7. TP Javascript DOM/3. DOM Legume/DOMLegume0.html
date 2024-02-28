@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<!-- Utilisation des getElementByID et du DOM. voir https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById -->
+
+		<p id="demo">une chaine</p>
+
+		<!-- on appelle une fonction modifiant le code html -->
+		<button onclick="maFonction()">Try it</button>
+
+		<button onclick="afficherCacher()">Afficher / Cacher</button>
+
+		<button onclick="changeColor()">Changer couleur</button>
+
+		<script>
+			var x = document.getElementById('demo');
+			x.style = 'color:red';
+
+			function maFonction() {
+				var elementChaine = document.getElementById('demo');
+
+				let tableau = [
+					"evenement1",
+					"evenement2",
+					"evenement3"
+				];
+
+				let jolieChaine = "";
+				for( el of tableau){
+					jolieChaine = jolieChaine + el + "<br>";
+				}
+
+				elementChaine.innerHTML = jolieChaine;
+				elementChaine.style.color = "blue";
+	
+			}
+
+			function afficherCacher() {
+				var x = document.getElementById('demo');
+				//...
+			}
+
+			function changeColor() {
+				var x = document.getElementById('demo');
+			
+
+				if(x.style.color == "red"){
+					x.style = "color:green";
+				}else{
+					x.style = "color:red";
+				}
+
+				//...
+			}
+		</script>
+	</body>
+</html>
