@@ -17,7 +17,7 @@
 				text-align: center;
 			}
 		</style>
-
+<div class="tbl-header">
 		<table id="table1">
 			<tr>
 				<th>Type</th>
@@ -34,8 +34,10 @@
 				<th>Prix</th>
 			</tr>
 		</table>
-
+</div>
 		<script>
+			let jolieChaine = "";
+			let jolieChaineTableauHtml = "";
 			let alimentationListe = [];
 			alimentationListe.push(['fruit', 'pomme', 10]);
 			alimentationListe.push(['fruit', 'poire', 10]);
@@ -43,11 +45,27 @@
 			// On récupèle l'élélement html souhaité, ici notre zone de texte ayant l'id txt100
 			let tableau1 = document.getElementById('table1');
 			let tableau2 = document.getElementById('table2');
+
 			afficherTableau(tableau1, alimentationListe, 'fruit');
 			afficherTableau(tableau2, alimentationListe, 'legume');
 
 			function afficherTableau(tableauHTML, tableau, typeAlimentation) {
-				//...
+				
+				jolieChaine = "";
+				jolieChaineTableauHtml ="";
+
+				jolieChaineTableauHtml="<table><tr><th>Type</th><th>Element</th><th>Prix</th></tr>";
+
+				for( el of tableau){
+					if(el[0] == typeAlimentation){
+						jolieChaine = jolieChaine + el[0] + ' ' + el[1] + ' ' + el[2] + '\n';
+						jolieChaineTableauHtml = jolieChaineTableauHtml + "<tr> <td>"+ el[0] +"</td><td>"+ el[1] +"</td><td>"+ el[2] +"</td> </tr>";
+					}
+				}
+
+				jolieChaineTableauHtml = jolieChaineTableauHtml + "</table>";
+				tableauHTML.innerHTML = jolieChaineTableauHtml;
+				
 			}
 		</script>
 	</body>

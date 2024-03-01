@@ -5,6 +5,7 @@
 	<body>
 		<textarea id="txt100" name="txt100" rows="10" cols="70"></textarea><br />
 		<textarea id="txt200" name="txt200" rows="10" cols="70"></textarea>
+
 		<script>
 
 			let alimentationListe = [];
@@ -16,12 +17,12 @@
 			let zoneTexte = document.getElementById('txt100');
 			let zoneTexte2 = document.getElementById('txt200');
 
-			afficherTableau(zoneTexte, alimentationListe, 'fruit');
-			afficherTableau(zoneTexte2, alimentationListe, 'legume');
+			//afficherTableau(zoneTexte, alimentationListe, 'fruit');
+			//afficherTableau(zoneTexte2, alimentationListe, 'legume');
+			afficherLegume(zoneTexte, alimentationListe);
 
 			function afficherTableau(elementHTML, tableau, typeAlimentation) {
 				
-				console.log(tableau); console.log(typeAlimentation);
 				let jolieChaine = "";
 				for( el of tableau){
 					if(el[0] == typeAlimentation){
@@ -30,12 +31,17 @@
 				}
 				elementHTML.innerHTML = jolieChaine;
 
-
-
 			}
-
 			function afficherLegume(elementHTML, tableau) {
-				//...
+
+				let jolieChaine = "";
+				for( el of tableau){
+					if(el[0] == "legume"){
+						jolieChaine = jolieChaine + el[0] + ' ' + el[1] + ' ' + el[2] + '\n';
+					}
+				}
+				elementHTML.innerHTML = jolieChaine;
+
 			}
 		</script>
 	</body>

@@ -34,20 +34,18 @@
 			}
 		</style>
 
-		<table id="table1">
-			<tr>
-				<th>Type</th>
-				<th>Element</th>
-			</tr>
-		</table>
+		<button onclick="affTabLeg()">Afficher le tableau de legume</button>
+		<button onclick="affTabFruit()">Afficher le tableau de fruit</button>
 
+		<p id="description"> </p>
+
+		<table id="table1">
+		</table>
 		<br />
 		<table id="table2">
-			<tr>
-				<th>Type</th>
-				<th>Element</th>
-			</tr>
 		</table>
+
+		
 
 		<script>
 			let alimentationListe = [];
@@ -57,11 +55,35 @@
 			// On récupèle l'élélement html souhaité, ici notre zone de texte ayant l'id txt100
 			let tableau1 = document.getElementById('table1');
 			let tableau2 = document.getElementById('table2');
-			afficherTableau(tableau1, alimentationListe, 'fruit');
-			afficherTableau(tableau2, alimentationListe, 'legume');
+			let maDescription = document.getElementById('description');
+
+			function affTabFruit(){
+				maDescription.innerHTML= " mon bla bla sur les fruits";
+				afficherTableau(tableau1, alimentationListe, 'fruit');
+				
+			}
+			function affTabLeg(){
+				maDescription.innerHTML= " mon bla bla sur les légumes";
+				afficherTableau(tableau1, alimentationListe, 'legume');
+			}
 
 			function afficherTableau(tableauHTML, tableau, typeAlimentation) {
-				//...
+				
+				jolieChaine = "";
+				jolieChaineTableauHtml ="";
+
+				jolieChaineTableauHtml="<table><tr><th>Type</th><th>Element</th><th>Prix</th></tr>";
+
+				for( el of tableau){
+					if(el[0] == typeAlimentation){
+						jolieChaine = jolieChaine + el[0] + ' ' + el[1] + ' ' + el[2] + '\n';
+						jolieChaineTableauHtml = jolieChaineTableauHtml + "<tr> <td>"+ el[0] +"</td><td>"+ el[1] +"</td><td>"+ el[2] +"</td> </tr>";
+					}
+				}
+
+				jolieChaineTableauHtml = jolieChaineTableauHtml + "</table>";
+				tableauHTML.innerHTML = jolieChaineTableauHtml;
+				
 			}
 		</script>
 	</body>
