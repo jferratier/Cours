@@ -1,1 +1,0 @@
-mmc /32 C:\windows\SysWOW64\SQLServerManager15.msc
