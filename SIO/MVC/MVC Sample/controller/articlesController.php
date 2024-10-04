@@ -58,7 +58,7 @@ class Articlescontroller{
         $Article->setArt_prix($_POST["prix"]);
         $Article->setArt_poid($_POST["poid"]);
         if($Article->update()){
-            header('Location : index.php');
+            header('Location: index.php');
             exit;
         }
         
