@@ -59,6 +59,7 @@ class Articlescontroller{
         $Article->setArt_poid($_POST["poid"]);
         if($Article->update())
             header('Location : index.php');
+        exit;
     }
     function view($name,$data){
         require_once __DIR__ . "/../view/". $name . "View.php";
