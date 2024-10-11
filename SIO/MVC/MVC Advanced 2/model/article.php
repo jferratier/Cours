@@ -85,7 +85,6 @@
             $this->connexion = null;
             return $result;
         }
-        
         public function delete(){
             $query = $this->connexion->prepare("DELETE FROM ".$this->table. " WHERE art_id = :id");
             $result= $query->execute(array(
@@ -95,6 +94,7 @@
             $this->connexion = null;
             return $result;
         }
+        //TODO function delete()
 
     }
 ?>

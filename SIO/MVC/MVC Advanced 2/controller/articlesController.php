@@ -19,15 +19,18 @@ class Articlescontroller{
             case "creer" :
                 $this->creer();
                 break;
+            case "initArticle" :
+                $this->initArticle();
+            break;
             case "detail" :
                 $this->detail();
                 break;
             case "maj" :
                 $this->maj();
                 break;
-            case "delete" :
+            case "suppression":
                 $this->delete();
-            break;
+                break;
             default :
                 $this->index();
                 break;
@@ -54,23 +57,34 @@ class Articlescontroller{
             exit;
         }
     }
+    public function initArticle(){
+        $this->view("create", array("", "titre"=> "PHP MVC"));
+    }
     public function maj(){
         $Article = new Article($this->connexion);
         $Article->setArt_id($_POST["id"]);
         $Article->setArt_nom($_POST["nom"]);
         $Article->setArt_prix($_POST["prix"]);
         $Article->setArt_poid($_POST["poid"]);
-        if($Article->update())
-            header('Location : index.php');
+        if($Article->update()){
+            header('Location: index.php');
+            exit;
+        }
+        
     }
-
     public function delete(){
         $Article = new Article($this->connexion);
-        $Article->setArt_id($_POST["id"]);
 
-        echo "------".$_POST["id"]."------"; exit;
-        if($Article->delete())
-            header('Location : index.php');
+        $id=$_POST["id"];
+        if($id=="")
+            $id=$_GET["id"];
+
+        $Article->setArt_id($id);
+        if($Article->delete()){
+            header('Location: index.php');
+            exit;
+        }
+        
     }
     function view($name,$data){
         require_once __DIR__ . "/../view/". $name . "View.php";
