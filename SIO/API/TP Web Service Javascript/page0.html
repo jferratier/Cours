@@ -11,21 +11,33 @@
 
 <body>
   <div id="root"></div>
-  <script>
+  <label for="fname">Mon departement : </label>
+  <input type="text" id="dep" name="dep"><br><br>
+  <button onclick="myFunction()">Recevoir les villes</button>
+  <b></b><p id="compteurVille" style="color:red;"></p></b>
+  <p id="demo"></p>
+<script>
+	function myFunction() {
+		var monDep = document.getElementById("dep");
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', 'https://geo.api.gouv.fr/departements/'+monDep.value+'/communes?fields=nom,code,codesPostaux,siren,codeEpci,codeDepartement,codeRegion,population&format=json&geometry=centre');
+		xhr.send();
+		xhr.onload = function() {
+		if (xhr.status != 200) { // analyze HTTP status of the response
+			alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+		} else { // show the result
+			var texte = document.getElementById("demo");
+			var monJson = xhr.response;
+			var monTab = JSON.parse(monJson);
+			texte.innerHTML = "";
+			var i = 0;
+			
+			//  !!! faire un for !!!
 
-	/*
-		geo.api.gouv.fr
-		Grace aux formulaires de la page permettant de tester les web services, et grâce à vos onglets console et network, trouvez le service qui recherche et retourne la liste des villes(communes) en fournissant un numéro département.
-		Quel est le format du retour de ce web service ? 
-
-		Depuis la page0.html insérer le code javascript permettant de :
-		-	Consommer le web service avec un appel XMLHttpRequest (utilisez le département de votre choix).
-		-	Convertir la réponse du Web service avec la méthode JSON.parse. 
-		Cette méthode convertit le format JSON en tableau. 
-		-	Parcourez le tableau récupéré et afficher les informations suivantes en console :
-			XXXX
-	/*/
-  
+			document.getElementById("compteurVille").innerHTML = "<h1>Le nombre de villes du departement : </h1>" + i + "<br><br>";
+		}
+		};
+	}
   </script>
 </body>
 
