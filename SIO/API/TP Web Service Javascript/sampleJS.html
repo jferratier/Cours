@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ville App</title>
+
+</head>
+
+<body>
+  <div id="root"></div>
+  <label for="fname">Mon departement : </label>
+  <input type="text" id="dep" name="dep"><br><br>
+  <button onclick="myFunction()">Recevoir les villes</button>
+  <b></b><p id="compteurVille" style="color:red;"></p></b>
+  <p id="demo"></p>
+<script>
+	function myFunction() {
+		var monDep = document.getElementById("dep");
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', 'https://geo.api.gouv.fr/departements/'+monDep.value+'/communes?fields=nom,code,codesPostaux,siren,codeEpci,codeDepartement,codeRegion,population&format=json&geometry=centre');
+		xhr.send();
+		xhr.onload = function() {
+		if (xhr.status != 200) { // analyze HTTP status of the response
+			alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+		} else { // show the result
+			var texte = document.getElementById("demo");
+			var monJson = xhr.response;
+			var monTab = JSON.parse(monJson);
+			texte.innerHTML = "";
+			var i = 0;
+			//  !!! faire un for !!!
+			document.getElementById("compteurVille").innerHTML = "<h1>Le nombre de villes du departement : </h1>" + i + "<br><br>";
+		}
+		};
+	}
+  </script>
+</body>
+
+</html>
