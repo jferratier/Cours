@@ -29,12 +29,15 @@
 			var texte = document.getElementById("demo");
 			var monJson = xhr.response;
 			var monTab = JSON.parse(monJson);
+			//console.log(monTab);
 			texte.innerHTML = "";
-			var i = 0;
-			
-			//  !!! faire un for !!!
 
-			document.getElementById("compteurVille").innerHTML = "<h1>Le nombre de villes du departement : </h1>" + i + "<br><br>";
+			for (let el of monTab) {
+				//console.log(el.nom);
+				texte.innerHTML = texte.innerHTML + el.nom + " " + el.code + "<br>";
+			}
+
+			document.getElementById("compteurVille").innerHTML = "<h1>Le nombre de villes du departement : </h1>" + monTab.length + "<br><br>";
 		}
 		};
 	}
