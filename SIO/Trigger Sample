@@ -1,0 +1,28 @@
+drop trigger if exists Update_estimate_from_line_items;
+delimiter //
+
+CREATE TRIGGER Update_estimate_from_line_items
+AFTER UPDATE
+   ON estimate_line_items FOR EACH ROW
+
+BEGIN
+
+   -- variable declarations
+   DECLARE vPrev_amnt INT;
+   DECLARE vNew_amnt INT;
+   DECLARE nDiff INT;
+
+
+   SET vPrev_amnt = OLD.price * OLD.quantity;
+   SET vNew_amnt = NEW.price * NEW.quantity;
+   SET nDiff = vNew_amnt - vPrev_amnt;  -- names amended
+
+   -- trigger code
+   UPDATE estimates SET 
+     subtotal = total + nDiff
+   , total = subtotal + (tax_rate/100 * subtotal)
+   WHERE estimate_id = NEW.estimate_id;  
+
+END//
+
+delimiter ;
