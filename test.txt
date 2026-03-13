@@ -1,1 +1,48 @@
-https://www.data.gouv.fr/dataservices/api-decoupage-administratif-api-geo/
+USE [AutomateIA]
+GO
+/****** Object:  Trigger [dbo].[InsertLogsNews]    Script Date: 13/03/2026 11:47:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER TRIGGER [dbo].[InsertLogsNews]
+ON [dbo].[News]
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @IDNews INT;
+    DECLARE @NewsTitle VARCHAR(200);
+
+    SELECT @IDNews = new_id FROM INSERTED;
+
+	SELECT @NewsTitle = new_title FROM INSERTED ;
+
+	DECLARE @NewsArticle VARCHAR(200);
+	SELECT @NewsArticle = new_article FROM INSERTED;
+
+	DECLARE @NewsDate  DATETIME;
+	SELECT @NewsDate = new_date FROM INSERTED;
+  
+	DECLARE @NewsLastBy  VARCHAR(200);
+	SELECT @NewsLastBy = new_lastBy FROM INSERTED;
+
+	
+	INSERT INTO [dbo].[LogsNews]
+           ([logn_idnews]
+           ,[logn_title]
+           ,[logn_article]
+           ,[logn_date]
+           ,[logn_lastby]
+           ,[logn_typeev])
+     VALUES
+           (@IDNews
+           ,@NewsTitle
+           ,@NewsArticle
+           ,@NewsDate
+           ,@NewsLastBy
+           ,'CREATION');
+
+END
