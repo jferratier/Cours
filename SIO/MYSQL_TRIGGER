@@ -1,0 +1,35 @@
+--MYSQL
+
+---- Création table news
+DROP TABLE IF EXISTS `news`;
+CREATE TABLE IF NOT EXISTS `news` (
+  `new_id` int NOT NULL AUTO_INCREMENT,
+  `new_title` text,
+  `new_article` text,
+  `new_date` datetime DEFAULT NULL,
+  `new_lastby` text,
+  PRIMARY KEY (`new_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+---- Création table logsnews
+DROP TABLE IF EXISTS `logsnews`;
+CREATE TABLE IF NOT EXISTS `logsnews` (
+  `logn_id` int NOT NULL AUTO_INCREMENT,
+  `logn_idnews` int DEFAULT NULL,
+  `logn_title` text,
+  `logn_article` text,
+  `logn_date` datetime DEFAULT NULL,
+  `logn_lastby` text,
+  `logn_typeev` text,
+  PRIMARY KEY (`logn_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+---- Création Trigger DeleteLogsNews
+DROP TRIGGER IF EXISTS `DeleteLogsNews`;CREATE DEFINER=`root`@`localhost` TRIGGER `DeleteLogsNews` BEFORE DELETE ON `news` FOR EACH ROW BEGIN IF OLD.new_lastby <> 'JFE' THEN INSERT INTO LogsNews ( logn_idnews, logn_title, logn_article, logn_date, logn_lastby, logn_typeev ) VALUES ( OLD.new_id, OLD.new_title, OLD.new_article, OLD.new_date, OLD.new_lastby, 'DELETE' ); ELSE SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Suppression interdite'; END IF; END
+
+---- Création Trigger UPDATELogsNews
+DROP TRIGGER IF EXISTS `UpdateLogsNews`;CREATE DEFINER=`root`@`localhost` TRIGGER `UpdateLogsNews` AFTER UPDATE ON `news` FOR EACH ROW IF NEW.new_date <> OLD.new_date THEN INSERT INTO LogsNews ( logn_idnews, logn_title, logn_article, logn_date, logn_lastby, logn_typeev ) VALUES ( NEW.new_id, NEW.new_title, NEW.new_article, NEW.new_date, NEW.new_lastby, 'UPDATE' ); END IF
+
+---- Création Trigger INSERTLogsNews
+DROP TRIGGER IF EXISTS `InsertLogsNews`;CREATE DEFINER=`root`@`localhost` TRIGGER `InsertLogsNews` AFTER INSERT ON `news` FOR EACH ROW INSERT INTO LogsNews ( logn_idnews, logn_title, logn_article, logn_date, logn_lastby, logn_typeev ) VALUES ( NEW.new_id, NEW.new_title, NEW.new_article, NEW.new_date, NEW.new_lastby, 'CREATION' )
+
