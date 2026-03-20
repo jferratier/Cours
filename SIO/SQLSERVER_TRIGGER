@@ -1,0 +1,192 @@
+--SQLSERVER
+----Creation table news 
+USE [AutomateIA]
+GO
+
+/****** Object:  Table [dbo].[News]    Script Date: 20/03/2026 11:17:47 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[News](
+	[new_id] [int] IDENTITY(1,1) NOT NULL,
+	[new_title] [varchar](max) NULL,
+	[new_article] [varchar](max) NULL,
+	[new_date] [datetime] NULL,
+	[new_lastby] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+
+---- Creation table lognews
+USE [AutomateIA]
+GO
+
+/****** Object:  Table [dbo].[LogsNews]    Script Date: 20/03/2026 11:18:26 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[LogsNews](
+	[logn_id] [int] IDENTITY(1,1) NOT NULL,
+	[logn_idnews] [int] NULL,
+	[logn_title] [varchar](max) NULL,
+	[logn_article] [varchar](max) NULL,
+	[logn_date] [datetime] NULL,
+	[logn_lastby] [varchar](max) NULL,
+	[logn_typeev] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+---- Creation Trigger  DeleteLogsNews
+USE [AutomateIA]
+GO
+/****** Object:  Trigger [dbo].[DeleteLogsNews]    Script Date: 20/03/2026 11:18:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TRIGGER [dbo].[DeleteLogsNews]
+ON [dbo].[News]
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @IDNews INT;
+    DECLARE @NewsTitle VARCHAR(200);
+
+    SELECT @IDNews = new_id FROM DELETED;
+
+	SELECT @NewsTitle = new_title FROM DELETED ;
+
+	DECLARE @NewsArticle VARCHAR(200);
+	SELECT @NewsArticle = new_article FROM DELETED;
+
+	DECLARE @NewsDate  DATETIME;
+	SELECT @NewsDate = new_date FROM DELETED;
+  
+	DECLARE @NewsLastBy  VARCHAR(200);
+	SELECT @NewsLastBy = new_lastBy FROM INSERTED;
+
+	DECLARE @OLDLastBy  VARCHAR(200);
+	SELECT @OLDLastBy = new_lastBy FROM DELETED;
+
+	IF @OLDLastBy LIKE 'JFE'
+	INSERT INTO [dbo].[LogsNews]
+           ([logn_idnews]
+           ,[logn_title]
+           ,[logn_article]
+           ,[logn_date]
+           ,[logn_lastby]
+           ,[logn_typeev])
+     VALUES
+           (@IDNews
+           ,@NewsTitle
+           ,@NewsArticle
+           ,@NewsDate
+           ,@NewsLastBy
+           ,'SUPRESSION');
+
+END
+
+---- Creation Trigger  InsertLogsNews
+
+USE [AutomateIA]
+GO
+/****** Object:  Trigger [dbo].[InsertLogsNews]    Script Date: 20/03/2026 11:19:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TRIGGER [dbo].[InsertLogsNews]
+ON [dbo].[News]
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @IDNews INT;
+    DECLARE @NewsTitle VARCHAR(200);
+
+    SELECT @IDNews = new_id FROM INSERTED;
+
+	SELECT @NewsTitle = new_title FROM INSERTED ;
+
+	DECLARE @NewsArticle VARCHAR(200);
+	SELECT @NewsArticle = new_article FROM INSERTED;
+
+	DECLARE @NewsDate  DATETIME;
+	SELECT @NewsDate = new_date FROM INSERTED;
+  
+	DECLARE @NewsLastBy  VARCHAR(200);
+	SELECT @NewsLastBy = new_lastBy FROM INSERTED;
+
+	
+	INSERT INTO [dbo].[LogsNews]
+           ([logn_idnews]
+           ,[logn_title]
+           ,[logn_article]
+           ,[logn_date]
+           ,[logn_lastby]
+           ,[logn_typeev])
+     VALUES
+           (@IDNews
+           ,@NewsTitle
+           ,@NewsArticle
+           ,@NewsDate
+           ,@NewsLastBy
+           ,'CREATION');
+
+END
+
+---- Creation Trigger  UpdateLogsNews
+
+USE [AutomateIA]
+GO
+/****** Object:  Trigger [dbo].[UpdateLogsNews]    Script Date: 20/03/2026 11:19:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TRIGGER [dbo].[UpdateLogsNews]
+ON [dbo].[News]
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @IDNews INT;
+    DECLARE @NewsTitle VARCHAR(200);
+
+    SELECT @IDNews = new_id FROM INSERTED;
+	SELECT @NewsTitle = new_title FROM INSERTED ;
+	
+	DECLARE @NewsArticle VARCHAR(200);
+	SELECT @NewsArticle = new_article FROM INSERTED;
+
+	DECLARE @NewsDate  DATETIME;
+	SELECT @NewsDate = new_date FROM INSERTED;
+
+	DECLARE @OLDDate  DATETIME;
+	SELECT @OLDDate = new_date FROM DELETED;
+  
+	DECLARE @NewsLastBy  VARCHAR(200);
+	SELECT @NewsLastBy = new_lastBy FROM INSERTED;
+
+	IF @NewsDate != @OLDDate 
+		INSERT INTO 
+			[dbo].[LogsNews] ([logn_idnews],[logn_title],[logn_article],[logn_date],[logn_lastby],[logn_typeev])
+		 VALUES
+			   (@IDNews,@NewsTitle,@NewsArticle,@NewsDate,@NewsLastBy,'MODIFTY');
+
+END
