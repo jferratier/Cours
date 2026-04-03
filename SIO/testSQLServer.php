@@ -14,9 +14,15 @@ extension=php_pdo_sqlsrv_83_ts_x64
 Configuration du reseau SQL Serveur > Protocoles ppour SQLEXPRESS > TCP/IP
 IPALL > Port TCP >1433
 
-4- Start Services
-net start SQLBrowser
-net start MSSQL$SQLEXPRESS
+4- SQL Server Management Studio
+Clic droit > propriété > Sécurité > autoriser les connexion Windows ET SQL
+
+5- SQL Server Management Studio
+Clic droit sur Security > Clic droit sur Login > creer un login et lui donner les drois sysadmins
+
+6- restart Services
+net restart SQLBrowser
+net restart MSSQL$SQLEXPRESS
 
 */
 
