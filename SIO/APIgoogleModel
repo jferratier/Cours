@@ -1,0 +1,57 @@
+
+<?php
+
+$apiKey = "AQ.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+$model = "gemini-3-flash-preview";
+
+$url = "https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey";
+
+$data = [
+    "contents" => [
+        [
+            "parts" => [
+                [
+                    "text" => "bonjour !"
+                ]
+            ]
+        ]
+    ]
+];
+
+$ch = curl_init($url);
+
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Content-Type: application/json"
+]);
+
+
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+$response = curl_exec($ch);
+
+if ($response === false) {
+    die("cURL error: " . curl_error($ch));
+}
+
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+echo "HTTP CODE: $httpCode\n";
+echo "RAW RESPONSE:\n$response\n";
+
+$result = json_decode($response, true);
+
+// Gestion des erreurs API propre
+if (isset($result['error'])) {
+    die("API ERROR: " . $result['error']['message']);
+}
+
+echo "\n\nRESPONSE TEXT:\n";
+echo $result['candidates'][0]['content']['parts'][0]['text'] ?? "Pas de réponse";
+
+?>
