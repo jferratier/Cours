@@ -322,6 +322,26 @@ ul.qcm li.bonne .marque{display:none!important}
 .encadre.corrige{display:none!important}
 
 /* ==========================================================================
+   5 bis. TAILLE DES IMAGES DU COURS
+   --------------------------------------------------------------------------
+   Les images ne dépassent jamais 50 % de la largeur de la colonne de cours
+   (elles restent centrées). Sur mobile, elles reprennent toute la largeur.
+   Sélecteurs préfixés par « main » pour passer devant les styles injectés
+   par buildnew.js. Pour changer la taille : modifier --largeur-image.
+   ========================================================================== */
+:root{ --largeur-image:50%; }
+main .figure-cours .img-cours,
+main p > .img-cours{ max-width:var(--largeur-image); height:auto; }
+main .galerie-cours .img-cours{ max-width:100%; }
+@media (max-width:960px){
+  main .figure-cours .img-cours,
+  main p > .img-cours{ max-width:100%; }
+}
+@media print{
+  main .figure-cours .img-cours{ max-width:var(--largeur-image); }
+}
+
+/* ==========================================================================
    6. RESPONSIVE
    ========================================================================== */
 @media (max-width:960px){
