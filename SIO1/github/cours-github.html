@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GitHub  Manuel de survie</title>
+<meta name="description" content="GitHub  Manuel de survie — document de cours généré depuis cours.md.">
+
+<!-- ==========================================================================
+     FICHIER GÉNÉRÉ AUTOMATIQUEMENT — NE PAS ÉDITER À LA MAIN
+     ==========================================================================
+     Cours      : github
+     Source     : cours.md
+     Gabarit    : template.html
+     Sortie     : html/cours-github.html
+     Génération : node outils/buildnew.js github
+     Images     : intégrées en base64 (fichier autonome)
+     ========================================================================== -->
+
+<style>
+/* ==========================================================================
+   1. VARIABLES DE THÈME  (modifier ici pour changer toute la charte)
+   ========================================================================== */
+/* --------------------------------------------------------------------------
+   THÈME 1 — « Sobre » (clair, par défaut)
+   Toutes les couleurs de l'interface passent par ces variables : changer de
+   thème = redéfinir ces variables (voir les blocs [data-theme=...] plus bas).
+   -------------------------------------------------------------------------- */
+:root{
+  /* couleurs de marque */
+  --bleu:#12395c;          /* titres, barre supérieure */
+  --bleu-clair:#1e6fa8;    /* liens, sous-titres */
+  --accent:#e8590c;        /* mises en avant, numéros de session */
+  --vert:#177245;          /* corrigés, points à retenir */
+  --rouge:#b3261e;         /* avertissements */
+  /* textes et fonds */
+  --texte:#1c1f23;
+  --texte-doux:#5b636b;
+  --texte-inactif:#9aa2aa;
+  --fond:#f6f7f9;          /* fond de page (accepte un dégradé) */
+  --fond-carte:#ffffff;    /* fond des sections et du sommaire */
+  --fond-doux:#eef2f6;     /* en-têtes de tableaux, puces */
+  --bordure:#dfe3e8;
+  --tr-alt:#fafbfc;        /* lignes paires des tableaux */
+  --ombre:0 1px 2px rgba(16,24,40,.04);
+  /* barre supérieure et boutons */
+  --entete-fond:#12395c;
+  --entete-texte:#ffffff;
+  --btn-fond:#ffffff;
+  --btn-texte:#12395c;
+  /* sommaire */
+  --nav-hover:#f0f4f8;
+  --nav-actif:#e8f1f8;
+  /* code et schémas */
+  --code-fond:#eef1f4;
+  --code-texte:#1c1f23;
+  --pre-fond:#0f1720;
+  --pre-texte:#e6edf3;
+  /* encadrés pédagogiques */
+  --enc-bleu:#f2f7fb;
+  --enc-rouge:#fdf1f0;
+  --enc-vert:#f1f8f3;
+  --enc-orange:#fff7f1;
+  --duree-fond:#fff4ec;
+  --duree-bordure:#f6d5bd;
+  /* gabarit */
+  --radius:8px;
+  --largeur-nav:290px;
+  --largeur-contenu:1180px;   /* largeur max de la colonne de cours (centrée) */
+  --police:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --police-titre:var(--police);
+  --police-mono:"Consolas","SFMono-Regular","DejaVu Sans Mono",monospace;
+}
+
+/* --------------------------------------------------------------------------
+   THÈME 2 — « Nuit » (sombre, confort de lecture en faible luminosité)
+   -------------------------------------------------------------------------- */
+html[data-theme="nuit"]{
+  --bleu:#8ab4f8; --bleu-clair:#67c9e8; --accent:#ff9147;
+  --vert:#4cc38a; --rouge:#ff7b72;
+  --texte:#e2e8ef; --texte-doux:#9aa5b1; --texte-inactif:#5d6773;
+  --fond:#0d1117; --fond-carte:#151b23; --fond-doux:#1d2632;
+  --bordure:#2a333f; --tr-alt:#1a212b;
+  --ombre:0 1px 3px rgba(0,0,0,.5);
+  --entete-fond:#080d14; --entete-texte:#e8eef6;
+  --btn-fond:#243244; --btn-texte:#e8eef6;
+  --nav-hover:#1b2430; --nav-actif:#1f2b3a;
+  --code-fond:#1e2733; --code-texte:#ffd7ab;
+  --pre-fond:#070c12; --pre-texte:#d7e2ec;
+  --enc-bleu:#141f2e; --enc-rouge:#2a1719; --enc-vert:#11241d; --enc-orange:#2a1f13;
+  --duree-fond:#2a1f13; --duree-bordure:#5b3c1e;
+}
+
+/* --------------------------------------------------------------------------
+   THÈME 3 — « Moderne » (dégradés violet/turquoise, coins arrondis, ombres)
+   -------------------------------------------------------------------------- */
+html[data-theme="moderne"]{
+  --bleu:#3b1e78; --bleu-clair:#7c3aed; --accent:#e11d74;
+  --vert:#0d9488; --rouge:#e11d48;
+  --texte:#251f33; --texte-doux:#6d6685; --texte-inactif:#a9a2bd;
+  --fond:linear-gradient(155deg,#f6f2ff 0%,#eef6ff 55%,#fff1f7 100%);
+  --fond-carte:#ffffff; --fond-doux:#f5f0ff;
+  --bordure:#e7dffa; --tr-alt:#fbf9ff;
+  --ombre:0 10px 30px rgba(76,29,149,.10);
+  --entete-fond:linear-gradient(90deg,#4c1d95 0%,#7c3aed 48%,#0891b2 100%);
+  --entete-texte:#ffffff;
+  --btn-fond:#ffffff; --btn-texte:#5b21b6;
+  --nav-hover:#f7f2ff; --nav-actif:#efe6ff;
+  --code-fond:#f3ecff; --code-texte:#5b21b6;
+  --pre-fond:#1d1435; --pre-texte:#ece7ff;
+  --enc-bleu:#f5f1ff; --enc-rouge:#fff1f4; --enc-vert:#eafaf6; --enc-orange:#fff4ec;
+  --duree-fond:#fff0f6; --duree-bordure:#f8cfe1;
+  --radius:16px;
+}
+/* Quelques finitions propres au thème « Moderne » */
+html[data-theme="moderne"] h1{
+  background:linear-gradient(90deg,#4c1d95,#7c3aed 55%,#0891b2);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+html[data-theme="moderne"] h2{border-bottom:2px solid transparent;
+  border-image:linear-gradient(90deg,#7c3aed,#e11d74 60%,transparent) 1}
+html[data-theme="moderne"] section.session, html[data-theme="moderne"] section.bloc{
+  border-top:4px solid transparent;
+  background-image:linear-gradient(var(--fond-carte),var(--fond-carte)),
+                   linear-gradient(90deg,#7c3aed,#0891b2 60%,#e11d74);
+  background-origin:border-box; background-clip:padding-box,border-box;
+}
+html[data-theme="moderne"] .puce{background:linear-gradient(90deg,#f5f0ff,#eef6ff)}
+html[data-theme="moderne"] nav#sommaire a.actif{box-shadow:inset 0 0 0 1px var(--bordure)}
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:70px}
+body{
+  margin:0; font-family:var(--police); color:var(--texte);
+  background:var(--fond); background-attachment:fixed;
+  line-height:1.65; font-size:16.5px;
+  transition:background-color .25s ease, color .25s ease;
+}
+h1,h2,h3,h4{line-height:1.3; color:var(--bleu); margin:1.6em 0 .6em; font-family:var(--police-titre)}
+h1{font-size:1.85rem}
+h2{font-size:1.4rem; border-bottom:2px solid var(--bordure); padding-bottom:.3em}
+h3{font-size:1.13rem; color:var(--bleu-clair)}
+h4{font-size:1rem}
+p,ul,ol{margin:.7em 0}
+li{margin:.25em 0}
+a{color:var(--bleu-clair)}
+a:hover{color:var(--accent)}
+code{
+  font-family:var(--police-mono); font-size:.9em;
+  background:var(--code-fond); color:var(--code-texte); padding:.12em .38em; border-radius:4px;
+}
+pre{
+  font-family:var(--police-mono); font-size:.82rem; line-height:1.45;
+  background:var(--pre-fond); color:var(--pre-texte); padding:14px 16px;
+  border-radius:var(--radius); overflow-x:auto;
+}
+pre code{background:none; color:inherit; padding:0; font-size:inherit}
+hr{border:none; border-top:1px solid var(--bordure); margin:2.2em 0}
+
+/* ==========================================================================
+   3. BARRE SUPÉRIEURE + BARRE DE PROGRESSION DE LECTURE
+   ========================================================================== */
+header.topbar{
+  position:fixed; top:0; left:0; right:0; height:56px; z-index:50;
+  display:flex; align-items:center; gap:12px; padding:0 16px;
+  background:var(--entete-fond); color:var(--entete-texte);
+  box-shadow:0 1px 6px rgba(0,0,0,.18);
+}
+.topbar .titre{font-weight:600; font-size:.95rem; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.topbar .titre small{display:block; font-weight:400; opacity:.75; font-size:.75rem}
+.btn{
+  font:inherit; font-size:.85rem; cursor:pointer;
+  background:var(--btn-fond); color:var(--btn-texte); border:1px solid transparent;
+  padding:7px 13px; border-radius:6px; font-weight:600;
+}
+.btn:hover{background:var(--accent); color:#fff}
+.btn.ghost{background:transparent; color:var(--entete-texte); border-color:rgba(255,255,255,.5)}
+.btn.ghost:hover{background:rgba(255,255,255,.15)}
+/* La barre de progression est remplie en JS via la largeur de #barre-remplissage */
+#barre-progression{
+  position:fixed; top:56px; left:0; right:0; height:4px;
+  background:rgba(0,0,0,.08); z-index:49;
+}
+#barre-remplissage{height:100%; width:0; background:var(--accent); transition:width .1s linear}
+
+/* ==========================================================================
+   4. SOMMAIRE LATÉRAL (24 sessions, généré en JS)
+   ========================================================================== */
+nav#sommaire{
+  position:fixed; top:60px; bottom:0; left:0; width:var(--largeur-nav);
+  overflow-y:auto; background:var(--fond-carte);
+  border-right:1px solid var(--bordure); padding:14px 0 40px; z-index:40;
+}
+nav#sommaire .nav-titre{
+  font-size:.72rem; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--texte-doux); padding:10px 18px 6px; font-weight:700;
+}
+nav#sommaire ol{list-style:none; margin:0; padding:0}
+nav#sommaire li{margin:0}
+nav#sommaire a, nav#sommaire span.lien-inactif{
+  display:flex; gap:9px; align-items:baseline;
+  padding:7px 16px; font-size:.855rem; text-decoration:none;
+  border-left:3px solid transparent; color:var(--texte);
+}
+nav#sommaire a:hover{background:var(--nav-hover); border-left-color:var(--bleu-clair)}
+nav#sommaire a.actif{background:var(--nav-actif); border-left-color:var(--accent); font-weight:600; color:var(--bleu)}
+nav#sommaire .num{
+  flex:0 0 24px; font-weight:700; font-size:.78rem;
+  color:var(--accent); font-family:var(--police-mono);
+}
+/* Sessions non encore rédigées : grisées + mention « à venir » */
+nav#sommaire span.lien-inactif{color:var(--texte-inactif); cursor:not-allowed}
+nav#sommaire span.lien-inactif .num{color:var(--texte-inactif); opacity:.6}
+nav#sommaire span.lien-inactif::after{
+  content:"à venir"; margin-left:auto; font-size:.66rem;
+  background:var(--fond-doux); color:var(--texte-doux); padding:1px 6px; border-radius:10px;
+  align-self:center; white-space:nowrap;
+}
+
+/* Bouton d'ouverture du sommaire sur mobile */
+#btn-menu{display:none}
+.voile{display:none}
+
+/* ==========================================================================
+   5. CONTENU PRINCIPAL
+   ========================================================================== */
+/* La zone de contenu occupe tout l'espace à droite du sommaire, et la colonne
+   de cours y est centrée horizontalement (flex + align-items:center).
+   Chaque bloc enfant prend 100 % de la largeur disponible, plafonnée par
+   --largeur-contenu. Aucun conteneur supplémentaire n'est nécessaire :
+   toute nouvelle <section> ajoutée hérite automatiquement du même cadrage. */
+main{
+  margin-left:var(--largeur-nav); padding:84px 34px 90px;
+  display:flex; flex-direction:column; align-items:center;
+}
+main > *{ width:100%; max-width:var(--largeur-contenu); }
+section.session, section.bloc{
+  background:var(--fond-carte); border:1px solid var(--bordure);
+  border-radius:var(--radius); padding:30px 38px; margin-bottom:30px;
+  box-shadow:var(--ombre);
+}
+/* Les tableaux et blocs de code remplissent toute la largeur de leur section */
+.table-wrap, table, pre{ width:100%; }
+.meta{
+  display:flex; flex-wrap:wrap; gap:8px; margin:.6em 0 1.2em;
+}
+.puce{
+  font-size:.75rem; background:var(--fond-doux); color:var(--bleu);
+  border:1px solid var(--bordure); border-radius:20px; padding:3px 11px; font-weight:600;
+}
+.duree{
+  font-size:.78rem; font-weight:600; color:var(--accent);
+  background:var(--duree-fond); border:1px solid var(--duree-bordure); border-radius:20px;
+  padding:2px 10px; margin-left:8px; white-space:nowrap;
+}
+
+/* Encadrés pédagogiques réutilisables */
+.encadre{border-left:4px solid var(--bleu-clair); background:var(--enc-bleu); padding:12px 16px; border-radius:0 var(--radius) var(--radius) 0; margin:1.1em 0}
+.encadre.attention{border-color:var(--rouge); background:var(--enc-rouge)}
+.encadre.corrige{border-color:var(--vert); background:var(--enc-vert)}
+.encadre.definition{border-color:var(--accent); background:var(--enc-orange)}
+.encadre p:first-child{margin-top:0}
+.encadre p:last-child{margin-bottom:0}
+.encadre .etiquette{
+  display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.07em;
+  font-weight:700; color:var(--texte-doux); margin-bottom:.35em;
+}
+
+/* Listes d'objectifs et de synthèse */
+ol.objectifs{padding-left:1.3em}
+ol.objectifs li{margin:.4em 0}
+ul.retenir{list-style:none; padding-left:0}
+ul.retenir li{
+  position:relative; padding-left:1.9em; margin:.65em 0;
+}
+ul.retenir li::before{content:"✅"; position:absolute; left:0}
+
+/* Tableaux */
+.table-wrap{overflow-x:auto; margin:1.1em 0}
+table{border-collapse:collapse; width:100%; font-size:.88rem; background:var(--fond-carte)}
+th,td{border:1px solid var(--bordure); padding:8px 11px; text-align:left; vertical-align:top}
+th{background:var(--fond-doux); color:var(--bleu); font-weight:700}
+tbody tr:nth-child(even){background:var(--tr-alt)}
+table.plan td:first-child{text-align:center; font-weight:700; color:var(--accent); white-space:nowrap}
+
+/* QCM : la bonne réponse est signalée en vert */
+ul.qcm{list-style:none; padding-left:1em}
+ul.qcm li{margin:.2em 0}
+ul.qcm li.bonne{color:var(--vert); font-weight:600}
+.exercice{border-top:1px dashed var(--bordure); padding-top:1.2em; margin-top:1.6em}
+.exercice:first-of-type{border-top:none; padding-top:0}
+
+/* --------------------------------------------------------------------------
+   AFFICHAGE / MASQUAGE DES CORRIGÉS
+   Deux niveaux : un bouton global dans la barre supérieure (classe
+   .corriges-masques sur <html>) et un bouton par bloc (classe .masque sur
+   l'encadré). Tout bloc .encadre.corrige ajouté plus tard est pris en charge
+   automatiquement.
+   -------------------------------------------------------------------------- */
+/* Bouton « Afficher / Masquer » inséré en JS dans chaque encadré de corrigé */
+.btn-corrige{
+  font:inherit; font-size:.74rem; font-weight:700; cursor:pointer;
+  background:var(--vert); color:#fff; border:none; border-radius:20px;
+  padding:3px 12px; margin:0 0 .4em;
+}
+.btn-corrige:hover{background:var(--accent)}
+/* Bloc masqué : seuls l'étiquette et le bouton restent visibles */
+.encadre.corrige.masque > *:not(.etiquette):not(.btn-corrige){display:none}
+/* Dans un QCM, la bonne réponse redevient neutre quand les corrigés sont masqués */
+html.corriges-masques ul.qcm li.bonne{color:inherit; font-weight:400}
+html.corriges-masques ul.qcm li.bonne .marque{display:none}
+
+/* ==========================================================================
+   6. RESPONSIVE
+   ========================================================================== */
+@media (max-width:960px){
+  body{font-size:16px}
+  main{margin-left:0; padding:80px 18px 70px}
+  section.session, section.bloc{padding:18px 16px}
+  main > *{max-width:none}
+  #btn-menu{display:inline-block}
+  nav#sommaire{
+    transform:translateX(-100%); transition:transform .25s ease;
+    width:min(86vw,var(--largeur-nav)); box-shadow:2px 0 12px rgba(0,0,0,.12);
+  }
+  nav#sommaire.ouvert{transform:translateX(0)}
+  .voile.visible{display:block; position:fixed; inset:56px 0 0 0; background:rgba(0,0,0,.35); z-index:39}
+  .topbar .titre small{display:none}
+}
+/* Tr\u00e8s petits \u00e9crans : boutons plus compacts (3 boutons dans la barre) */
+@media (max-width:560px){
+  .btn{padding:6px 9px; font-size:.78rem}
+  .topbar{gap:8px; padding:0 10px}
+}
+
+/* ==========================================================================
+   7. IMPRESSION / EXPORT PDF  (window.print())
+   ========================================================================== */
+@media print{
+  /* --- Format de page et marges --- */
+  @page{ size:A4 portrait; margin:16mm 13mm; }
+
+  /* Quel que soit le thème actif à l'écran, le PDF est toujours imprimé en
+     version claire (encre économisée, lisibilité papier garantie). */
+  :root, html[data-theme]{
+    --largeur-nav:0px;
+    --bleu:#12395c; --bleu-clair:#1e6fa8; --accent:#a8410a;
+    --vert:#146c40; --rouge:#a3231c;
+    --texte:#111; --texte-doux:#555; --texte-inactif:#888;
+    --fond:#fff; --fond-carte:#fff; --fond-doux:#eef1f4;
+    --bordure:#c8ced6; --tr-alt:#fafafa; --ombre:none;
+    --code-fond:#eef1f4; --code-texte:#111;
+    --pre-fond:#f4f4f4; --pre-texte:#111;
+    --enc-bleu:#f4f7fa; --enc-rouge:#fdf2f1; --enc-vert:#f2f8f4; --enc-orange:#fdf6f0;
+    --duree-fond:#fdf6f0; --duree-bordure:#e6cdb6;
+    --radius:6px;
+  }
+  /* Neutralisation des effets décoratifs du thème « Moderne » à l'impression */
+  html[data-theme="moderne"] h1{background:none; color:var(--bleu); -webkit-text-fill-color:currentColor}
+  html[data-theme="moderne"] h2{border-image:none; border-bottom:2px solid var(--bordure)}
+  html[data-theme="moderne"] section.session, html[data-theme="moderne"] section.bloc{background-image:none; border-top:none}
+  header.topbar, nav#sommaire, #barre-progression, .voile, .no-print, .btn-corrige{display:none !important}
+  /* Un corrigé masqué à l'écran reste masqué dans le PDF :
+     masquer les corrigés avant l'export produit la « version élève ». */
+  body{background:#fff; font-size:10.5pt; line-height:1.5}
+  main{margin:0; padding:0; display:block}
+  main > *{max-width:none; width:auto}
+  section.session, section.bloc{border:none; padding:0; margin:0}
+
+  /* ---------------------------------------------------------------------
+     A. CHAQUE CHAPITRE COMMENCE SUR UNE NOUVELLE PAGE
+     1) chaque session (section) démarre en haut d'une page ;
+     2) chaque grande partie d'une session (chaque <h2> : Objectifs, Partie
+        théorique, Cas concret, Exercices, Points à retenir) démarre elle aussi
+        sur une page neuve. Le premier <h2> est exclu pour ne pas laisser le
+        titre de la session seul sur une page.
+     Pour revenir à un flux continu à l'intérieur des sessions, il suffit de
+     neutraliser la règle « section.session > h2 » ci-dessous.
+     --------------------------------------------------------------------- */
+  section.bloc, section.session{ break-before:page; page-break-before:always; }
+  main > *:first-child{ break-before:avoid; page-break-before:avoid; }
+  section.session > h2:not(:first-of-type){ break-before:page; page-break-before:always; }
+  /* Les sous-parties (h3) restent dans le flux mais ne sont jamais coupées
+     de leur premier paragraphe (voir règle B ci-dessous). */
+
+  /* ---------------------------------------------------------------------
+     B. LES SOUS-PARTIES ET LES BLOCS NE SONT PLUS COUPÉS EN DEUX
+     break-inside:avoid demande au navigateur de reporter le bloc entier
+     sur la page suivante plutôt que de le scinder.
+     --------------------------------------------------------------------- */
+  .encadre, .exercice, .table-wrap, table, pre,
+  ul.qcm, ol.objectifs, ul.retenir, .meta, li{
+    break-inside:avoid; page-break-inside:avoid;
+  }
+  /* Un titre n'est jamais orphelin en bas de page : il reste avec son texte */
+  h1,h2,h3,h4{ break-after:avoid; page-break-after:avoid; break-inside:avoid; }
+  /* Deux lignes minimum d'un paragraphe de part et d'autre d'une coupure */
+  p, li{ orphans:3; widows:3; }
+  /* Tableaux : lignes insécables + en-tête répété si le tableau change de page */
+  tr, td, th{ break-inside:avoid; page-break-inside:avoid; }
+  thead{ display:table-header-group; }
+  tfoot{ display:table-footer-group; }
+
+  /* --- Lisibilité des schémas ASCII et tableaux denses à l'impression --- */
+  pre{ background:#f4f4f4; color:#111; border:1px solid #ccc; font-size:8pt; line-height:1.3; }
+  table{ font-size:9pt; }
+  table.plan{ font-size:8pt; }
+  a{color:#000; text-decoration:none}
+  a[href^="http"]::after{content:" (" attr(href) ")"; font-size:8pt; color:#555}
+
+  /* ---------------------------------------------------------------------
+     C. CLASSES UTILITAIRES DE PAGINATION (à poser sur n'importe quel bloc)
+       class="saut-page-avant" → force un début de page
+       class="saut-page-apres" → force une fin de page
+       class="insecable"       → interdit la coupure du bloc
+       class="coupure-ok"      → autorise explicitement la coupure
+                                 (utile pour un très long tableau)
+     --------------------------------------------------------------------- */
+  .saut-page-avant{ break-before:page !important; page-break-before:always !important; }
+  .saut-page-apres{ break-after:page !important; page-break-after:always !important; }
+  .insecable{ break-inside:avoid !important; page-break-inside:avoid !important; }
+  .coupure-ok{ break-inside:auto !important; page-break-inside:auto !important; }
+}
+</style>
+<style id="styles-images-buildnew">
+/* --- Images du cours (ajouté par buildnew.js) --------------------------- */
+.figure-cours{margin:1.4em auto;text-align:center;max-width:100%}
+.figure-cours .img-cours{max-width:100%;height:auto;border-radius:10px;
+  border:1px solid var(--bordure,#dfe3e8);background:var(--fond-carte,#fff);
+  box-shadow:0 1px 3px rgba(16,24,40,.10)}
+.figure-cours figcaption{margin-top:.5em;font-size:.82rem;
+  color:var(--texte-doux,#5b636b);font-style:italic}
+p > .img-cours{max-width:100%;height:auto;border-radius:8px;vertical-align:middle}
+.galerie-cours{display:grid;gap:14px;margin:1.4em 0;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.galerie-cours .figure-cours{margin:0}
+.galerie-cours .img-cours{width:100%;object-fit:contain}
+/* --- Agrandissement au clic --------------------------------------------- */
+.img-cours[data-zoom]{cursor:zoom-in}
+#loupe-image{position:fixed;inset:0;z-index:9999;display:none;align-items:center;
+  justify-content:center;padding:24px;background:rgba(10,14,20,.88);cursor:zoom-out}
+#loupe-image.ouverte{display:flex}
+#loupe-image img{max-width:96vw;max-height:92vh;border-radius:8px;
+  box-shadow:0 10px 40px rgba(0,0,0,.5)}
+#loupe-image .fermer{position:absolute;top:14px;right:20px;color:#fff;font-size:2rem;
+  line-height:1;background:none;border:0;cursor:pointer;opacity:.85}
+@media print{
+  .figure-cours{break-inside:avoid;page-break-inside:avoid}
+  .figure-cours .img-cours{max-height:11cm;box-shadow:none}
+  .galerie-cours{grid-template-columns:repeat(2,1fr)}
+  #loupe-image{display:none !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ====================== BARRE SUPÉRIEURE ====================== -->
+<header class="topbar">
+  <button class="btn ghost" id="btn-menu" aria-label="Ouvrir le sommaire">☰</button>
+  <div class="titre">
+    GitHub  Manuel de survie
+    <small>4 sessions</small>
+  </div>
+  <button class="btn ghost" id="btn-corriges" title="Afficher ou masquer tous les corrigés (raccourci : c)">✅ Corrigés</button>
+  <button class="btn ghost" id="btn-theme" title="Changer de thème (Sobre → Nuit → Moderne)" aria-label="Changer de thème">☀️ Sobre</button>
+  <button class="btn" id="btn-pdf" title="Imprimer / Enregistrer en PDF — pensez à cocher « Graphiques d'arrière-plan » dans la boîte d'impression">🖨️ Export PDF</button>
+  <button class="btn" id="btn-word" title="Télécharger le cours au format Word (.doc)">📄 Export Word</button>
+</header>
+<div id="barre-progression" aria-hidden="true"><div id="barre-remplissage"></div></div>
+<div class="voile" id="voile"></div>
+
+<!-- ====================== SOMMAIRE (généré par JS) ====================== -->
+<nav id="sommaire" aria-label="Sommaire des sessions">
+  <div class="nav-titre">Sommaire</div>
+  <ol id="liste-sommaire"><!-- rempli dynamiquement depuis le tableau PLAN --></ol>
+</nav>
+
+<main>
+  <!-- Carte d'accueil (générée depuis le début du Markdown) -->
+  <section class="bloc" id="accueil">
+    <h1 style="margin-top:0">GitHub  Manuel de survie</h1>
+    <div class="meta"><span class="puce">Module : GitHub</span><span class="puce">Support : Procédure GitHub  CCI Nîmes</span></div>
+    <p>Ce document reprend la procédure GitHub du module, réalisée et enseignée par <strong>Jérôme Ferratier</strong>  CCI Nîmes.</p>
+    <p>Il couvre la création du compte, la mise en place de l'authentification par clé SSH, la création et le partage d'un projet, et la liste des commandes essentielles.</p>
+  </section>
+
+  <!-- Plan : <tbody> rempli dynamiquement depuis le tableau PLAN -->
+  <section class="bloc" id="plan">
+    <h2 style="margin-top:0">Plan complet des 4 sessions</h2>
+    <div class="table-wrap">
+      <table class="plan">
+        <thead><tr><th style="width:38px">#</th><th style="width:22%">Titre</th><th>Objectifs pédagogiques</th><th>Notions abordées</th></tr></thead>
+        <tbody id="corps-plan"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ====================== SESSION 1 ====================== -->
+  <section class="session" id="session-1">
+    <h1 style="margin-top:0">Session 1 : Création d'un nouveau compte</h1>
+    <p>Rendez-vous sur <a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a></p>
+    <p>Pour la création d'un nouveau compte :</p>
+    <div class="encadre attention">
+      <span class="etiquette">Attention</span>
+    <ul>
+      <li>Utiliser une <strong>vraie adresse mail</strong>, avec <code>prenom.nom</code>, pour vous inscrire.</li>
+      <li>Dans votre login, renseigner bien votre <code>prenom.nom</code>.</li>
+    </ul>
+    </div>
+  </section>
+
+  <!-- ====================== SESSION 2 ====================== -->
+  <section class="session" id="session-2">
+    <h1 style="margin-top:0">Session 2 : Utilisation de SSH pour GitHub</h1>
+    <h2>Pré-requis</h2>
+    <p>Installer <strong>Git for Windows</strong> : <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">https://git-scm.com/download/win</a></p>
+    <p>Les paramètres d'installation par défaut suffisent, mais vous pouvez tout de même choisir votre éditeur de texte préféré (Notepad++ / Visual Studio Code / …).</p>
+    <h2>Création de la clé privée / publique SSH</h2>
+    <ol>
+      <li>Ouvrir <strong>Git Bash</strong>  à partir du menu Démarrer, ou le lancer directement :</li>
+    </ol>
+    <pre>"C:\Program Files\Git\git-bash.exe"</pre>
+    <ol start="2">
+      <li>Générer la clé :</li>
+    </ol>
+    <pre>ssh-keygen -t ed25519 -C "prenom.nom@cci.com"</pre>
+    <ol start="3">
+      <li>Je conseille de ne pas utiliser de mot de passe : appuyer sur Entrée sans rentrer de mot de passe créera une clé sans mot de passe.</li>
+    </ol>
+    <ol start="4">
+      <li>Le générateur de clé va demander un chemin : appuyer sur Entrée, ce qui utilisera le chemin suggéré.</li>
+    </ol>
+    <h2>Insertion de la clé publique dans GitHub</h2>
+    <ol>
+      <li>Copier la clé publique dans votre presse-papier :</li>
+    </ol>
+    <pre>cat ~/.ssh/id_ed25519.pub | clip</pre>
+    <ol start="2">
+      <li>Naviguer vers le configurateur de communication avec clés SSH : <a href="https://github.com/settings/keys" target="_blank" rel="noopener">https://github.com/settings/keys</a></li>
+    </ol>
+    <ol start="3">
+      <li>Dans la textbox <strong>Key</strong>, coller la clé publique. Normalement un titre sera automatiquement inséré. Terminez en appuyant sur <strong>Add Key</strong>.</li>
+    </ol>
+    <h2>Configuration pour l'identification lors des commits</h2>
+    <p>Ouvrez une invite de commande (Win + R, <code>cmd.exe</code>) ou Git Bash, puis taper :</p>
+    <pre>git config --global user.email "prenom.nom@cci.com"
+git config --global user.name "Prenom Nom"</pre>
+  </section>
+
+  <!-- ====================== SESSION 3 ====================== -->
+  <section class="session" id="session-3">
+    <h1 style="margin-top:0">Session 3 : Création et partage d'un projet</h1>
+    <h2>Création d'un nouveau projet</h2>
+    <p>Dans GitHub faire :</p>
+    <ol>
+      <li><strong>Create a new repository</strong></li>
+      <li>Choisir <strong>projet privé</strong></li>
+    </ol>
+    <h2>Partager un projet</h2>
+    <p>Dans GitHub faire :</p>
+    <ol>
+      <li>Sélection de votre projet</li>
+      <li><strong>Settings</strong></li>
+      <li><strong>Collaborators</strong></li>
+      <li><strong>Add People</strong></li>
+    </ol>
+  </section>
+
+  <!-- ====================== SESSION 4 ====================== -->
+  <section class="session" id="session-4">
+    <h1 style="margin-top:0">Session 4 : Liste de commandes essentielles</h1>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Commande</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>git clone &lt;url&gt;</code></td><td>Clone un dépôt distant en local</td></tr>
+          <tr><td><code>git status</code></td><td>Affiche l'état des fichiers (modifiés, non suivis, etc.)</td></tr>
+          <tr><td><code>git add &lt;fichier&gt;</code></td><td>Ajoute un fichier à l'index pour le prochain commit</td></tr>
+          <tr><td><code>git add .</code></td><td>Ajoute tous les nouveaux fichiers à l'index pour le prochain commit</td></tr>
+          <tr><td><code>git commit -m "message"</code></td><td>Enregistre les modifications avec un message</td></tr>
+          <tr><td><code>git push</code></td><td>Envoie les commits locaux vers le dépôt distant</td></tr>
+          <tr><td><code>git pull</code></td><td>Récupère et fusionne les modifications du dépôt distant</td></tr>
+          <tr><td><code>git branch</code></td><td>Liste les branches locales</td></tr>
+          <tr><td><code>git checkout &lt;branche&gt;</code></td><td>Change de branche</td></tr>
+          <tr><td><code>git checkout -b &lt;branche&gt;</code></td><td>Crée une nouvelle branche et s'y place</td></tr>
+          <tr><td><code>git merge &lt;branche&gt;</code></td><td>Fusionne une branche dans la branche courante</td></tr>
+          <tr><td><code>git log</code></td><td>Affiche l'historique des commits</td></tr>
+          <tr><td><code>git diff</code></td><td>Montre les différences entre fichiers modifiés</td></tr>
+          <tr><td><code>git remote -v</code></td><td>Affiche les dépôts distants configurés</td></tr>
+          <tr><td><code>git stash</code></td><td>Met de côté les modifications en cours pour revenir à un état propre</td></tr>
+          <tr><td><code>git stash pop</code></td><td>Récupère les modifications mises de côté</td></tr>
+          <tr><td><code>git reset --hard</code></td><td>Annule toutes les modifications locales non commitées</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <footer class="no-print" style="color:var(--texte-doux); font-size:.82rem; text-align:center; padding:10px 0 30px">
+    GitHub  Manuel de survie · Document généré automatiquement — éditez le .md, pas le .html.
+  </footer>
+</main>
+
+<script>
+/* ==========================================================================
+   1. SOURCE DE VÉRITÉ : le plan des 24 sessions
+   --------------------------------------------------------------------------
+   Ce tableau alimente à la fois le tableau « Plan » et le sommaire latéral.
+   Pour publier une session : passer "redigee" à true (le lien se dégrise) et
+   ajouter la section HTML correspondante avec l'id "session-N".
+   ========================================================================== */
+const PLAN = [
+  {
+    "n": 1,
+    "redigee": true,
+    "titre": "Création d'un nouveau compte",
+    "objectifs": "Créer son compte sur github.com en respectant les règles d'adresse et de login",
+    "notions": "Adresse mail `prenom.nom`, login"
+  },
+  {
+    "n": 2,
+    "redigee": true,
+    "titre": "Utilisation de SSH pour GitHub",
+    "objectifs": "Installer Git for Windows, générer une clé SSH, la déclarer sur GitHub et configurer son identité",
+    "notions": "Git for Windows, Git Bash, `ssh-keygen`, clé `ed25519`, `git config`"
+  },
+  {
+    "n": 3,
+    "redigee": true,
+    "titre": "Création et partage d'un projet",
+    "objectifs": "Créer un dépôt privé et y ajouter des collaborateurs",
+    "notions": "Repository, projet privé, Settings, Collaborators"
+  },
+  {
+    "n": 4,
+    "redigee": true,
+    "titre": "Liste de commandes essentielles",
+    "objectifs": "Disposer de l'aide-mémoire des commandes Git du module",
+    "notions": "`clone`, `status`, `add`, `commit`, `push`, `pull`, `branch`, `merge`, `log`, `diff`, `stash`, `reset`"
+  }
+];
+
+/* ==========================================================================
+   2. GÉNÉRATION DU TABLEAU « PLAN » ET DU SOMMAIRE LATÉRAL
+   ========================================================================== */
+const corpsPlan = document.getElementById('corps-plan');
+const listeSommaire = document.getElementById('liste-sommaire');
+
+PLAN.forEach(function(s){
+  // --- ligne du tableau du plan
+  const tr = document.createElement('tr');
+  tr.innerHTML = '<td>' + s.n + '</td>'
+    + '<td><strong>' + s.titre + '</strong></td>'
+    + '<td>' + s.objectifs + '</td>'
+    + '<td>' + s.notions + '</td>';
+  corpsPlan.appendChild(tr);
+
+  // --- entrée du sommaire : lien actif si rédigée, texte grisé sinon
+  const li = document.createElement('li');
+  if (s.redigee) {
+    li.innerHTML = '<a href="#session-' + s.n + '" data-cible="session-' + s.n + '">'
+      + '<span class="num">' + String(s.n).padStart(2,'0') + '</span>'
+      + '<span>' + s.titre + '</span></a>';
+  } else {
+    li.innerHTML = '<span class="lien-inactif" title="Session non encore rédigée" aria-disabled="true">'
+      + '<span class="num">' + String(s.n).padStart(2,'0') + '</span>'
+      + '<span>' + s.titre + '</span></span>';
+  }
+  listeSommaire.appendChild(li);
+});
+
+/* ==========================================================================
+   3. BARRE DE PROGRESSION DE LECTURE
+   Ratio défilement / hauteur défilable, recalculé au scroll et au redimensionnement.
+   ========================================================================== */
+const remplissage = document.getElementById('barre-remplissage');
+function majProgression(){
+  const h = document.documentElement;
+  const defilable = h.scrollHeight - h.clientHeight;
+  const ratio = defilable > 0 ? (h.scrollTop || document.body.scrollTop) / defilable : 0;
+  remplissage.style.width = Math.min(100, Math.max(0, ratio * 100)) + '%';
+}
+window.addEventListener('scroll', majProgression, {passive:true});
+window.addEventListener('resize', majProgression);
+majProgression();
+
+/* ==========================================================================
+   4. SURLIGNAGE DU LIEN ACTIF DANS LE SOMMAIRE (IntersectionObserver)
+   Fonctionne automatiquement pour toute nouvelle section .session ajoutée.
+   ========================================================================== */
+const sections = document.querySelectorAll('section.session');
+if ('IntersectionObserver' in window && sections.length) {
+  const observateur = new IntersectionObserver(function(entrees){
+    entrees.forEach(function(e){
+      if (!e.isIntersecting) return;
+      document.querySelectorAll('#sommaire a').forEach(function(a){
+        a.classList.toggle('actif', a.dataset.cible === e.target.id);
+      });
+    });
+  }, {rootMargin:'-72px 0px -70% 0px'});
+  sections.forEach(function(s){ observateur.observe(s); });
+}
+
+/* ==========================================================================
+   5. EXPORT PDF  (impression navigateur → « Enregistrer au format PDF »)
+   ========================================================================== */
+document.getElementById('btn-pdf').addEventListener('click', function(){
+  window.print();
+});
+
+/* ==========================================================================
+   5 bis. EXPORT WORD (.doc)
+   --------------------------------------------------------------------------
+   Aucune bibliothèque externe : on fabrique un document HTML aux normes
+   Word (espaces de noms Office), on l'encapsule dans un Blob puis on le
+   télécharge. Word l'ouvre nativement et il reste éditable / convertible
+   en .docx via « Enregistrer sous ».
+   Comme pour le PDF, l'état des corrigés est respecté : masqués à l'écran,
+   ils sont absents du document exporté (version élève).
+   ========================================================================== */
+function exporterWord(){
+  // 1. Copie du contenu, nettoyée des éléments d'interface
+  const contenu = document.querySelector('main').cloneNode(true);
+  contenu.querySelectorAll('.btn-corrige, .no-print, script').forEach(function(e){ e.remove(); });
+  if (document.documentElement.classList.contains('corriges-masques')){
+    contenu.querySelectorAll('.encadre.corrige').forEach(function(e){ e.remove(); });
+  }
+
+  // 2. Feuille de style dédiée à Word (unités en points, toujours en clair)
+  const styles = ''
+    + '@page{size:A4 portrait; margin:2cm}'
+    + 'body{font-family:Calibri,Arial,sans-serif; font-size:11pt; color:#111; line-height:1.4}'
+    + 'h1{font-size:18pt; color:#12395c; page-break-before:always}'
+    + 'h1:first-of-type{page-break-before:avoid}'
+    + 'h2{font-size:14pt; color:#12395c; border-bottom:1pt solid #b9c2cc; padding-bottom:2pt; page-break-before:always}'
+    + 'h3{font-size:12pt; color:#1e6fa8}'
+    + 'h1,h2,h3,h4{page-break-after:avoid; font-family:Calibri,Arial,sans-serif}'
+    + 'p,li{font-size:11pt}'
+    + 'table{border-collapse:collapse; width:100%; font-size:9.5pt}'
+    + 'th,td{border:0.75pt solid #9aa3ad; padding:4pt; vertical-align:top; text-align:left}'
+    + 'th{background:#eef2f6; font-weight:bold}'
+    + 'pre{font-family:Consolas,"Courier New",monospace; font-size:8pt; background:#f4f4f4;'
+    + '     border:0.5pt solid #ccc; padding:6pt}'
+    + '.encadre{border-left:4pt solid #1e6fa8; background:#f4f7fa; padding:6pt 8pt; margin:8pt 0}'
+    + '.encadre.attention{border-left-color:#b3261e; background:#fdf2f1}'
+    + '.encadre.corrige{border-left-color:#177245; background:#f2f8f4}'
+    + '.encadre.definition{border-left-color:#a8410a; background:#fdf6f0}'
+    + '.etiquette{display:block; font-size:8.5pt; font-weight:bold; text-transform:uppercase; color:#555}'
+    + '.puce{font-size:9pt; color:#12395c}'
+    + '.meta{font-size:9pt; color:#555; margin-bottom:8pt}'
+    + 'ul.retenir{list-style:none; padding-left:0}'
+    + 'a{color:#12395c}';
+
+  // 3. Document Word complet
+  const doc = '<html xmlns:o="urn:schemas-microsoft-com:office:office"'
+    + ' xmlns:w="urn:schemas-microsoft-com:office:word"'
+    + ' xmlns="http://www.w3.org/TR/REC-html40"><head>'
+    + '<meta charset="utf-8">'
+    + '<title>' + document.title + '</title>'
+    + '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View>'
+    + '<w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->'
+    + '<style>' + styles + '</style></head><body>'
+    + contenu.innerHTML
+    + '</body></html>';
+
+  // 4. Téléchargement (le BOM \ufeff garantit l'encodage UTF-8 côté Word)
+  const nom = document.title.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')   // sans accents
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'cours';
+  const blob = new Blob(['\ufeff' + doc], {type: 'application/msword'});
+  const url = URL.createObjectURL(blob);
+  const lien = document.createElement('a');
+  lien.href = url;
+  lien.download = nom + '.doc';
+  document.body.appendChild(lien);
+  lien.click();
+  document.body.removeChild(lien);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+}
+document.getElementById('btn-word').addEventListener('click', exporterWord);
+
+/* ==========================================================================
+   5 bis bis. SÉLECTEUR DE THÈME  (Sobre → Nuit → Moderne, en boucle)
+   --------------------------------------------------------------------------
+   Le thème est posé dans l'attribut data-theme de <html> ; tout le reste est
+   géré en CSS par les blocs html[data-theme="..."].
+   Le choix est mémorisé dans localStorage ; à la première visite, la
+   préférence système (mode sombre de l'OS) est respectée.
+   POUR AJOUTER UN THÈME : créer un bloc html[data-theme="mon-theme"] dans le
+   CSS, puis ajouter une entrée ici. Rien d'autre à modifier.
+   ========================================================================== */
+const THEMES = [
+  {id:'sobre',   libelle:'☀️ Sobre'},
+  {id:'nuit',    libelle:'🌙 Nuit'},
+  {id:'moderne', libelle:'✨ Moderne'}
+];
+const btnTheme = document.getElementById('btn-theme');
+
+function appliquerTheme(id){
+  const theme = THEMES.find(function(t){ return t.id === id; }) || THEMES[0];
+  // 'sobre' = thème par défaut défini par :root, donc pas d'attribut nécessaire
+  if (theme.id === 'sobre') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme', theme.id);
+  btnTheme.textContent = theme.libelle;
+  btnTheme.dataset.theme = theme.id;
+  try{ localStorage.setItem('theme-cours', theme.id); }catch(e){/* mode privé */}
+}
+
+// Thème initial : choix mémorisé, sinon préférence système, sinon 'sobre'
+(function themeInitial(){
+  let choix = null;
+  try{ choix = localStorage.getItem('theme-cours'); }catch(e){}
+  if (!choix) {
+    const sombreOS = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    choix = sombreOS ? 'nuit' : 'sobre';
+  }
+  appliquerTheme(choix);
+})();
+
+// Clic : passage au thème suivant, en boucle
+btnTheme.addEventListener('click', function(){
+  const i = THEMES.findIndex(function(t){ return t.id === btnTheme.dataset.theme; });
+  appliquerTheme(THEMES[(i + 1) % THEMES.length].id);
+});
+
+// Raccourci clavier : touche "t" (hors champ de saisie)
+document.addEventListener('keydown', function(e){
+  if (e.key === 't' && !/input|textarea|select/i.test(e.target.tagName)) btnTheme.click();
+});
+
+/* ==========================================================================
+   5 ter. AFFICHAGE / MASQUAGE DES CORRIGÉS
+   --------------------------------------------------------------------------
+   - Bouton global (barre supérieure) : masque ou affiche TOUS les corrigés,
+     y compris les bonnes réponses signalées dans les QCM.
+   - Bouton local : chaque encadré « Corrigé » reçoit son propre bouton pour
+     être révélé individuellement (utile en classe, question par question).
+   - L'état global est mémorisé dans localStorage.
+   - Aucun réglage à faire pour les sessions ajoutées plus tard : tout bloc
+     <div class="encadre corrige"> est détecté automatiquement au chargement.
+   ========================================================================== */
+const btnCorriges = document.getElementById('btn-corriges');
+const blocsCorriges = document.querySelectorAll('.encadre.corrige');
+
+// Un bouton « Afficher / Masquer » est injecté dans chaque encadré de corrigé
+blocsCorriges.forEach(function(bloc){
+  const b = document.createElement('button');
+  b.className = 'btn-corrige';
+  b.type = 'button';
+  b.addEventListener('click', function(){
+    bloc.classList.toggle('masque');
+    majLibelleLocal(bloc, b);
+  });
+  // insertion juste après l'étiquette « Corrigé » du bloc
+  const etiquette = bloc.querySelector('.etiquette');
+  if (etiquette) etiquette.insertAdjacentElement('afterend', b);
+  else bloc.prepend(b);
+  majLibelleLocal(bloc, b);
+});
+
+function majLibelleLocal(bloc, bouton){
+  const masque = bloc.classList.contains('masque');
+  bouton.textContent = masque ? '👁 Afficher le corrigé' : '🙈 Masquer le corrigé';
+  bouton.setAttribute('aria-expanded', String(!masque));
+}
+
+/* Bascule globale : tous les corrigés d'un coup */
+function appliquerCorriges(masquer){
+  document.documentElement.classList.toggle('corriges-masques', masquer);
+  blocsCorriges.forEach(function(bloc){
+    bloc.classList.toggle('masque', masquer);
+    const b = bloc.querySelector('.btn-corrige');
+    if (b) majLibelleLocal(bloc, b);
+  });
+  btnCorriges.textContent = masquer ? '🙈 Corrigés masqués' : '✅ Corrigés visibles';
+  btnCorriges.dataset.masque = masquer ? '1' : '0';
+  btnCorriges.setAttribute('aria-pressed', String(masquer));
+  try{ localStorage.setItem('corriges-masques', masquer ? '1' : '0'); }catch(e){}
+}
+
+// État initial : mémorisé, sinon corrigés visibles
+(function corrigesInitial(){
+  let memo = null;
+  try{ memo = localStorage.getItem('corriges-masques'); }catch(e){}
+  appliquerCorriges(memo === '1');
+})();
+
+btnCorriges.addEventListener('click', function(){
+  appliquerCorriges(btnCorriges.dataset.masque !== '1');
+});
+
+// Raccourci clavier : touche "c" (hors champ de saisie)
+document.addEventListener('keydown', function(e){
+  if (e.key === 'c' && !e.ctrlKey && !e.metaKey
+      && !/input|textarea|select/i.test(e.target.tagName)) btnCorriges.click();
+});
+
+/* ==========================================================================
+   6. SOMMAIRE MOBILE (ouverture / fermeture)
+   ========================================================================== */
+const sommaire = document.getElementById('sommaire');
+const voile = document.getElementById('voile');
+function basculerMenu(ouvrir){
+  sommaire.classList.toggle('ouvert', ouvrir);
+  voile.classList.toggle('visible', ouvrir);
+}
+document.getElementById('btn-menu').addEventListener('click', function(){
+  basculerMenu(!sommaire.classList.contains('ouvert'));
+});
+voile.addEventListener('click', function(){ basculerMenu(false); });
+// Sur mobile, refermer le sommaire après un clic sur un lien
+sommaire.addEventListener('click', function(e){
+  if (e.target.closest('a') && window.innerWidth <= 960) basculerMenu(false);
+});
+// Touche Échap : ferme le sommaire
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') basculerMenu(false);
+});
+</script>
+<div id="loupe-image" role="dialog" aria-modal="true" aria-label="Image agrandie">
+  <button class="fermer" type="button" aria-label="Fermer">&times;</button>
+  <img alt="">
+</div>
+<script>
+/* Agrandissement des images au clic (ajouté par buildnew.js) */
+(function(){
+  var loupe = document.getElementById("loupe-image");
+  if (!loupe) return;
+  var cible = loupe.querySelector("img");
+  document.querySelectorAll(".img-cours").forEach(function(img){
+    img.setAttribute("data-zoom", "1");
+    img.addEventListener("click", function(){
+      cible.src = img.currentSrc || img.src;
+      cible.alt = img.alt || "";
+      loupe.classList.add("ouverte");
+      document.body.style.overflow = "hidden";
+    });
+  });
+  function fermer(){
+    loupe.classList.remove("ouverte"); cible.removeAttribute("src");
+    document.body.style.overflow = "";
+  }
+  loupe.addEventListener("click", fermer);
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") fermer(); });
+})();
+</script>
+<script>
+/* ==========================================================================
+   EXPORT WORD AVEC IMAGES (ajouté par buildnew.js)
+   --------------------------------------------------------------------------
+   L'export d'origine produit un HTML « habillé en .doc » : Word l'ouvre, mais
+   il IGNORE les images en data:URI — elles disparaissent du document.
+   On produit donc un vrai fichier MHTML (multipart/related), le format
+   « Page web à fichier unique » de Word : le texte est une partie MIME, chaque
+   image une autre partie, référencée par un nom de fichier relatif.
+   Word affiche alors toutes les illustrations, et « Enregistrer sous » permet
+   de convertir en .docx.
+   ========================================================================== */
+(function(){
+  var bouton = document.getElementById('btn-word');
+  if (!bouton) return;
+
+  var LARGEUR_MAX = 620;                 // px ≈ 16,4 cm dans une page A4 à marges 2 cm
+  var BASE = 'file:///C:/cours-export/'; // base de résolution des noms d'images
+  var EXTENSIONS = {
+    'image/png':'png', 'image/jpeg':'jpg', 'image/gif':'gif',
+    'image/webp':'webp', 'image/bmp':'bmp', 'image/svg+xml':'svg', 'image/avif':'avif'
+  };
+
+  /* --- styles du document Word (points, toujours en clair) ---------------- */
+  var STYLES = ''
+    + '@page{size:A4 portrait; margin:2cm}'
+    + 'body{font-family:Calibri,Arial,sans-serif; font-size:11pt; color:#111; line-height:1.4}'
+    + 'h1{font-size:18pt; color:#12395c; page-break-before:always}'
+    + 'h1:first-of-type{page-break-before:avoid}'
+    + 'h2{font-size:14pt; color:#12395c; border-bottom:1pt solid #b9c2cc; padding-bottom:2pt;'
+    + '   page-break-before:always}'
+    + 'h3{font-size:12pt; color:#1e6fa8}'
+    + 'h1,h2,h3,h4{page-break-after:avoid; font-family:Calibri,Arial,sans-serif}'
+    + 'p,li{font-size:11pt}'
+    + 'table{border-collapse:collapse; width:100%; font-size:9.5pt}'
+    + 'th,td{border:0.75pt solid #9aa3ad; padding:4pt; vertical-align:top; text-align:left}'
+    + 'th{background:#eef2f6; font-weight:bold}'
+    + 'pre{font-family:Consolas,"Courier New",monospace; font-size:8pt; background:#f4f4f4;'
+    + '     border:0.5pt solid #ccc; padding:6pt}'
+    + '.encadre{border-left:4pt solid #1e6fa8; background:#f4f7fa; padding:6pt 8pt; margin:8pt 0}'
+    + '.encadre.attention{border-left-color:#b3261e; background:#fdf2f1}'
+    + '.encadre.corrige{border-left-color:#177245; background:#f2f8f4}'
+    + '.encadre.definition{border-left-color:#a8410a; background:#fdf6f0}'
+    + '.etiquette{display:block; font-size:8.5pt; font-weight:bold; text-transform:uppercase; color:#555}'
+    + '.puce{font-size:9pt; color:#12395c}'
+    + 'p.meta{font-size:9pt; color:#555; margin:0 0 8pt}'
+    + 'ul.retenir{list-style:none; padding-left:0}'
+    /* --- QCM : la bonne réponse doit rester visible dans Word --- */
+    + 'ul.qcm li.bonne{color:#177245; font-weight:bold}'
+    + 'a{color:#12395c}'
+    /* --- images : centrées, jamais plus larges que la zone imprimable --- */
+    + 'p.figure-cours{text-align:center; margin:10pt 0}'
+    + 'p.figure-cours img{border:0.5pt solid #c9d0d8}'
+    + 'p.legende-cours{text-align:center; font-size:9pt; font-style:italic; color:#555; margin:2pt 0 10pt}';
+
+  /* --- utilitaires MIME --------------------------------------------------- */
+  function base64Utf8(texte){
+    var octets = new TextEncoder().encode(texte);
+    var binaire = '', PAS = 0x8000;
+    for (var i = 0; i < octets.length; i += PAS){
+      binaire += String.fromCharCode.apply(null, octets.subarray(i, i + PAS));
+    }
+    return btoa(binaire);
+  }
+  function plier(b64){                    // lignes de 76 caractères (RFC 2045)
+    return b64.replace(/.{1,76}/g, '$&\r\n');
+  }
+
+  /* --- récupère une image non embarquée (mode --no-base64) ---------------- */
+  function lireDistante(url){
+    return fetch(url).then(function(r){
+      if (!r.ok) throw new Error(r.status);
+      return r.blob();
+    }).then(function(blob){
+      return new Promise(function(ok, ko){
+        var fr = new FileReader();
+        fr.onload = function(){
+          var m = String(fr.result).match(/^data:([^;,]+);base64,(.*)$/);
+          m ? ok({mime: m[1], b64: m[2]}) : ko(new Error('format'));
+        };
+        fr.onerror = ko;
+        fr.readAsDataURL(blob);
+      });
+    });
+  }
+
+  /* --- export ------------------------------------------------------------- */
+  function exporterWordAvecImages(){
+    var principal = document.querySelector('main');
+    if (!principal) return;
+
+    bouton.disabled = true;
+    var libelle = bouton.textContent;
+    bouton.textContent = '⏳ Préparation…';
+
+    // 1. forcer le chargement des images (elles sont en loading="lazy")
+    var origines = Array.prototype.slice.call(principal.querySelectorAll('img'));
+    origines.forEach(function(im, i){
+      im.setAttribute('loading', 'eager');
+      im.setAttribute('data-export-idx', i);
+    });
+
+    Promise.all(origines.map(function(im){
+      if (im.complete && im.naturalWidth) return Promise.resolve();
+      return (im.decode ? im.decode() : Promise.resolve()).catch(function(){});
+    }))
+    .then(function(){
+      // 2. copie nettoyée du contenu
+      var contenu = principal.cloneNode(true);
+      contenu.querySelectorAll('.btn-corrige, .no-print, script, #loupe-image')
+             .forEach(function(e){ e.remove(); });
+      if (document.documentElement.classList.contains('corriges-masques')){
+        contenu.querySelectorAll('.encadre.corrige').forEach(function(e){ e.remove(); });
+      }
+
+      // 3. chaque image devient une pièce MIME + une référence relative
+      var pieces = [], connues = {}, compteur = 0, attentes = [];
+
+      contenu.querySelectorAll('img').forEach(function(img){
+        var source = img.getAttribute('src') || '';
+        var origine = origines[parseInt(img.getAttribute('data-export-idx'), 10)];
+
+        // dimensions réelles, ramenées à la largeur de page
+        var l = (origine && origine.naturalWidth) || 0;
+        var h = (origine && origine.naturalHeight) || 0;
+        if (l > LARGEUR_MAX && h){ h = Math.round(h * LARGEUR_MAX / l); l = LARGEUR_MAX; }
+
+        // Word ignore les classes/styles CSS modernes : on repart propre
+        img.removeAttribute('class');
+        img.removeAttribute('style');
+        img.removeAttribute('loading');
+        img.removeAttribute('data-zoom');
+        img.removeAttribute('data-export-idx');
+        if (l){ img.setAttribute('width', l); img.setAttribute('height', h); }
+
+        function enregistrer(mime, b64){
+          var cle = mime + '|' + b64.length + '|' + b64.slice(0, 64);
+          if (!connues[cle]){
+            compteur++;
+            var nom = 'image' + ('000' + compteur).slice(-3) + '.'
+                    + (EXTENSIONS[mime] || 'png');
+            connues[cle] = nom;
+            pieces.push({nom: nom, mime: mime, b64: b64});
+          }
+          // On NE pose PAS src= tout de suite : le navigateur essaierait de
+          // charger « image001.png » et remplirait la console d'erreurs.
+          // L'attribut est renommé en src juste avant la sérialisation.
+          img.removeAttribute('src');
+          img.setAttribute('data-mht-src', connues[cle]);
+        }
+
+        var embarquee = source.match(/^data:([^;,]+);base64,(.*)$/);
+        if (embarquee){
+          enregistrer(embarquee[1], embarquee[2]);
+        } else if (source && !/^(https?:)?\/\//.test(source)){
+          // image liée (mode --no-base64) : on tente de la lire
+          attentes.push(lireDistante(source)
+            .then(function(r){ enregistrer(r.mime, r.b64); })
+            .catch(function(){ /* on laisse le lien tel quel */ }));
+        }
+      });
+
+      return Promise.all(attentes).then(function(){
+        // 4. les <figure> ne sont pas comprises par Word -> paragraphes
+        contenu.querySelectorAll('figure').forEach(function(fig){
+          var img = fig.querySelector('img');
+          var leg = fig.querySelector('figcaption');
+          var p = document.createElement('p');
+          p.className = 'figure-cours';
+          if (img) p.appendChild(img);
+          var apres = null;
+          if (leg && leg.textContent.trim()){
+            apres = document.createElement('p');
+            apres.className = 'legende-cours';
+            apres.textContent = leg.textContent.trim();
+          }
+          fig.parentNode.insertBefore(p, fig);
+          if (apres) fig.parentNode.insertBefore(apres, fig);
+          fig.remove();
+        });
+        // les pastilles de méta deviennent une ligne de texte séparée par « · »
+        contenu.querySelectorAll('.meta').forEach(function(meta){
+          var textes = [];
+          meta.querySelectorAll('.puce').forEach(function(pu){
+            var t = pu.textContent.replace(/\s+/g, ' ').trim();
+            if (t) textes.push(t);
+          });
+          if (!textes.length) return;
+          var ligne = document.createElement('p');
+          ligne.className = 'meta';
+          ligne.textContent = textes.join('   ·   ');
+          meta.parentNode.replaceChild(ligne, meta);
+        });
+
+        // les grilles CSS (galeries) deviennent de simples suites de paragraphes
+        contenu.querySelectorAll('.galerie-cours').forEach(function(g){
+          while (g.firstChild) g.parentNode.insertBefore(g.firstChild, g);
+          g.remove();
+        });
+
+        // 5. document HTML aux normes Word
+        var html = '<html xmlns:o="urn:schemas-microsoft-com:office:office"'
+          + ' xmlns:w="urn:schemas-microsoft-com:office:word"'
+          + ' xmlns="http://www.w3.org/TR/REC-html40"><head>'
+          + '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'
+          + '<meta name="ProgId" content="Word.Document">'
+          + '<meta name="Generator" content="Microsoft Word 15">'
+          + '<title>' + (document.title || 'Cours') + '</title>'
+          + '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View>'
+          + '<w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->'
+          + '<style>' + STYLES + '</style></head><body>'
+          + contenu.innerHTML.replace(/data-mht-src="/g, 'src="')
+          + '</body></html>';
+
+        // 6. assemblage MHTML (multipart/related)
+        var limite = '----=_NextPart_Cours_' + Date.now().toString(36);
+        var mht = 'MIME-Version: 1.0\r\n'
+          + 'Content-Type: multipart/related; type="text/html"; boundary="' + limite + '"\r\n'
+          + '\r\n'
+          + 'Ce document est une « page web à fichier unique » : ouvrez-le avec Word.\r\n'
+          + '\r\n'
+          + '--' + limite + '\r\n'
+          + 'Content-Type: text/html; charset="utf-8"\r\n'
+          + 'Content-Transfer-Encoding: base64\r\n'
+          + 'Content-Location: ' + BASE + 'document.html\r\n\r\n'
+          + plier(base64Utf8(html));
+
+        pieces.forEach(function(p){
+          mht += '--' + limite + '\r\n'
+            + 'Content-Type: ' + p.mime + '\r\n'
+            + 'Content-Transfer-Encoding: base64\r\n'
+            + 'Content-Location: ' + BASE + p.nom + '\r\n\r\n'
+            + plier(p.b64.replace(/\s+/g, ''));
+        });
+        mht += '--' + limite + '--\r\n';
+
+        // 7. téléchargement
+        var nom = (document.title || 'cours').toLowerCase()
+          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'cours';
+        var blob = new Blob([mht], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var lien = document.createElement('a');
+        lien.href = url;
+        lien.download = nom + '.doc';
+        document.body.appendChild(lien);
+        lien.click();
+        document.body.removeChild(lien);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+        return {images: pieces.length, octets: mht.length};
+      });
+    })
+    .catch(function(e){
+      console.error('Export Word :', e);
+      alert("L'export Word a échoué : " + e.message);
+    })
+    .then(function(){
+      origines.forEach(function(im){ im.removeAttribute('data-export-idx'); });
+      bouton.disabled = false;
+      bouton.textContent = libelle;
+    });
+  }
+
+  // Remplace le gestionnaire d'origine (le clone supprime l'ancien écouteur)
+  var neuf = bouton.cloneNode(true);
+  bouton.parentNode.replaceChild(neuf, bouton);
+  bouton = neuf;
+  bouton.title = 'Télécharger le cours au format Word (.doc) — images incluses';
+  bouton.addEventListener('click', exporterWordAvecImages);
+  window.exporterWordAvecImages = exporterWordAvecImages;
+})();
+</script>
+</body>
+</html>
