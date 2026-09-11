@@ -1376,15 +1376,18 @@ INSERT INTO tp_entrainement (ent_nom, ent_niveau) VALUES
  ('Récupération','Debutant');                       -- jamais utilisé
 
 INSERT INTO tp_course (spo_id, cou_type, cou_duree, cou_lieu, cou_distance) VALUES
- (1,'Trail',       95, 'Fontainebleau', 14.20),
- (1,'Route',       42, 'Paris',          8.00),
- (1,'Fractionné',  35, NULL,             6.50),     -- lieu inconnu
- (2,'Route',      120, 'Lyon',          21.10),
- (2,'Trail',       80, 'Chartreuse',    12.00),
- (3,'Route',       28, 'Paris',          5.00);
+ (1, N'Trail',       95, N'Fontainebleau', 14.20),
+ (1, N'Route',       42, N'Paris',          8.00),
+ (1, N'Fractionné',  35, NULL,              6.50),   -- lieu inconnu
+ (2, N'Route',      120, N'Lyon',          21.10),
+ (2, N'Trail',       80, N'Chartreuse',    12.00),
+ (3, N'Route',       28, N'Paris',          5.00),
+ (3, N'Route',       55, N'Paris',         10.40),
+ (3, N'Trail',      150, N'Vercors',       24.80),
+ (4, N'Fractionné',  40, N'Nantes',         7.20);
 
- INSERT INTO tp_serie (ent_id, ser_date, ser_ressenti, ser_commentaire) VALUES
- (3,'Route',       55, 'Paris',         ressenti, ser_commentaire),
+ INSERT INTO tp_serie (cou_id, ent_id, ser_date, ser_ressenti, ser_commentaire) VALUES
+ (1,3,'Route',   4, 'Paris'),
  (1,1,'2026-03-02',4,'Bonnes sensations'),
  (1,4,'2026-03-02',3,NULL),
  (2,2,'2026-03-05',5,'Rapide'),
@@ -1489,14 +1492,19 @@ INSERT INTO tp_course (spo_id, cou_type, cou_duree, cou_lieu, cou_distance) VALU
  (3, N'Trail',      150, N'Vercors',       24.80),
  (4, N'Fractionné',  40, N'Nantes',         7.20);
 
-INSERT INTO tp_serie (cou_id, ent_id, ser_date, ser_ressenti, ser_commentaire) VALUES
+ INSERT INTO tp_serie (cou_id, ent_id, ser_date, ser_ressenti, ser_commentaire) VALUES
+ (1,3,'Route',   4, 'Paris'),
  (1,1,'2026-03-02',4,'Bonnes sensations'),
  (1,4,'2026-03-02',3,NULL),
  (2,2,'2026-03-05',5,'Rapide'),
  (3,3,'2026-03-07',2,'Jambes lourdes'),
  (4,1,'2026-03-09',4,NULL),
  (5,4,'2026-03-12',3,'Dénivelé important'),
- (6,2,'2026-03-14',4,NULL);</pre>
+ (6,2,'2026-03-14',4,NULL),
+ (8,3,'2026-03-18',5,'Excellent'),
+ (9,2,'2026-03-20',3,NULL);
+GO
+</pre>
     <h2>Travail à réaliser</h2>
         <div class="exercice">
     <h3>Exercice 1 : Interroger une seule table</h3>
