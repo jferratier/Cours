@@ -1,0 +1,65 @@
+<Window x:Class="Sample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sample : le donjon"
+        Width="1000" Height="760"
+        WindowStartupLocation="CenterScreen"
+        Background="#2B2A33"
+        Loaded="Fenetre_Loaded">
+
+    <!-- Deux lignes : 20 % en haut (actions + fiche), 80 % en bas (journal). -->
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="8*" />
+        </Grid.RowDefinitions>
+
+        <!-- ============ En haut : les actions à gauche, la fiche à droite ============ -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="380" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#3A3945" CornerRadius="6" Padding="8" Margin="0,0,10,0">
+                <WrapPanel VerticalAlignment="Center">
+                    <Button x:Name="BoutonExplorer" Content="Explorer" Click="BoutonExplorer_Click" />
+                    <Button x:Name="BoutonAttaquer" Content="Attaquer" Click="BoutonAttaquer_Click" />
+                    <Button x:Name="BoutonDefendre" Content="Défendre" Click="BoutonDefendre_Click" />
+                    <Button x:Name="BoutonManger" Content="Manger" Click="BoutonManger_Click" />
+                    <Button x:Name="BoutonDormir" Content="Dormir" Click="BoutonDormir_Click" />
+                    <Button x:Name="BoutonRamasser" Content="Ramasser" Click="BoutonRamasser_Click" />
+                    <Button x:Name="BoutonRecommencer" Content="Recommencer" Click="BoutonRecommencer_Click" />
+                </WrapPanel>
+            </Border>
+
+            <!-- La fiche du personnage -->
+            <Border Grid.Column="1" Background="#F4EBD0" CornerRadius="6" Padding="8">
+                <DockPanel>
+                    <Image x:Name="ImageHeros" Source="/Images/heros.png" Width="64" Height="64"
+                           VerticalAlignment="Top" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                    <StackPanel Margin="10,0,0,0">
+                        <TextBlock x:Name="TexteNom" FontSize="16" FontWeight="Bold" />
+                        <DockPanel>
+                            <TextBlock x:Name="TexteVie" Width="90" />
+                            <ProgressBar x:Name="BarreVie" Height="10" Foreground="#C0392B" />
+                        </DockPanel>
+                        <TextBlock x:Name="TexteCaracteristiques" />
+                        <TextBlock x:Name="TexteSac" TextWrapping="Wrap" Foreground="#5A3D28" />
+                        <TextBlock x:Name="TexteAdversaire" FontWeight="Bold" Foreground="#C0392B" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- ============ En bas : le journal des événements (80 %) ============ -->
+        <Border Grid.Row="1" Background="#1E1D24" CornerRadius="6" Padding="8">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top" Text="Journal (le plus récent en haut)"
+                           Foreground="#F4EBD0" FontWeight="Bold" Margin="0,0,0,6" />
+                <ListBox x:Name="ListeJournal" Background="Transparent" BorderThickness="0"
+                         Foreground="#E8E6E3" FontFamily="Consolas" FontSize="14" />
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

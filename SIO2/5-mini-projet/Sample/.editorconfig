@@ -1,0 +1,51 @@
+# Convention de codage du projet, vérifiée par Visual Studio à chaque compilation.
+# Une seule convention, une seule indentation : c'est celle de l'équipe, pas celle de chacun.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{cs,xaml}]
+indent_style = space
+indent_size = 4
+
+[*.{csproj,sln,json,xml}]
+indent_style = space
+indent_size = 2
+
+[*.cs]
+# Accolades sur leur propre ligne, toujours des accolades après if/for/while
+csharp_new_line_before_open_brace = all
+csharp_prefer_braces = true:warning
+dotnet_diagnostic.IDE0011.severity = warning
+
+# var quand le type est évident
+csharp_style_var_when_type_is_apparent = true:suggestion
+
+# Namespace sur une ligne (file-scoped)
+csharp_style_namespace_declarations = file_scoped:warning
+
+# Nommage : champs privés en _camelCase, types et méthodes en PascalCase
+dotnet_naming_rule.champs_prives.symbols = champs_prives
+dotnet_naming_rule.champs_prives.style = souligne_camel
+dotnet_naming_rule.champs_prives.severity = warning
+dotnet_naming_symbols.champs_prives.applicable_kinds = field
+dotnet_naming_symbols.champs_prives.applicable_accessibilities = private
+dotnet_naming_style.souligne_camel.required_prefix = _
+dotnet_naming_style.souligne_camel.capitalization = camel_case
+
+# Les constantes et champs statiques en lecture seule échappent à la règle ci-dessus
+dotnet_naming_rule.constantes.symbols = constantes
+dotnet_naming_rule.constantes.style = libre
+dotnet_naming_rule.constantes.severity = none
+dotnet_naming_symbols.constantes.applicable_kinds = field
+dotnet_naming_symbols.constantes.required_modifiers = const
+dotnet_naming_rule.statiques_lecture.symbols = statiques_lecture
+dotnet_naming_rule.statiques_lecture.style = libre
+dotnet_naming_rule.statiques_lecture.severity = none
+dotnet_naming_symbols.statiques_lecture.applicable_kinds = field
+dotnet_naming_symbols.statiques_lecture.required_modifiers = static, readonly
+dotnet_naming_style.libre.capitalization = pascal_case
