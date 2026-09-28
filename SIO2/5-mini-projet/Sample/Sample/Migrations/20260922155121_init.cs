@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -110,7 +110,7 @@ namespace Sample.Migrations
                     { 7, -6, "Une eau claire et scintillante. Vous vous sentez mieux.", "Fontaine de santé", null, "Fontaine" },
                     { 8, 0, "Un petit coffre entrouvert.", "Coffre", "Ration", "Objet" },
                     { 9, 0, "Une arme pend au mur.", "Râtelier", "Épée", "Objet" },
-                    { 10, 0, "Un courant d'air frais... La sortie du donjon !", "Sortie", null, "Sortie" }
+                    { 10, 0, "Un courant d'air frais... La sortie du jeux !", "Sortie", null, "Sortie" }
                 });
 
             migrationBuilder.InsertData(

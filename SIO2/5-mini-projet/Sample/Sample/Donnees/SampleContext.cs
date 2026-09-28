@@ -14,6 +14,11 @@ public class SampleContext : DbContext
     public DbSet<EtatJoueur> EtatJoueur => Set<EtatJoueur>();
     public DbSet<ObjetInventaire> Inventaire => Set<ObjetInventaire>();
 
+    public DbSet<Epreuve> Epreuves => Set<Epreuve>();
+
+    public DbSet<Participant> Participant => Set<Participant>();
+
+
     // WampServer : utilisateur root, mot de passe vide (poste de développement uniquement).
     public const string Chaine = "server=localhost;port=3306;database=sample;user=root;password=";
 
@@ -37,7 +42,7 @@ public class SampleContext : DbContext
             new Evenement { Id = 7, Nom = "Fontaine de santé", Type = TypeEvenement.Fontaine, Description = "Une eau claire et scintillante. Vous vous sentez mieux.", Degats = -6 },
             new Evenement { Id = 8, Nom = "Coffre", Type = TypeEvenement.Objet, Description = "Un petit coffre entrouvert.", Objet = "Ration" },
             new Evenement { Id = 9, Nom = "Râtelier", Type = TypeEvenement.Objet, Description = "Une arme pend au mur.", Objet = "Épée" },
-            new Evenement { Id = 10, Nom = "Sortie", Type = TypeEvenement.Sortie, Description = "Un courant d'air frais... La sortie du donjon !" });
+            new Evenement { Id = 10, Nom = "Sortie", Type = TypeEvenement.Sortie, Description = "Un courant d'air frais... La sortie du jeux !" });
 
         mb.Entity<Monstre>().HasData(
             new Monstre { Id = 1, Nom = "Rat géant", Attaque = 3, Vie = 4, Defense = 0 },

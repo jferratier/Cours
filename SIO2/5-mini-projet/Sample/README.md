@@ -27,6 +27,7 @@ Un héros explore un donjon. Chaque clic sur **Explorer** tire un **événement 
 
 ## Lancer le projet
 
+0. .NET 9 Installé
 1. WampServer démarré (icône verte).
 2. phpMyAdmin → onglet SQL → exécuter `base/01-creer-base.sql`.
 3. Ouvrir `Sample.sln` dans Visual Studio 2022. **Outils → Gestionnaire de package NuGet → Console** :
@@ -36,7 +37,7 @@ Add-Migration Initial
 Update-Database
 ```
 
-4. **F5**. Puis essayez `base/02-requetes-exemples.sql` dans phpMyAdmin.
+4. **F5**. Puis lancez `base/02-requetes-exemples.sql` dans phpMyAdmin.
 
 ---
 
@@ -62,18 +63,58 @@ Sample/
     └── MainWindow.xaml(.cs)  l'écran : il appelle Donjon, puis affiche
 ```
 
+### L'algorithme d'Explorer (`Donjon.Explorer`)
+
+```
+nombre    <- nombre de lignes de la table Evenements
+rang      <- un nombre au hasard entre 0 et nombre - 1
+evenement <- la ligne à ce rang
+écrire le nom et la description dans le journal
+vie       <- vie - evenement.Degats          (Degats négatifs = soin)
+si Monstre : tirer un monstre au hasard, de la même façon, et commencer le combat
+si Sortie  : victoire
+enregistrer la vie en base
+```
+
+Plus il y a de lignes d'un type dans la table, plus ce type sort souvent : ajoutez trois « Couloir vide » et le donjon devient plus calme.
+
+### Le combat
+
+| Action | Le héros frappe | Le monstre riposte |
+|---|---|---|
+| Attaquer | `Force + (0 à 2) - Défense du monstre` (au moins 1) | `Attaque + (0 à 2) - Défense du héros` |
+| Défendre | 1 point | `Attaque + (0 à 2) - 2 x Défense du héros` |
+
+La table `Monstres` n'est jamais modifiée : c'est un **modèle**. La vie du monstre en cours de combat est gardée en mémoire (`VieAdversaire`).
+
+### Où sont Entity Framework et LINQ ?
+
+| Dans le code | Ce qui se passe | Le SQL envoyé par EF (en gros) |
+|---|---|---|
+| `_db.EtatJoueur.First()` | lire le héros | `SELECT ... FROM EtatJoueur LIMIT 1` |
+| `_db.Evenements.Count()` | compter les événements | `SELECT COUNT(*) FROM Evenements` |
+| `.OrderBy(e => e.Id).Skip(n).First()` | prendre la ligne n | `SELECT ... ORDER BY Id LIMIT 1 OFFSET n` |
+| `_db.Inventaire.Where(o => o.Quantite > 0).OrderBy(o => o.Nom)` | lire le sac | `SELECT ... WHERE Quantite > 0 ORDER BY Nom` |
+| `Joueur.Vie = ...` puis `_db.SaveChanges()` | enregistrer le héros | `UPDATE EtatJoueur SET Vie = ... WHERE Id = 1` |
+| `.Select(o => $"{o.Nom} x{o.Quantite}")` | texte du sac (dans `MainWindow`) | aucun : LINQ sur une liste en mémoire |
+
 ---
 
 ## Le travail demandé
 
-### 0. Créez un jeu selon vos envies : reprenez tout, le monde, la mécanique, les images.
-
 ### 1. Ajouter ou enlever des boutons d'action
+
+- Un bouton = une ligne dans `MainWindow.xaml` + un gestionnaire `Click` dans `MainWindow.xaml.cs`.
+- La **règle** s'écrit dans `Donjon.cs` (une méthode publique), jamais dans la fenêtre.
+- À coder : **Manger** (utiliser une `Ration` de l'inventaire), **Dormir** (regagner de la vie, au risque d'être surpris par un monstre), **Ramasser** (ajouter l'objet vu à l'inventaire).
 
 ### 2. Au moins un trigger
 
-- Exemple 1: empêcher la vie de dépasser `VieMax` (`BEFORE UPDATE ON EtatJoueur`) ;
-- Exemple 2: compter les monstres vaincus, les objets ramassés... dans une table de statistiques (`AFTER INSERT`) ;
+Écrit en SQL dans phpMyAdmin, rangé dans `base/03-triggers.sql`. Idées :
+
+- empêcher la vie de dépasser `VieMax` (`BEFORE UPDATE ON EtatJoueur`) ;
+- compter les monstres vaincus, les objets ramassés... dans une table de statistiques (`AFTER INSERT`) ;
+- refuser une quantité négative dans l'inventaire (`BEFORE UPDATE` + `SIGNAL`).
 
 ### 3. Au moins une table de plus, synchronisée avec Entity Framework
 
@@ -86,10 +127,7 @@ Sample/
 
 Au moins trois requêtes nouvelles, par exemple : l'objet le plus nombreux du sac, les monstres plus faibles que le héros, le nombre de combats gagnés.
 
-## 5. A rendre
+### 5. Deux fiches à rendre
 
-### 5.1 Deux fiches (Word)
 - **Le modèle UML de la base** : toutes les tables (les quatre de départ et les vôtres), leurs colonnes, leurs types, leurs clés et leurs relations.
-- **Les requêtes les plus utilisées** dans votre code : pour chacune, la ligne LINQ, le SQL équivalent, et à quoi elle sert dans le jeu. Il faut au moins une requete avec jointure. Au moins une requete un "GROUP BY et HAVING".
-
-### 5.2 Votre projet 
+- **Les requêtes les plus utilisées** dans votre code : pour chacune, la ligne LINQ, le SQL équivalent, et à quoi elle sert dans le jeu.

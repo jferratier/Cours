@@ -1,15 +1,16 @@
-using System.Windows;
 using Sample.Jeu;
+using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace Sample;
 
 /// <summary>
-/// La fenêtre : elle transmet les clics au Donjon, puis affiche son état.
+/// La fenêtre : elle transmet les clics au Jeux, puis affiche son état.
 /// Aucune règle ici.
 /// </summary>
 public partial class MainWindow : Window
 {
-    private Donjon? _donjon;   // null si la base n'a pas pu être lue
+    private Jeux? _jeux;   // null si la base n'a pas pu être lue
 
     public MainWindow()
     {
@@ -19,9 +20,8 @@ public partial class MainWindow : Window
     private void Fenetre_Loaded(object sender, RoutedEventArgs e)
     {
         try
-        {
-            _donjon = new Donjon();
-            Rafraichir();
+        { 
+            _jeux = new Jeux();
         }
         catch (Exception ex)
         {
@@ -33,70 +33,50 @@ public partial class MainWindow : Window
     }
 
     // ---------------------------------------------------------------------
-    // Les boutons codés
-    // ---------------------------------------------------------------------
-
-    private void BoutonExplorer_Click(object sender, RoutedEventArgs e) => Jouer(d => d.Explorer());
-
-    private void BoutonAttaquer_Click(object sender, RoutedEventArgs e) => Jouer(d => d.Attaquer());
-
-    private void BoutonDefendre_Click(object sender, RoutedEventArgs e) => Jouer(d => d.Defendre());
-
-    private void BoutonRecommencer_Click(object sender, RoutedEventArgs e) => Jouer(d => d.Recommencer());
-
-    // ---------------------------------------------------------------------
-    // À CODER (étudiants) : écrire la règle dans Donjon, puis l'appeler ici
-    // ---------------------------------------------------------------------
-
-    private void BoutonManger_Click(object sender, RoutedEventArgs e) =>
-        Jouer(d => d.Ecrire("Manger : action pas encore codée."));
-
-    private void BoutonDormir_Click(object sender, RoutedEventArgs e) =>
-        Jouer(d => d.Ecrire("Dormir : action pas encore codée."));
-
-    private void BoutonRamasser_Click(object sender, RoutedEventArgs e) =>
-        Jouer(d => d.Ecrire("Ramasser : action pas encore codée."));
-
-    // ---------------------------------------------------------------------
     // L'affichage
     // ---------------------------------------------------------------------
 
-    private void Jouer(Action<Donjon> action)
-    {
-        if (_donjon != null)
-        {
-            action(_donjon);
-            Rafraichir();
-        }
-    }
 
-    private void Rafraichir()
+    private void tirerEpreuve()
     {
-        var donjon = _donjon!;
-        var joueur = donjon.Joueur;
+        var jeux = _jeux;
+        var monNomEpreuve = _jeux.NomEpreuve;
 
         // La fiche du personnage.
-        TexteNom.Text = joueur.Nom;
-        TexteVie.Text = $"Vie {joueur.Vie} / {joueur.VieMax}";
-        BarreVie.Maximum = joueur.VieMax;
-        BarreVie.Value = joueur.Vie;
-        TexteCaracteristiques.Text = $"Attaque {joueur.Force}    Défense {joueur.Defense}";
-        ImageHeros.Opacity = joueur.Vie > 0 ? 1.0 : 0.3;
+        TexteNom.Text = monNomEpreuve;
+        TexteCaracteristiques.Text = $"";
 
-        // Le sac : une ligne LINQ transforme la liste d'objets en texte.
-        var sac = donjon.Inventaire().Select(o => $"{o.Nom} x{o.Quantite}");
-        TexteSac.Text = "Sac : " + string.Join(", ", sac);
-
-        TexteAdversaire.Text = donjon.Adversaire is { } monstre
-            ? $"Combat : {monstre.Nom}, vie {donjon.VieAdversaire} / {monstre.Vie}"
-            : "";
-
-        // Les boutons utilisables selon la situation.
-        BoutonExplorer.IsEnabled = !donjon.EnCombat && !donjon.EstTermine;
-        BoutonAttaquer.IsEnabled = donjon.EnCombat;
-        BoutonDefendre.IsEnabled = donjon.EnCombat;
-
+ 
         // Le journal, le plus récent en haut.
-        ListeJournal.ItemsSource = donjon.Journal.Reverse().ToList();
+        ListeJournal.ItemsSource = jeux.Journal.Reverse().ToList();
     }
+
+    
+    private void ButtonEpreuve_Click(object sender, RoutedEventArgs e)
+    {
+
+        tirerEpreuve();
+
+    }
+
+    private void ButtonLancerEpreuve_Click(object sender, RoutedEventArgs e)
+    {
+        int resultat = _jeux.LancerEpreuve(int.Parse(nomChoix.Text));
+
+        if (resultat == 0)
+        {
+            ImageJeux0.Source = new BitmapImage(
+           new Uri(@"Images/croix.png", UriKind.Relative));
+        }
+        else
+        {
+            ImageJeux0.Source = new BitmapImage(
+            new Uri(@"Images/succes.png", UriKind.Relative));
+        }
+
+        //On actualise le journal
+        ListeJournal.ItemsSource = _jeux.Journal.Reverse().ToList();
+    }
+
+   
 }

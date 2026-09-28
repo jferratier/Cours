@@ -11,8 +11,8 @@ using Sample.Donnees;
 namespace Sample.Migrations
 {
     [DbContext(typeof(SampleContext))]
-    [Migration("20260922155121_init")]
-    partial class init
+    [Migration("20260925141605_epreuve")]
+    partial class epreuve
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,35 @@ namespace Sample.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("Sample.Modeles.Epreuve", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("niveauEndurance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("niveauForce")
+                        .HasColumnType("int");
+
+                    b.Property<int>("niveauForme")
+                        .HasColumnType("int");
+
+                    b.Property<int>("niveauIntelligence")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Epreuves");
+                });
 
             modelBuilder.Entity("Sample.Modeles.EtatJoueur", b =>
                 {

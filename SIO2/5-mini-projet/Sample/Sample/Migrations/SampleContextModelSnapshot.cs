@@ -21,6 +21,35 @@ namespace Sample.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("Sample.Modeles.Epreuve", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("niveauEndurance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("niveauForce")
+                        .HasColumnType("int");
+
+                    b.Property<int>("niveauForme")
+                        .HasColumnType("int");
+
+                    b.Property<int>("niveauIntelligence")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Epreuves");
+                });
+
             modelBuilder.Entity("Sample.Modeles.EtatJoueur", b =>
                 {
                     b.Property<int>("Id")
@@ -171,7 +200,7 @@ namespace Sample.Migrations
                         {
                             Id = 10,
                             Degats = 0,
-                            Description = "Un courant d'air frais... La sortie du donjon !",
+                            Description = "Un courant d'air frais... La sortie du jeux !",
                             Nom = "Sortie",
                             Type = "Sortie"
                         });
@@ -269,6 +298,35 @@ namespace Sample.Migrations
                             Nom = "Torche",
                             Quantite = 1
                         });
+                });
+
+            modelBuilder.Entity("Sample.Modeles.Participant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("niveauEndurance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("niveauForce")
+                        .HasColumnType("int");
+
+                    b.Property<int>("niveauForme")
+                        .HasColumnType("int");
+
+                    b.Property<int>("niveauIntelligence")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Participant");
                 });
 #pragma warning restore 612, 618
         }
