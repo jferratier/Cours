@@ -9,11 +9,11 @@
 <!-- ==========================================================================
      FICHIER GÉNÉRÉ AUTOMATIQUEMENT — NE PAS ÉDITER À LA MAIN
      ==========================================================================
-     Cours      : uml-sql
+     Cours      : 2.3-uml-sql
      Source     : cours.md
      Gabarit    : template-etudiant.html
      Sortie     : html/cours-uml-sql-etudiant.html
-     Génération : node outils/buildnew.js uml-sql
+     Génération : node outils/buildnew.js 2.3-uml-sql
      Images     : intégrées en base64 (fichier autonome)
      ========================================================================== -->
 
@@ -171,6 +171,16 @@ header.topbar{
 }
 .topbar .titre{font-weight:600; font-size:.95rem; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .topbar .titre small{display:block; font-weight:400; opacity:.75; font-size:.75rem}
+/* Identité de l'établissement : logo injecté par buildnew.js (option « logo »),
+   mention d'auteur ajoutée devant le nombre de sessions (option « auteur »). */
+.topbar .logo-etab{height:32px; width:auto; flex:0 0 auto; display:block; border-radius:2px}
+.topbar .titre .auteur{font-weight:500; opacity:.92}
+/* Lien « maison » vers la page d'accueil du site des cours (https://jferratier.github.io/Cours/) */
+.topbar .lien-accueil{flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border-radius:6px; color:var(--entete-texte); text-decoration:none;
+  border:1px solid rgba(255,255,255,.35); transition:background .15s ease}
+.topbar .lien-accueil:hover{background:rgba(255,255,255,.15)}
+.topbar .lien-accueil svg{width:18px; height:18px; display:block; fill:currentColor}
 .btn{
   font:inherit; font-size:.85rem; cursor:pointer;
   background:var(--btn-fond); color:var(--btn-texte); border:1px solid transparent;
@@ -373,6 +383,7 @@ main .galerie-cours .img-cours{ max-width:100%; }
 /* Tr\u00e8s petits \u00e9crans : boutons plus compacts (3 boutons dans la barre) */
 @media (max-width:560px){
   .btn{padding:6px 9px; font-size:.78rem}
+  .topbar .logo-etab{height:24px}
   .topbar{gap:8px; padding:0 10px}
 }
 
@@ -501,9 +512,16 @@ p > .img-cours{max-width:100%;height:auto;border-radius:8px;vertical-align:middl
 <!-- ====================== BARRE SUPÉRIEURE ====================== -->
 <header class="topbar">
   <button class="btn ghost" id="btn-menu" aria-label="Ouvrir le sommaire">☰</button>
+  <!-- Logo de l'établissement : rempli par buildnew.js depuis outils/gabarits/<cfg.logo>.
+       Si le fichier est absent, la balise est simplement retirée. -->
+  
+  <!-- Petit logo maison : retour à l'accueil du site des cours -->
+  <a class="lien-accueil no-print" href="https://jferratier.github.io/Cours/" title="Accueil des cours BTS SIO" aria-label="Accueil des cours BTS SIO">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 12h3v8h5v-6h4v6h5v-8h3L12 3z"/></svg>
+  </a>
   <div class="titre">
     UML orienté SQL : De la modélisation à la base de données
-    <small>8 sessions · version étudiant</small>
+    <small><span class="auteur">Jérôme Ferratier</span> · 8 sessions · version étudiant</small>
   </div>
   <button class="btn ghost" id="btn-corriges" title="Afficher ou masquer tous les corrigés (raccourci : c)">✅ Corrigés</button>
   <button class="btn ghost" id="btn-theme" title="Changer de thème (Sobre → Nuit → Moderne)" aria-label="Changer de thème">☀️ Sobre</button>
@@ -1376,18 +1394,15 @@ INSERT INTO tp_entrainement (ent_nom, ent_niveau) VALUES
  ('Récupération','Debutant');                       -- jamais utilisé
 
 INSERT INTO tp_course (spo_id, cou_type, cou_duree, cou_lieu, cou_distance) VALUES
- (1, N'Trail',       95, N'Fontainebleau', 14.20),
- (1, N'Route',       42, N'Paris',          8.00),
- (1, N'Fractionné',  35, NULL,              6.50),   -- lieu inconnu
- (2, N'Route',      120, N'Lyon',          21.10),
- (2, N'Trail',       80, N'Chartreuse',    12.00),
- (3, N'Route',       28, N'Paris',          5.00),
- (3, N'Route',       55, N'Paris',         10.40),
- (3, N'Trail',      150, N'Vercors',       24.80),
- (4, N'Fractionné',  40, N'Nantes',         7.20);
+ (1,'Trail',       95, 'Fontainebleau', 14.20),
+ (1,'Route',       42, 'Paris',          8.00),
+ (1,'Fractionné',  35, NULL,             6.50),     -- lieu inconnu
+ (2,'Route',      120, 'Lyon',          21.10),
+ (2,'Trail',       80, 'Chartreuse',    12.00),
+ (3,'Route',       28, 'Paris',          5.00);
 
- INSERT INTO tp_serie (cou_id, ent_id, ser_date, ser_ressenti, ser_commentaire) VALUES
- (1,3,'Route',   4, 'Paris'),
+ INSERT INTO tp_serie (ent_id, ser_date, ser_ressenti, ser_commentaire) VALUES
+ (3,'Route',       55, 'Paris',         ressenti, ser_commentaire),
  (1,1,'2026-03-02',4,'Bonnes sensations'),
  (1,4,'2026-03-02',3,NULL),
  (2,2,'2026-03-05',5,'Rapide'),

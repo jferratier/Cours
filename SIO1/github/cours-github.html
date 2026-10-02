@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GitHub  Manuel de survie</title>
+<title>GitHub  Manuel de survie — version étudiant</title>
 <meta name="description" content="GitHub  Manuel de survie — document de cours généré depuis cours.md.">
 
 <!-- ==========================================================================
      FICHIER GÉNÉRÉ AUTOMATIQUEMENT — NE PAS ÉDITER À LA MAIN
      ==========================================================================
-     Cours      : github
+     Cours      : 2.2-github
      Source     : cours.md
-     Gabarit    : template.html
-     Sortie     : html/cours-github.html
-     Génération : node outils/buildnew.js github
+     Gabarit    : template-etudiant.html
+     Sortie     : html/cours-github-etudiant.html
+     Génération : node outils/buildnew.js 2.2-github
      Images     : intégrées en base64 (fichier autonome)
      ========================================================================== -->
 
@@ -171,6 +171,16 @@ header.topbar{
 }
 .topbar .titre{font-weight:600; font-size:.95rem; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .topbar .titre small{display:block; font-weight:400; opacity:.75; font-size:.75rem}
+/* Identité de l'établissement : logo injecté par buildnew.js (option « logo »),
+   mention d'auteur ajoutée devant le nombre de sessions (option « auteur »). */
+.topbar .logo-etab{height:32px; width:auto; flex:0 0 auto; display:block; border-radius:2px}
+.topbar .titre .auteur{font-weight:500; opacity:.92}
+/* Lien « maison » vers la page d'accueil du site des cours (https://jferratier.github.io/Cours/) */
+.topbar .lien-accueil{flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border-radius:6px; color:var(--entete-texte); text-decoration:none;
+  border:1px solid rgba(255,255,255,.35); transition:background .15s ease}
+.topbar .lien-accueil:hover{background:rgba(255,255,255,.15)}
+.topbar .lien-accueil svg{width:18px; height:18px; display:block; fill:currentColor}
 .btn{
   font:inherit; font-size:.85rem; cursor:pointer;
   background:var(--btn-fond); color:var(--btn-texte); border:1px solid transparent;
@@ -276,7 +286,19 @@ ul.retenir{list-style:none; padding-left:0}
 ul.retenir li{
   position:relative; padding-left:1.9em; margin:.65em 0;
 }
-ul.retenir li::before{content:"✅"; position:absolute; left:0}
+ul.retenir li::before{
+  content:""; position:absolute; left:0; top:.16em;
+  width:1.1em; height:1.1em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Ccircle cx='256' cy='256' r='248' fill='%2316a34a'/%3E%3Cpath d='M142 266 L214 340 L372 182' fill='none' stroke='%23ffffff' stroke-width='54' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+/* coche verte des QCM : meme pastille */
+ul.qcm li.bonne .marque{
+  display:inline-block; width:1em; height:1em; vertical-align:-.14em;
+  font-size:0; line-height:0; margin-left:.25em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Ccircle cx='256' cy='256' r='248' fill='%2316a34a'/%3E%3Cpath d='M142 266 L214 340 L372 182' fill='none' stroke='%23ffffff' stroke-width='54' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
 
 /* Tableaux */
 .table-wrap{overflow-x:auto; margin:1.1em 0}
@@ -313,6 +335,34 @@ ul.qcm li.bonne{color:var(--vert); font-weight:600}
 html.corriges-masques ul.qcm li.bonne{color:inherit; font-weight:400}
 html.corriges-masques ul.qcm li.bonne .marque{display:none}
 
+/* ========== VERSION ÉTUDIANT : MASQUAGE PERMANENT DES RÉPONSES ========== */
+/* Neutraliser la couleur verte et le poids des bonnes réponses */
+ul.qcm li.bonne{color:inherit!important; font-weight:400!important}
+/* Masquer les marques ✅ */
+ul.qcm li.bonne .marque{display:none!important}
+/* Masquer tous les encadrés de corrigés */
+.encadre.corrige{display:none!important}
+
+/* ==========================================================================
+   5 bis. TAILLE DES IMAGES DU COURS
+   --------------------------------------------------------------------------
+   Les images ne dépassent jamais 50 % de la largeur de la colonne de cours
+   (elles restent centrées). Sur mobile, elles reprennent toute la largeur.
+   Sélecteurs préfixés par « main » pour passer devant les styles injectés
+   par buildnew.js. Pour changer la taille : modifier --largeur-image.
+   ========================================================================== */
+:root{ --largeur-image:50%; }
+main .figure-cours .img-cours,
+main p > .img-cours{ max-width:var(--largeur-image); height:auto; }
+main .galerie-cours .img-cours{ max-width:100%; }
+@media (max-width:960px){
+  main .figure-cours .img-cours,
+  main p > .img-cours{ max-width:100%; }
+}
+@media print{
+  main .figure-cours .img-cours{ max-width:var(--largeur-image); }
+}
+
 /* ==========================================================================
    6. RESPONSIVE
    ========================================================================== */
@@ -333,6 +383,7 @@ html.corriges-masques ul.qcm li.bonne .marque{display:none}
 /* Tr\u00e8s petits \u00e9crans : boutons plus compacts (3 boutons dans la barre) */
 @media (max-width:560px){
   .btn{padding:6px 9px; font-size:.78rem}
+  .topbar .logo-etab{height:24px}
   .topbar{gap:8px; padding:0 10px}
 }
 
@@ -425,6 +476,7 @@ html.corriges-masques ul.qcm li.bonne .marque{display:none}
   .coupure-ok{ break-inside:auto !important; page-break-inside:auto !important; }
 }
 </style>
+<style id="sans-corriges-buildnew">#btn-corriges{display:none!important}</style>
 <style id="styles-images-buildnew">
 /* --- Images du cours (ajouté par buildnew.js) --------------------------- */
 .figure-cours{margin:1.4em auto;text-align:center;max-width:100%}
@@ -460,9 +512,16 @@ p > .img-cours{max-width:100%;height:auto;border-radius:8px;vertical-align:middl
 <!-- ====================== BARRE SUPÉRIEURE ====================== -->
 <header class="topbar">
   <button class="btn ghost" id="btn-menu" aria-label="Ouvrir le sommaire">☰</button>
+  <!-- Logo de l'établissement : rempli par buildnew.js depuis outils/gabarits/<cfg.logo>.
+       Si le fichier est absent, la balise est simplement retirée. -->
+  
+  <!-- Petit logo maison : retour à l'accueil du site des cours -->
+  <a class="lien-accueil no-print" href="https://jferratier.github.io/Cours/" title="Accueil des cours BTS SIO" aria-label="Accueil des cours BTS SIO">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 12h3v8h5v-6h4v6h5v-8h3L12 3z"/></svg>
+  </a>
   <div class="titre">
     GitHub  Manuel de survie
-    <small>4 sessions</small>
+    <small><span class="auteur">Jérôme Ferratier</span> · 4 sessions · version étudiant</small>
   </div>
   <button class="btn ghost" id="btn-corriges" title="Afficher ou masquer tous les corrigés (raccourci : c)">✅ Corrigés</button>
   <button class="btn ghost" id="btn-theme" title="Changer de thème (Sobre → Nuit → Moderne)" aria-label="Changer de thème">☀️ Sobre</button>

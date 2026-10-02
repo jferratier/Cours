@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cybersécurité BTS SIO  Cours d'introduction  version étudiant</title>
-<meta name="description" content="Cybersécurité BTS SIO  Cours d'introduction  document de cours généré depuis cours.md.">
+<title>Cybersécurité BTS SIO — Cours d'introduction — version étudiant</title>
+<meta name="description" content="Cybersécurité BTS SIO — Cours d'introduction — document de cours généré depuis cours.md.">
 
 <!-- ==========================================================================
-     FICHIER GÉNÉRÉ AUTOMATIQUEMENT  NE PAS ÉDITER À LA MAIN
+     FICHIER GÉNÉRÉ AUTOMATIQUEMENT — NE PAS ÉDITER À LA MAIN
      ==========================================================================
-     Cours      : cybersecurite-introduction
+     Cours      : 1.0-cybersecurite-introduction
      Source     : cours.md
      Gabarit    : template-etudiant.html
      Sortie     : html/cours-cybersecurite-introduction-etudiant.html
-     Génération : node outils/buildnew.js cybersecurite-introduction
+     Génération : node outils/buildnew.js 1.0-cybersecurite-introduction
      Images     : intégrées en base64 (fichier autonome)
      ========================================================================== -->
 
@@ -22,7 +22,7 @@
    1. VARIABLES DE THÈME  (modifier ici pour changer toute la charte)
    ========================================================================== */
 /* --------------------------------------------------------------------------
-   THÈME 1  « Sobre » (clair, par défaut)
+   THÈME 1 — « Sobre » (clair, par défaut)
    Toutes les couleurs de l'interface passent par ces variables : changer de
    thème = redéfinir ces variables (voir les blocs [data-theme=...] plus bas).
    -------------------------------------------------------------------------- */
@@ -73,7 +73,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   THÈME 2  « Nuit » (sombre, confort de lecture en faible luminosité)
+   THÈME 2 — « Nuit » (sombre, confort de lecture en faible luminosité)
    -------------------------------------------------------------------------- */
 html[data-theme="nuit"]{
   --bleu:#8ab4f8; --bleu-clair:#67c9e8; --accent:#ff9147;
@@ -92,7 +92,7 @@ html[data-theme="nuit"]{
 }
 
 /* --------------------------------------------------------------------------
-   THÈME 3  « Moderne » (dégradés violet/turquoise, coins arrondis, ombres)
+   THÈME 3 — « Moderne » (dégradés violet/turquoise, coins arrondis, ombres)
    -------------------------------------------------------------------------- */
 html[data-theme="moderne"]{
   --bleu:#3b1e78; --bleu-clair:#7c3aed; --accent:#e11d74;
@@ -171,6 +171,16 @@ header.topbar{
 }
 .topbar .titre{font-weight:600; font-size:.95rem; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .topbar .titre small{display:block; font-weight:400; opacity:.75; font-size:.75rem}
+/* Identité de l'établissement : logo injecté par buildnew.js (option « logo »),
+   mention d'auteur ajoutée devant le nombre de sessions (option « auteur »). */
+.topbar .logo-etab{height:32px; width:auto; flex:0 0 auto; display:block; border-radius:2px}
+.topbar .titre .auteur{font-weight:500; opacity:.92}
+/* Lien « maison » vers la page d'accueil du site des cours (https://jferratier.github.io/Cours/) */
+.topbar .lien-accueil{flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border-radius:6px; color:var(--entete-texte); text-decoration:none;
+  border:1px solid rgba(255,255,255,.35); transition:background .15s ease}
+.topbar .lien-accueil:hover{background:rgba(255,255,255,.15)}
+.topbar .lien-accueil svg{width:18px; height:18px; display:block; fill:currentColor}
 .btn{
   font:inherit; font-size:.85rem; cursor:pointer;
   background:var(--btn-fond); color:var(--btn-texte); border:1px solid transparent;
@@ -276,7 +286,19 @@ ul.retenir{list-style:none; padding-left:0}
 ul.retenir li{
   position:relative; padding-left:1.9em; margin:.65em 0;
 }
-ul.retenir li::before{content:"✅"; position:absolute; left:0}
+ul.retenir li::before{
+  content:""; position:absolute; left:0; top:.16em;
+  width:1.1em; height:1.1em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Ccircle cx='256' cy='256' r='248' fill='%2316a34a'/%3E%3Cpath d='M142 266 L214 340 L372 182' fill='none' stroke='%23ffffff' stroke-width='54' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+/* coche verte des QCM : meme pastille */
+ul.qcm li.bonne .marque{
+  display:inline-block; width:1em; height:1em; vertical-align:-.14em;
+  font-size:0; line-height:0; margin-left:.25em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Ccircle cx='256' cy='256' r='248' fill='%2316a34a'/%3E%3Cpath d='M142 266 L214 340 L372 182' fill='none' stroke='%23ffffff' stroke-width='54' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
 
 /* Tableaux */
 .table-wrap{overflow-x:auto; margin:1.1em 0}
@@ -361,6 +383,7 @@ main .galerie-cours .img-cours{ max-width:100%; }
 /* Tr\u00e8s petits \u00e9crans : boutons plus compacts (3 boutons dans la barre) */
 @media (max-width:560px){
   .btn{padding:6px 9px; font-size:.78rem}
+  .topbar .logo-etab{height:24px}
   .topbar{gap:8px; padding:0 10px}
 }
 
@@ -489,13 +512,20 @@ p > .img-cours{max-width:100%;height:auto;border-radius:8px;vertical-align:middl
 <!-- ====================== BARRE SUPÉRIEURE ====================== -->
 <header class="topbar">
   <button class="btn ghost" id="btn-menu" aria-label="Ouvrir le sommaire">☰</button>
+  <!-- Logo de l'établissement : rempli par buildnew.js depuis outils/gabarits/<cfg.logo>.
+       Si le fichier est absent, la balise est simplement retirée. -->
+  
+  <!-- Petit logo maison : retour à l'accueil du site des cours -->
+  <a class="lien-accueil no-print" href="https://jferratier.github.io/Cours/" title="Accueil des cours BTS SIO" aria-label="Accueil des cours BTS SIO">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 12h3v8h5v-6h4v6h5v-8h3L12 3z"/></svg>
+  </a>
   <div class="titre">
-    Cybersécurité BTS SIO  Cours d'introduction
-    <small>6 sessions · version étudiant</small>
+    Cybersécurité BTS SIO — Cours d'introduction
+    <small><span class="auteur">Jérôme Ferratier</span> · 6 sessions · version étudiant</small>
   </div>
   <button class="btn ghost" id="btn-corriges" title="Afficher ou masquer tous les corrigés (raccourci : c)">✅ Corrigés</button>
   <button class="btn ghost" id="btn-theme" title="Changer de thème (Sobre → Nuit → Moderne)" aria-label="Changer de thème">☀️ Sobre</button>
-  <button class="btn" id="btn-pdf" title="Imprimer / Enregistrer en PDF  pensez à cocher « Graphiques d'arrière-plan » dans la boîte d'impression">🖨️ Export PDF</button>
+  <button class="btn" id="btn-pdf" title="Imprimer / Enregistrer en PDF — pensez à cocher « Graphiques d'arrière-plan » dans la boîte d'impression">🖨️ Export PDF</button>
   <button class="btn" id="btn-word" title="Télécharger le cours au format Word (.doc)">📄 Export Word</button>
 </header>
 <div id="barre-progression" aria-hidden="true"><div id="barre-remplissage"></div></div>
@@ -960,7 +990,7 @@ p > .img-cours{max-width:100%;height:auto;border-radius:8px;vertical-align:middl
 
 
   <footer class="no-print" style="color:var(--texte-doux); font-size:.82rem; text-align:center; padding:10px 0 30px">
-    Cybersécurité BTS SIO  Cours d'introduction · Document généré automatiquement  éditez le .md, pas le .html.
+    Cybersécurité BTS SIO — Cours d'introduction · Document généré automatiquement — éditez le .md, pas le .html.
   </footer>
 </main>
 
@@ -1326,7 +1356,7 @@ document.addEventListener('keydown', function(e){
    EXPORT WORD AVEC IMAGES (ajouté par buildnew.js)
    --------------------------------------------------------------------------
    L'export d'origine produit un HTML « habillé en .doc » : Word l'ouvre, mais
-   il IGNORE les images en data:URI  elles disparaissent du document.
+   il IGNORE les images en data:URI — elles disparaissent du document.
    On produit donc un vrai fichier MHTML (multipart/related), le format
    « Page web à fichier unique » de Word : le texte est une partie MIME, chaque
    image une autre partie, référencée par un nom de fichier relatif.
@@ -1588,7 +1618,7 @@ document.addEventListener('keydown', function(e){
   var neuf = bouton.cloneNode(true);
   bouton.parentNode.replaceChild(neuf, bouton);
   bouton = neuf;
-  bouton.title = 'Télécharger le cours au format Word (.doc)  images incluses';
+  bouton.title = 'Télécharger le cours au format Word (.doc) — images incluses';
   bouton.addEventListener('click', exporterWordAvecImages);
   window.exporterWordAvecImages = exporterWordAvecImages;
 })();

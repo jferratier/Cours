@@ -175,6 +175,12 @@ header.topbar{
    mention d'auteur ajoutée devant le nombre de sessions (option « auteur »). */
 .topbar .logo-etab{height:32px; width:auto; flex:0 0 auto; display:block; border-radius:2px}
 .topbar .titre .auteur{font-weight:500; opacity:.92}
+/* Lien « maison » vers la page d'accueil du site des cours (https://jferratier.github.io/Cours/) */
+.topbar .lien-accueil{flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border-radius:6px; color:var(--entete-texte); text-decoration:none;
+  border:1px solid rgba(255,255,255,.35); transition:background .15s ease}
+.topbar .lien-accueil:hover{background:rgba(255,255,255,.15)}
+.topbar .lien-accueil svg{width:18px; height:18px; display:block; fill:currentColor}
 .btn{
   font:inherit; font-size:.85rem; cursor:pointer;
   background:var(--btn-fond); color:var(--btn-texte); border:1px solid transparent;
@@ -509,9 +515,13 @@ p > .img-cours{max-width:100%;height:auto;border-radius:8px;vertical-align:middl
   <!-- Logo de l'établissement : rempli par buildnew.js depuis outils/gabarits/<cfg.logo>.
        Si le fichier est absent, la balise est simplement retirée. -->
   
+  <!-- Petit logo maison : retour à l'accueil du site des cours -->
+  <a class="lien-accueil no-print" href="https://jferratier.github.io/Cours/" title="Accueil des cours BTS SIO" aria-label="Accueil des cours BTS SIO">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 12h3v8h5v-6h4v6h5v-8h3L12 3z"/></svg>
+  </a>
   <div class="titre">
     Cybersécurité — BTS SIO (SISR &amp; SLAM)
-    <small><span class="auteur">Jérôme Ferratier</span> · 25 sessions · version étudiant</small>
+    <small><span class="auteur">Jérôme Ferratier</span> · 3 sessions · version étudiant</small>
   </div>
   <button class="btn ghost" id="btn-corriges" title="Afficher ou masquer tous les corrigés (raccourci : c)">✅ Corrigés</button>
   <button class="btn ghost" id="btn-theme" title="Changer de thème (Sobre → Nuit → Moderne)" aria-label="Changer de thème">☀️ Sobre</button>
@@ -542,7 +552,7 @@ p > .img-cours{max-width:100%;height:auto;border-radius:8px;vertical-align:middl
 
   <!-- Plan : <tbody> rempli dynamiquement depuis le tableau PLAN -->
   <section class="bloc" id="plan">
-    <h2 style="margin-top:0">Plan complet des 25 sessions</h2>
+    <h2 style="margin-top:0">Plan complet des 3 sessions</h2>
     <div class="table-wrap">
       <table class="plan">
         <thead><tr><th style="width:38px">#</th><th style="width:22%">Titre</th><th>Objectifs pédagogiques</th><th>Notions abordées</th></tr></thead>
@@ -1507,160 +1517,6 @@ const PLAN = [
     "titre": "TP 1 : Protéger les données à caractère personnel (étude de cas CentreCall)",
     "objectifs": "Reconnaître une donnée à caractère personnel et un traitement ; recenser les opérations dans un registre ; conduire les deux premières phases d'un PIA ; coter et cartographier des risques ; rédiger une note de synthèse",
     "notions": "Donnée à caractère personnel (identification directe / indirecte), traitement et finalité, registre des traitements (art. 30 RGPD), PIA (art. 35 RGPD), EBIOS Risk Manager, vraisemblance et gravité, cartographie des risques, preuve (authentification / imputabilité / traçabilité), sécurité et sûreté, outil PIA de la CNIL"
-  },
-  {
-    "n": 4,
-    "redigee": false,
-    "titre": "Taxonomie des cyberattaques  Panorama des menaces",
-    "objectifs": "Classer les attaques par nature et vecteur ; identifier les méthodes courantes ; associer chaque menace à une contre-mesure de premier niveau",
-    "notions": "Ransomware, phishing / spear-phishing, DDoS, Man-in-the-Middle, injection, ingénierie sociale, zero-day, supply chain attack, Living Off The Land"
-  },
-  {
-    "n": 5,
-    "redigee": false,
-    "titre": "Les fondements de la cryptographie",
-    "objectifs": "Comprendre les principes mathématiques de base du chiffrement ; distinguer chiffrement symétrique et asymétrique ; maîtriser la notion de hachage",
-    "notions": "Chiffrement symétrique (AES, DES), chiffrement asymétrique (RSA, ECC), fonction de hachage (SHA-256, MD5), clé, XOR, entropie, confidentialité vs intégrité"
-  },
-  {
-    "n": 6,
-    "redigee": false,
-    "titre": "Cryptographie appliquée  PKI, certificats et HTTPS",
-    "objectifs": "Comprendre l'infrastructure à clé publique ; analyser un certificat numérique ; mettre en œuvre HTTPS",
-    "notions": "PKI, certificats X.509, autorité de certification (CA/RA), SSL/TLS, HTTPS, CSR, révocation (CRL/OCSP), Let's Encrypt"
-  },
-  {
-    "n": 7,
-    "redigee": false,
-    "titre": "Authentification et gestion des identités (IAM)",
-    "objectifs": "Maîtriser les trois facteurs d'authentification ; configurer MFA ; comprendre SSO et les annuaires d'entreprise",
-    "notions": "Facteurs d'auth (connaissance / possession / inhérence), MFA/2FA, SSO, LDAP, Active Directory, OAuth 2.0, OpenID Connect, Kerberos, PAM"
-  },
-  {
-    "n": 8,
-    "redigee": false,
-    "titre": "Sécurisation d'un poste Windows",
-    "objectifs": "Appliquer les bonnes pratiques de durcissement Windows ; configurer GPO ; gérer les comptes locaux et les droits",
-    "notions": "GPO, UAC, pare-feu Windows Defender, BitLocker, LAPS, Observateur d'événements, Windows Defender ATP, CIS Benchmark Windows"
-  },
-  {
-    "n": 9,
-    "redigee": false,
-    "titre": "Sécurisation d'un système Linux",
-    "objectifs": "Appliquer les bonnes pratiques de durcissement Linux ; configurer SSH sécurisé ; gérer les droits et les services",
-    "notions": "Permissions UNIX (chmod, chown, SUID/SGID), sudo, fail2ban, SSH (authentification par clé, no-root-login), AppArmor/SELinux, systemd, auditd, CIS Benchmark Linux"
-  },
-  {
-    "n": 10,
-    "redigee": false,
-    "titre": "Architecture réseau sécurisée et segmentation",
-    "objectifs": "Concevoir une architecture réseau sécurisée ; implémenter la segmentation ; appliquer la défense en profondeur",
-    "notions": "VLAN, DMZ, zones de confiance, NAT, routage sécurisé, bastion host, pare-feu multi-niveaux, modèle de défense en profondeur, principe du moindre privilège"
-  },
-  {
-    "n": 11,
-    "redigee": false,
-    "titre": "Pare-feu, IDS et IPS",
-    "objectifs": "Configurer des règles de filtrage ; distinguer IDS et IPS ; choisir le bon dispositif selon le besoin",
-    "notions": "Filtrage stateful / stateless, règles ACL, NGFW, IDS / IPS (Snort, Suricata), honeypot, WAF, corrélation d'alertes"
-  },
-  {
-    "n": 12,
-    "redigee": false,
-    "titre": "VPN et accès distants sécurisés",
-    "objectifs": "Implémenter un VPN ; comprendre IPSec et SSL-VPN ; appliquer le principe Zero Trust pour les accès distants",
-    "notions": "IPSec (IKE, ESP, AH), SSL-VPN, OpenVPN, WireGuard, split tunneling, Zero Trust Network Access (ZTNA), NAC, posture de sécurité"
-  },
-  {
-    "n": 13,
-    "redigee": false,
-    "titre": "Sécurité des applications web  Fondamentaux",
-    "objectifs": "Identifier les vulnérabilités applicatives web ; comprendre l'OWASP Top 10 ; appliquer les en-têtes HTTP de sécurité",
-    "notions": "OWASP Top 10, en-têtes HTTP (CSP, HSTS, X-Frame-Options, X-XSS-Protection), SDLC sécurisé (DevSecOps), CORS, configuration serveur sécurisée"
-  },
-  {
-    "n": 14,
-    "redigee": false,
-    "titre": "Injections SQL et XSS  Attaques et contre-mesures",
-    "objectifs": "Identifier et tester les injections SQL et XSS ; implémenter les contre-mesures ; utiliser OWASP ZAP",
-    "notions": "SQLi (basique, aveugle, time-based), XSS (reflected, stored, DOM-based), CSRF, requêtes préparées (PreparedStatement), validation / encodage des entrées, CSP"
-  },
-  {
-    "n": 15,
-    "redigee": false,
-    "titre": "Gestion des mots de passe et contrôle d'accès",
-    "objectifs": "Implémenter une politique de mots de passe robuste ; comprendre le stockage sécurisé ; déployer RBAC",
-    "notions": "Hachage sécurisé (bcrypt, argon2, PBKDF2), salage, rainbow tables, gestionnaires de mots de passe (KeePass, Bitwarden), RBAC / ABAC, PAM, journalisation des accès"
-  },
-  {
-    "n": 16,
-    "redigee": false,
-    "titre": "Supervision de la sécurité  Logs et SIEM",
-    "objectifs": "Mettre en place la collecte et l'analyse de journaux ; utiliser un SIEM ; détecter des indicateurs de compromission",
-    "notions": "Syslog, journald, Windows Event Logs, SIEM (ELK Stack / Elastic SIEM, Splunk), indicateurs de compromission (IoC), règles de corrélation, dashboard SOC"
-  },
-  {
-    "n": 17,
-    "redigee": false,
-    "titre": "Sauvegarde, PCA et PRA",
-    "objectifs": "Concevoir un plan de sauvegarde adapté ; calculer RTO/RPO ; tester la restauration",
-    "notions": "Stratégie 3-2-1, sauvegardes full / incrémentale / différentielle, RTO, RPO, PCA (Plan de Continuité d'Activité), PRA (Plan de Reprise d'Activité), tests de restauration"
-  },
-  {
-    "n": 18,
-    "redigee": false,
-    "titre": "Politique de Sécurité des SI (PSSI) et gestion des risques",
-    "objectifs": "Rédiger une PSSI ; conduire une analyse de risques ; connaître ISO 27001",
-    "notions": "PSSI, charte informatique, EBIOS Risk Manager, ISO 27001 / 27002, identification des actifs, classification des risques, vraisemblance vs impact, traitement du risque"
-  },
-  {
-    "n": 19,
-    "redigee": false,
-    "titre": "Réglementation et conformité  RGPD et NIS2",
-    "objectifs": "Appliquer le RGPD dans un contexte professionnel ; comprendre la directive NIS2 ; identifier les responsabilités légales",
-    "notions": "RGPD (DPO, bases légales, droits des personnes, PIA), NIS2, LPM, OIV / OSE, CNIL, sanctions et amendes, registre des traitements"
-  },
-  {
-    "n": 20,
-    "redigee": false,
-    "titre": "Ingénierie sociale et phishing",
-    "objectifs": "Reconnaître les attaques d'ingénierie sociale ; mener une campagne de sensibilisation ; simuler et analyser un phishing",
-    "notions": "Phishing, spear-phishing, vishing, smishing, pretexting, baiting, deepfake, techniques de manipulation (urgence, autorité, peur), outils de simulation (GoPhish)"
-  },
-  {
-    "n": 21,
-    "redigee": false,
-    "titre": "Malwares  Analyse et protection",
-    "objectifs": "Identifier les types de malwares ; comprendre leurs mécanismes de propagation ; mettre en place la protection",
-    "notions": "Virus, ver, cheval de Troie, ransomware, rootkit, spyware, botnet, RAT, dropper, stager, analyse statique / dynamique, sandbox (Cuckoo), EDR"
-  },
-  {
-    "n": 22,
-    "redigee": false,
-    "titre": "Introduction au test d'intrusion (Pentest)",
-    "objectifs": "Comprendre la méthodologie d'un pentest ; utiliser les outils de base ; respecter le cadre légal",
-    "notions": "Phases PTES (recon, scan, exploitation, post-exploitation, rapport), outils (Kali Linux, Nmap, Metasploit, Burp Suite, Nikto), cadre légal (convention signée), bug bounty"
-  },
-  {
-    "n": 23,
-    "redigee": false,
-    "titre": "Sécurité des réseaux sans fil (Wi-Fi)",
-    "objectifs": "Sécuriser un réseau Wi-Fi d'entreprise ; identifier les attaques spécifiques ; configurer WPA3 et 802.1X",
-    "notions": "WEP / WPA / WPA2 / WPA3, attaques (evil twin, PMKID, deauth, krack), 802.1X, RADIUS, SSID caché, isolation client, réseau invité, outils (Aircrack-ng)"
-  },
-  {
-    "n": 24,
-    "redigee": false,
-    "titre": "Réponse à incident et forensics de base",
-    "objectifs": "Appliquer le cycle de réponse à incident ; collecter des preuves numériques ; rédiger un rapport post-incident",
-    "notions": "Cycle NIST (préparation, détection, confinement, éradication, récupération, retour d'expérience), chaîne de custody, outils forensics (Autopsy, Volatility, FTK Imager), DFIR"
-  },
-  {
-    "n": 25,
-    "redigee": false,
-    "titre": "Synthèse générale et préparation à l'épreuve E4/E5",
-    "objectifs": "Consolider l'ensemble des acquis ; maîtriser la méthodologie d'épreuve ; s'entraîner sur des cas complets transversaux",
-    "notions": "Révision des notions clés des sessions 1-24, études de cas globales (SISR : infrastructure ; SLAM : applicatif), méthodologie BTS, tableau de bord des compétences, conseils d'examen"
   }
 ];
 

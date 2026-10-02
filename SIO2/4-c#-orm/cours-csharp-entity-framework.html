@@ -9,11 +9,11 @@
 <!-- ==========================================================================
      FICHIER GÉNÉRÉ AUTOMATIQUEMENT — NE PAS ÉDITER À LA MAIN
      ==========================================================================
-     Cours      : csharp-entity-framework
+     Cours      : 2.4-orm-csharp-entity-framework
      Source     : cours.md
      Gabarit    : template-etudiant.html
      Sortie     : html/cours-csharp-entity-framework-etudiant.html
-     Génération : node outils/buildnew.js csharp-entity-framework
+     Génération : node outils/buildnew.js 2.4-orm-csharp-entity-framework
      Images     : intégrées en base64 (fichier autonome)
      ========================================================================== -->
 
@@ -175,6 +175,12 @@ header.topbar{
    mention d'auteur ajoutée devant le nombre de sessions (option « auteur »). */
 .topbar .logo-etab{height:32px; width:auto; flex:0 0 auto; display:block; border-radius:2px}
 .topbar .titre .auteur{font-weight:500; opacity:.92}
+/* Lien « maison » vers la page d'accueil du site des cours (https://jferratier.github.io/Cours/) */
+.topbar .lien-accueil{flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border-radius:6px; color:var(--entete-texte); text-decoration:none;
+  border:1px solid rgba(255,255,255,.35); transition:background .15s ease}
+.topbar .lien-accueil:hover{background:rgba(255,255,255,.15)}
+.topbar .lien-accueil svg{width:18px; height:18px; display:block; fill:currentColor}
 .btn{
   font:inherit; font-size:.85rem; cursor:pointer;
   background:var(--btn-fond); color:var(--btn-texte); border:1px solid transparent;
@@ -509,6 +515,10 @@ p > .img-cours{max-width:100%;height:auto;border-radius:8px;vertical-align:middl
   <!-- Logo de l'établissement : rempli par buildnew.js depuis outils/gabarits/<cfg.logo>.
        Si le fichier est absent, la balise est simplement retirée. -->
   
+  <!-- Petit logo maison : retour à l'accueil du site des cours -->
+  <a class="lien-accueil no-print" href="https://jferratier.github.io/Cours/" title="Accueil des cours BTS SIO" aria-label="Accueil des cours BTS SIO">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 12h3v8h5v-6h4v6h5v-8h3L12 3z"/></svg>
+  </a>
   <div class="titre">
     C# et Entity Framework : les deux sens entre objets et base
     <small><span class="auteur">Jérôme Ferratier</span> · 9 sessions · version étudiant</small>
