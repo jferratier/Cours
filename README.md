@@ -1,4 +1,4 @@
-# Cours BTS SIO – Bibliothèque de cours 2026-2027
+# Cours BTS SIO - Bibliothèque de cours 2026-2027 - Jérôme Ferratier
 
 Auteur : **Jerome Ferratier**, enseignant en BTS SIO. CCI Gard.
 
