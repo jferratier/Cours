@@ -47,7 +47,7 @@
     .sidenav .subheader{ color:var(--accent); font-weight:600; }
 
     /* Bandeau d'accueil */
-    .hero{ position:relative; overflow:hidden; color:#fff; padding:64px 0 72px;
+    .hero{ position:relative; overflow:hidden; color:#fff; padding:28px 0 32px;
            background:
              radial-gradient(circle at 85% 20%, rgba(255,255,255,.12) 0, rgba(255,255,255,0) 35%),
              radial-gradient(circle at 10% 90%, rgba(232,89,12,.25) 0, rgba(232,89,12,0) 40%),
@@ -62,8 +62,8 @@
     .hero .surtitre{ display:inline-block; text-transform:uppercase; letter-spacing:.16em;
            font-size:.8rem; font-weight:600; padding:6px 14px; border-radius:999px;
            background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); margin-bottom:18px; }
-    .hero-boutons{ margin-top:28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
-    .btn-hero{ display:inline-block; padding:12px 28px; border-radius:999px; font-weight:600;
+    .hero-boutons{ margin-top:16px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+    .btn-hero{ display:inline-block; padding:9px 24px; border-radius:999px; font-weight:600;
            font-size:1rem; letter-spacing:.02em; transition:transform .15s ease, box-shadow .15s ease, background .15s ease; }
     .btn-hero:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.2); }
     .btn-hero.plein{ background:var(--accent); color:#fff; }
@@ -73,8 +73,8 @@
     .hero .logo-cci{ background:#fff; border-radius:14px; padding:16px 22px; display:inline-block;
                      box-shadow:0 6px 18px rgba(0,0,0,.18); }
     .hero .logo-cci img{ height:90px; max-width:100%; display:block; }
-    .hero h1{ font-size:3rem; font-weight:700; margin:0 0 .5rem; letter-spacing:-.01em; }
-    .hero p.flow-text{ opacity:.9; margin:0; }
+    .hero h1{ font-size:2.4rem; font-weight:700; margin:0 0 .3rem; letter-spacing:-.01em; }
+    .hero p.flow-text{ opacity:.9; margin:0; font-size:1.2rem; }
 
     /* Tableau 2 colonnes : 1re année | 2e année */
     .tableau-annees{ margin-top:32px; width:100%; padding:0 24px; }
@@ -104,6 +104,7 @@
                         color:var(--theme); font-weight:700; padding:3px 10px; border-radius:999px;
                         background:color-mix(in srgb, var(--theme) 12%, transparent); margin-bottom:10px; }
     .card.cours .card-action a{ color:var(--theme) !important; }
+    .card.cours.bordure-rouge{ border-top-color:#c62828; }
     .card.cours .card-action a{ font-weight:600; }
 
     footer.page-footer{ background:var(--bleu); padding-top:0; }
@@ -195,10 +196,10 @@
               <div class="card-action"><a href="SIO1/cybersecurite/cours-cybersecurite-introduction.html">Ouvrir le cours</a></div>
             </div>
 
-            <div class="card cours">
+            <div class="card cours bordure-rouge">
               <div class="card-content">
                 <span class="theme">Cybersécurité</span>
-                <span class="card-title">Cours complet</span>
+                <span class="card-title">Cours CyberSécurité</span>
                 <p>Le programme de cybersécurité BTS SIO dans son intégralité.</p>
               </div>
               <div class="card-action"><a href="SIO1/cybersecurite/cours-cybersecurite.html">Ouvrir le cours</a></div>
@@ -252,7 +253,7 @@
               <div class="card-action"><a href="SIO2/3-uml-sql/cours-uml-sql.html">Ouvrir le cours</a></div>
             </div>
 
-            <div class="card cours">
+            <div class="card cours bordure-rouge">
               <div class="card-content">
                 <span class="theme">Développement</span>
                 <span class="card-title">C# et Entity Framework</span>
