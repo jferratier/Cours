@@ -4,7 +4,7 @@ Auteur : **Jerome Ferratier**, enseignant en BTS SIO.
 
 ## Accès aux cours en ligne :
 
-	**https://jferratier.github.io/Cours/**
+**https://jferratier.github.io/Cours/**
 
 La page d'accueil présente les cours en deux colonnes (1re année / 2e année). Chaque cours est une page HTML autonome : elle s'ouvre directement dans le navigateur, sans installation, et fonctionne aussi hors ligne une fois téléchargée.
 
