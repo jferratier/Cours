@@ -1,0 +1,15 @@
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\obj\Debug\net9.0\test.GeneratedMSBuildEditorConfig.editorconfig
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\obj\Debug\net9.0\test.AssemblyInfoInputs.cache
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\obj\Debug\net9.0\test.AssemblyInfo.cs
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\obj\Debug\net9.0\test.csproj.CoreCompileInputs.cache
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\bin\Debug\net9.0\test.exe
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\bin\Debug\net9.0\test.deps.json
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\bin\Debug\net9.0\test.runtimeconfig.json
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\bin\Debug\net9.0\test.dll
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\bin\Debug\net9.0\test.pdb
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\obj\Debug\net9.0\test.dll
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\obj\Debug\net9.0\refint\test.dll
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\obj\Debug\net9.0\test.pdb
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\obj\Debug\net9.0\test.genruntimeconfig.cache
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\obj\Debug\net9.0\ref\test.dll
+C:\CCI\Cours\2026\cours-git\TP-C#-ORM\test\test\obj\Debug\net9.0\test.csproj.Up2Date
