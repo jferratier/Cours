@@ -1,0 +1,19 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Compilation
+bin/
+obj/
+TestResults/
+
+# Journaux de l'application
+logs/
+*.log
+
+# Configuration locale (mission 6 : chaîne de connexion hors du code)
+appsettings.local.json
+.env
+
+# ATTENTION : le dossier Migrations/ est du code source, il SE VERSIONNE.
