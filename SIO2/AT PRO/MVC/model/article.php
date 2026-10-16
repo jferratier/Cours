@@ -40,10 +40,9 @@
 
 
         public function getAll(){
-            $query = $this->Connexion->prepare("SELECT art_id, art_nom, art_prix, art_poid FROM " . $this->table ); //correction article -> $this->table
+            $query = $this->Connexion->prepare("SELECT art_id, art_nom, art_prix, art_poid FROM " . $this->table . " ORDER BY art_id DESC");
             $query->execute();
-            $result = $query->fetchAll();
-            $this->Connexion = null;
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }
 
@@ -54,7 +53,6 @@
                 "id" => $id 
             ));
             $result = $query->fetchObject();
-            $this->Connexion = null;
             return $result;
         }
 
@@ -62,13 +60,11 @@
             $query = $this->Connexion->prepare("INSERT INTO " . $this->table . " (art_nom, art_prix, art_poid)
                     VALUES (:nom,:prix,:poid)
             "); 
-            // Correction $this->Art_nom --> $this->art_nom
             $result = $query->execute(array(
                 "nom" => $this->art_nom,
                 "prix" =>  $this->art_prix ,
                 "poid" => $this->art_poid ,
             ));
-            $this->Connexion = null;
             return $result;
         }
 
@@ -85,12 +81,13 @@
                 "prix" => $this->art_prix ,
                 "poid" => $this->art_poid ,
             ));
-
-            $this->Connexion = null;
             return $result;
         }
 
-
+        public function delete(){
+            $query = $this->Connexion->prepare("DELETE FROM " . $this->table . " WHERE art_id = :id");
+            return $query->execute(array("id" => $this->art_id));
+        }
 
     }
 
