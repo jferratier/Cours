@@ -1,0 +1,2525 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'algorithmique — version étudiant</title>
+<meta name="description" content="L'algorithmique — document de cours généré depuis cours.md.">
+
+<!-- ==========================================================================
+     FICHIER GÉNÉRÉ AUTOMATIQUEMENT — NE PAS ÉDITER À LA MAIN
+     ==========================================================================
+     Cours      : algorithmie
+     Source     : cours.md
+     Gabarit    : template-etudiant.html
+     Sortie     : html/cours-algorithmie-etudiant.html
+     Génération : node outils/buildnew.js algorithmie
+     Images     : intégrées en base64 (fichier autonome)
+     ========================================================================== -->
+
+<style>
+/* ==========================================================================
+   1. VARIABLES DE THÈME  (modifier ici pour changer toute la charte)
+   ========================================================================== */
+/* --------------------------------------------------------------------------
+   THÈME 1 — « Sobre » (clair, par défaut)
+   Toutes les couleurs de l'interface passent par ces variables : changer de
+   thème = redéfinir ces variables (voir les blocs [data-theme=...] plus bas).
+   -------------------------------------------------------------------------- */
+:root{
+  /* couleurs de marque */
+  --bleu:#12395c;          /* titres, barre supérieure */
+  --bleu-clair:#1e6fa8;    /* liens, sous-titres */
+  --accent:#e8590c;        /* mises en avant, numéros de session */
+  --vert:#177245;          /* corrigés, points à retenir */
+  --rouge:#b3261e;         /* avertissements */
+  /* textes et fonds */
+  --texte:#1c1f23;
+  --texte-doux:#5b636b;
+  --texte-inactif:#9aa2aa;
+  --fond:#f6f7f9;          /* fond de page (accepte un dégradé) */
+  --fond-carte:#ffffff;    /* fond des sections et du sommaire */
+  --fond-doux:#eef2f6;     /* en-têtes de tableaux, puces */
+  --bordure:#dfe3e8;
+  --tr-alt:#fafbfc;        /* lignes paires des tableaux */
+  --ombre:0 1px 2px rgba(16,24,40,.04);
+  /* barre supérieure et boutons */
+  --entete-fond:#12395c;
+  --entete-texte:#ffffff;
+  --btn-fond:#ffffff;
+  --btn-texte:#12395c;
+  /* sommaire */
+  --nav-hover:#f0f4f8;
+  --nav-actif:#e8f1f8;
+  /* code et schémas */
+  --code-fond:#eef1f4;
+  --code-texte:#1c1f23;
+  --pre-fond:#0f1720;
+  --pre-texte:#e6edf3;
+  /* encadrés pédagogiques */
+  --enc-bleu:#f2f7fb;
+  --enc-rouge:#fdf1f0;
+  --enc-vert:#f1f8f3;
+  --enc-orange:#fff7f1;
+  --duree-fond:#fff4ec;
+  --duree-bordure:#f6d5bd;
+  /* gabarit */
+  --radius:8px;
+  --largeur-nav:290px;
+  --largeur-contenu:1180px;   /* largeur max de la colonne de cours (centrée) */
+  --police:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --police-titre:var(--police);
+  --police-mono:"Consolas","SFMono-Regular","DejaVu Sans Mono",monospace;
+}
+
+/* --------------------------------------------------------------------------
+   THÈME 2 — « Nuit » (sombre, confort de lecture en faible luminosité)
+   -------------------------------------------------------------------------- */
+html[data-theme="nuit"]{
+  --bleu:#8ab4f8; --bleu-clair:#67c9e8; --accent:#ff9147;
+  --vert:#4cc38a; --rouge:#ff7b72;
+  --texte:#e2e8ef; --texte-doux:#9aa5b1; --texte-inactif:#5d6773;
+  --fond:#0d1117; --fond-carte:#151b23; --fond-doux:#1d2632;
+  --bordure:#2a333f; --tr-alt:#1a212b;
+  --ombre:0 1px 3px rgba(0,0,0,.5);
+  --entete-fond:#080d14; --entete-texte:#e8eef6;
+  --btn-fond:#243244; --btn-texte:#e8eef6;
+  --nav-hover:#1b2430; --nav-actif:#1f2b3a;
+  --code-fond:#1e2733; --code-texte:#ffd7ab;
+  --pre-fond:#070c12; --pre-texte:#d7e2ec;
+  --enc-bleu:#141f2e; --enc-rouge:#2a1719; --enc-vert:#11241d; --enc-orange:#2a1f13;
+  --duree-fond:#2a1f13; --duree-bordure:#5b3c1e;
+}
+
+/* --------------------------------------------------------------------------
+   THÈME 3 — « Moderne » (dégradés violet/turquoise, coins arrondis, ombres)
+   -------------------------------------------------------------------------- */
+html[data-theme="moderne"]{
+  --bleu:#3b1e78; --bleu-clair:#7c3aed; --accent:#e11d74;
+  --vert:#0d9488; --rouge:#e11d48;
+  --texte:#251f33; --texte-doux:#6d6685; --texte-inactif:#a9a2bd;
+  --fond:linear-gradient(155deg,#f6f2ff 0%,#eef6ff 55%,#fff1f7 100%);
+  --fond-carte:#ffffff; --fond-doux:#f5f0ff;
+  --bordure:#e7dffa; --tr-alt:#fbf9ff;
+  --ombre:0 10px 30px rgba(76,29,149,.10);
+  --entete-fond:linear-gradient(90deg,#4c1d95 0%,#7c3aed 48%,#0891b2 100%);
+  --entete-texte:#ffffff;
+  --btn-fond:#ffffff; --btn-texte:#5b21b6;
+  --nav-hover:#f7f2ff; --nav-actif:#efe6ff;
+  --code-fond:#f3ecff; --code-texte:#5b21b6;
+  --pre-fond:#1d1435; --pre-texte:#ece7ff;
+  --enc-bleu:#f5f1ff; --enc-rouge:#fff1f4; --enc-vert:#eafaf6; --enc-orange:#fff4ec;
+  --duree-fond:#fff0f6; --duree-bordure:#f8cfe1;
+  --radius:16px;
+}
+/* Quelques finitions propres au thème « Moderne » */
+html[data-theme="moderne"] h1{
+  background:linear-gradient(90deg,#4c1d95,#7c3aed 55%,#0891b2);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+html[data-theme="moderne"] h2{border-bottom:2px solid transparent;
+  border-image:linear-gradient(90deg,#7c3aed,#e11d74 60%,transparent) 1}
+html[data-theme="moderne"] section.session, html[data-theme="moderne"] section.bloc{
+  border-top:4px solid transparent;
+  background-image:linear-gradient(var(--fond-carte),var(--fond-carte)),
+                   linear-gradient(90deg,#7c3aed,#0891b2 60%,#e11d74);
+  background-origin:border-box; background-clip:padding-box,border-box;
+}
+html[data-theme="moderne"] .puce{background:linear-gradient(90deg,#f5f0ff,#eef6ff)}
+html[data-theme="moderne"] nav#sommaire a.actif{box-shadow:inset 0 0 0 1px var(--bordure)}
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:70px}
+body{
+  margin:0; font-family:var(--police); color:var(--texte);
+  background:var(--fond); background-attachment:fixed;
+  line-height:1.65; font-size:16.5px;
+  transition:background-color .25s ease, color .25s ease;
+}
+h1,h2,h3,h4{line-height:1.3; color:var(--bleu); margin:1.6em 0 .6em; font-family:var(--police-titre)}
+h1{font-size:1.85rem}
+h2{font-size:1.4rem; border-bottom:2px solid var(--bordure); padding-bottom:.3em}
+h3{font-size:1.13rem; color:var(--bleu-clair)}
+h4{font-size:1rem}
+p,ul,ol{margin:.7em 0}
+li{margin:.25em 0}
+a{color:var(--bleu-clair)}
+a:hover{color:var(--accent)}
+code{
+  font-family:var(--police-mono); font-size:.9em;
+  background:var(--code-fond); color:var(--code-texte); padding:.12em .38em; border-radius:4px;
+}
+pre{
+  font-family:var(--police-mono); font-size:.82rem; line-height:1.45;
+  background:var(--pre-fond); color:var(--pre-texte); padding:14px 16px;
+  border-radius:var(--radius); overflow-x:auto;
+}
+pre code{background:none; color:inherit; padding:0; font-size:inherit}
+hr{border:none; border-top:1px solid var(--bordure); margin:2.2em 0}
+
+/* ==========================================================================
+   3. BARRE SUPÉRIEURE + BARRE DE PROGRESSION DE LECTURE
+   ========================================================================== */
+header.topbar{
+  position:fixed; top:0; left:0; right:0; height:56px; z-index:50;
+  display:flex; align-items:center; gap:12px; padding:0 16px;
+  background:var(--entete-fond); color:var(--entete-texte);
+  box-shadow:0 1px 6px rgba(0,0,0,.18);
+}
+.topbar .titre{font-weight:600; font-size:.95rem; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.topbar .titre small{display:block; font-weight:400; opacity:.75; font-size:.75rem}
+/* Identité de l'établissement : logo injecté par buildnew.js (option « logo »),
+   mention d'auteur ajoutée devant le nombre de sessions (option « auteur »). */
+.topbar .logo-etab{height:32px; width:auto; flex:0 0 auto; display:block; border-radius:2px}
+.topbar .titre .auteur{font-weight:500; opacity:.92}
+/* Lien « maison » vers la page d'accueil du site des cours (https://jferratier.github.io/Cours/) */
+.topbar .lien-accueil{flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border-radius:6px; color:var(--entete-texte); text-decoration:none;
+  border:1px solid rgba(255,255,255,.35); transition:background .15s ease}
+.topbar .lien-accueil:hover{background:rgba(255,255,255,.15)}
+.topbar .lien-accueil svg{width:18px; height:18px; display:block; fill:currentColor}
+.btn{
+  font:inherit; font-size:.85rem; cursor:pointer;
+  background:var(--btn-fond); color:var(--btn-texte); border:1px solid transparent;
+  padding:7px 13px; border-radius:6px; font-weight:600;
+}
+.btn:hover{background:var(--accent); color:#fff}
+.btn.ghost{background:transparent; color:var(--entete-texte); border-color:rgba(255,255,255,.5)}
+.btn.ghost:hover{background:rgba(255,255,255,.15)}
+/* La barre de progression est remplie en JS via la largeur de #barre-remplissage */
+#barre-progression{
+  position:fixed; top:56px; left:0; right:0; height:4px;
+  background:rgba(0,0,0,.08); z-index:49;
+}
+#barre-remplissage{height:100%; width:0; background:var(--accent); transition:width .1s linear}
+
+/* ==========================================================================
+   4. SOMMAIRE LATÉRAL (24 sessions, généré en JS)
+   ========================================================================== */
+nav#sommaire{
+  position:fixed; top:60px; bottom:0; left:0; width:var(--largeur-nav);
+  overflow-y:auto; background:var(--fond-carte);
+  border-right:1px solid var(--bordure); padding:14px 0 40px; z-index:40;
+}
+nav#sommaire .nav-titre{
+  font-size:.72rem; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--texte-doux); padding:10px 18px 6px; font-weight:700;
+}
+nav#sommaire ol{list-style:none; margin:0; padding:0}
+nav#sommaire li{margin:0}
+nav#sommaire a, nav#sommaire span.lien-inactif{
+  display:flex; gap:9px; align-items:baseline;
+  padding:7px 16px; font-size:.855rem; text-decoration:none;
+  border-left:3px solid transparent; color:var(--texte);
+}
+nav#sommaire a:hover{background:var(--nav-hover); border-left-color:var(--bleu-clair)}
+nav#sommaire a.actif{background:var(--nav-actif); border-left-color:var(--accent); font-weight:600; color:var(--bleu)}
+nav#sommaire .num{
+  flex:0 0 24px; font-weight:700; font-size:.78rem;
+  color:var(--accent); font-family:var(--police-mono);
+}
+/* Sessions non encore rédigées : grisées + mention « à venir » */
+nav#sommaire span.lien-inactif{color:var(--texte-inactif); cursor:not-allowed}
+nav#sommaire span.lien-inactif .num{color:var(--texte-inactif); opacity:.6}
+nav#sommaire span.lien-inactif::after{
+  content:"à venir"; margin-left:auto; font-size:.66rem;
+  background:var(--fond-doux); color:var(--texte-doux); padding:1px 6px; border-radius:10px;
+  align-self:center; white-space:nowrap;
+}
+
+/* Bouton d'ouverture du sommaire sur mobile */
+#btn-menu{display:none}
+.voile{display:none}
+
+/* ==========================================================================
+   5. CONTENU PRINCIPAL
+   ========================================================================== */
+/* La zone de contenu occupe tout l'espace à droite du sommaire, et la colonne
+   de cours y est centrée horizontalement (flex + align-items:center).
+   Chaque bloc enfant prend 100 % de la largeur disponible, plafonnée par
+   --largeur-contenu. Aucun conteneur supplémentaire n'est nécessaire :
+   toute nouvelle <section> ajoutée hérite automatiquement du même cadrage. */
+main{
+  margin-left:var(--largeur-nav); padding:84px 34px 90px;
+  display:flex; flex-direction:column; align-items:center;
+}
+main > *{ width:100%; max-width:var(--largeur-contenu); }
+section.session, section.bloc{
+  background:var(--fond-carte); border:1px solid var(--bordure);
+  border-radius:var(--radius); padding:30px 38px; margin-bottom:30px;
+  box-shadow:var(--ombre);
+}
+/* Les tableaux et blocs de code remplissent toute la largeur de leur section */
+.table-wrap, table, pre{ width:100%; }
+.meta{
+  display:flex; flex-wrap:wrap; gap:8px; margin:.6em 0 1.2em;
+}
+.puce{
+  font-size:.75rem; background:var(--fond-doux); color:var(--bleu);
+  border:1px solid var(--bordure); border-radius:20px; padding:3px 11px; font-weight:600;
+}
+.duree{
+  font-size:.78rem; font-weight:600; color:var(--accent);
+  background:var(--duree-fond); border:1px solid var(--duree-bordure); border-radius:20px;
+  padding:2px 10px; margin-left:8px; white-space:nowrap;
+}
+
+/* Encadrés pédagogiques réutilisables */
+.encadre{border-left:4px solid var(--bleu-clair); background:var(--enc-bleu); padding:12px 16px; border-radius:0 var(--radius) var(--radius) 0; margin:1.1em 0}
+.encadre.attention{border-color:var(--rouge); background:var(--enc-rouge)}
+.encadre.corrige{border-color:var(--vert); background:var(--enc-vert)}
+.encadre.definition{border-color:var(--accent); background:var(--enc-orange)}
+.encadre p:first-child{margin-top:0}
+.encadre p:last-child{margin-bottom:0}
+.encadre .etiquette{
+  display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.07em;
+  font-weight:700; color:var(--texte-doux); margin-bottom:.35em;
+}
+
+/* Listes d'objectifs et de synthèse */
+ol.objectifs{padding-left:1.3em}
+ol.objectifs li{margin:.4em 0}
+ul.retenir{list-style:none; padding-left:0}
+ul.retenir li{
+  position:relative; padding-left:1.9em; margin:.65em 0;
+}
+ul.retenir li::before{
+  content:""; position:absolute; left:0; top:.16em;
+  width:1.1em; height:1.1em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Ccircle cx='256' cy='256' r='248' fill='%2316a34a'/%3E%3Cpath d='M142 266 L214 340 L372 182' fill='none' stroke='%23ffffff' stroke-width='54' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+/* coche verte des QCM : meme pastille */
+ul.qcm li.bonne .marque{
+  display:inline-block; width:1em; height:1em; vertical-align:-.14em;
+  font-size:0; line-height:0; margin-left:.25em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Ccircle cx='256' cy='256' r='248' fill='%2316a34a'/%3E%3Cpath d='M142 266 L214 340 L372 182' fill='none' stroke='%23ffffff' stroke-width='54' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+
+/* Tableaux */
+.table-wrap{overflow-x:auto; margin:1.1em 0}
+table{border-collapse:collapse; width:100%; font-size:.88rem; background:var(--fond-carte)}
+th,td{border:1px solid var(--bordure); padding:8px 11px; text-align:left; vertical-align:top}
+th{background:var(--fond-doux); color:var(--bleu); font-weight:700}
+tbody tr:nth-child(even){background:var(--tr-alt)}
+table.plan td:first-child{text-align:center; font-weight:700; color:var(--accent); white-space:nowrap}
+
+/* QCM : la bonne réponse est signalée en vert */
+ul.qcm{list-style:none; padding-left:1em}
+ul.qcm li{margin:.2em 0}
+ul.qcm li.bonne{color:var(--vert); font-weight:600}
+.exercice{border-top:1px dashed var(--bordure); padding-top:1.2em; margin-top:1.6em}
+.exercice:first-of-type{border-top:none; padding-top:0}
+
+/* --------------------------------------------------------------------------
+   AFFICHAGE / MASQUAGE DES CORRIGÉS
+   Deux niveaux : un bouton global dans la barre supérieure (classe
+   .corriges-masques sur <html>) et un bouton par bloc (classe .masque sur
+   l'encadré). Tout bloc .encadre.corrige ajouté plus tard est pris en charge
+   automatiquement.
+   -------------------------------------------------------------------------- */
+/* Bouton « Afficher / Masquer » inséré en JS dans chaque encadré de corrigé */
+.btn-corrige{
+  font:inherit; font-size:.74rem; font-weight:700; cursor:pointer;
+  background:var(--vert); color:#fff; border:none; border-radius:20px;
+  padding:3px 12px; margin:0 0 .4em;
+}
+.btn-corrige:hover{background:var(--accent)}
+/* Bloc masqué : seuls l'étiquette et le bouton restent visibles */
+.encadre.corrige.masque > *:not(.etiquette):not(.btn-corrige){display:none}
+/* Dans un QCM, la bonne réponse redevient neutre quand les corrigés sont masqués */
+html.corriges-masques ul.qcm li.bonne{color:inherit; font-weight:400}
+html.corriges-masques ul.qcm li.bonne .marque{display:none}
+
+/* ========== VERSION ÉTUDIANT : MASQUAGE PERMANENT DES RÉPONSES ========== */
+/* Neutraliser la couleur verte et le poids des bonnes réponses */
+ul.qcm li.bonne{color:inherit!important; font-weight:400!important}
+/* Masquer les marques ✅ */
+ul.qcm li.bonne .marque{display:none!important}
+/* Masquer tous les encadrés de corrigés */
+.encadre.corrige{display:none!important}
+
+/* ==========================================================================
+   5 bis. TAILLE DES IMAGES DU COURS
+   --------------------------------------------------------------------------
+   Les images ne dépassent jamais 50 % de la largeur de la colonne de cours
+   (elles restent centrées). Sur mobile, elles reprennent toute la largeur.
+   Sélecteurs préfixés par « main » pour passer devant les styles injectés
+   par buildnew.js. Pour changer la taille : modifier --largeur-image.
+   ========================================================================== */
+:root{ --largeur-image:50%; }
+main .figure-cours .img-cours,
+main p > .img-cours{ max-width:var(--largeur-image); height:auto; }
+main .galerie-cours .img-cours{ max-width:100%; }
+@media (max-width:960px){
+  main .figure-cours .img-cours,
+  main p > .img-cours{ max-width:100%; }
+}
+@media print{
+  main .figure-cours .img-cours{ max-width:var(--largeur-image); }
+}
+
+/* ==========================================================================
+   6. RESPONSIVE
+   ========================================================================== */
+@media (max-width:960px){
+  body{font-size:16px}
+  main{margin-left:0; padding:80px 18px 70px}
+  section.session, section.bloc{padding:18px 16px}
+  main > *{max-width:none}
+  #btn-menu{display:inline-block}
+  nav#sommaire{
+    transform:translateX(-100%); transition:transform .25s ease;
+    width:min(86vw,var(--largeur-nav)); box-shadow:2px 0 12px rgba(0,0,0,.12);
+  }
+  nav#sommaire.ouvert{transform:translateX(0)}
+  .voile.visible{display:block; position:fixed; inset:56px 0 0 0; background:rgba(0,0,0,.35); z-index:39}
+  .topbar .titre small{display:none}
+}
+/* Tr\u00e8s petits \u00e9crans : boutons plus compacts (3 boutons dans la barre) */
+@media (max-width:560px){
+  .btn{padding:6px 9px; font-size:.78rem}
+  .topbar .logo-etab{height:24px}
+  .topbar{gap:8px; padding:0 10px}
+}
+
+/* ==========================================================================
+   7. IMPRESSION / EXPORT PDF  (window.print())
+   ========================================================================== */
+@media print{
+  /* --- Format de page et marges --- */
+  @page{ size:A4 portrait; margin:16mm 13mm; }
+
+  /* Quel que soit le thème actif à l'écran, le PDF est toujours imprimé en
+     version claire (encre économisée, lisibilité papier garantie). */
+  :root, html[data-theme]{
+    --largeur-nav:0px;
+    --bleu:#12395c; --bleu-clair:#1e6fa8; --accent:#a8410a;
+    --vert:#146c40; --rouge:#a3231c;
+    --texte:#111; --texte-doux:#555; --texte-inactif:#888;
+    --fond:#fff; --fond-carte:#fff; --fond-doux:#eef1f4;
+    --bordure:#c8ced6; --tr-alt:#fafafa; --ombre:none;
+    --code-fond:#eef1f4; --code-texte:#111;
+    --pre-fond:#f4f4f4; --pre-texte:#111;
+    --enc-bleu:#f4f7fa; --enc-rouge:#fdf2f1; --enc-vert:#f2f8f4; --enc-orange:#fdf6f0;
+    --duree-fond:#fdf6f0; --duree-bordure:#e6cdb6;
+    --radius:6px;
+  }
+  /* Neutralisation des effets décoratifs du thème « Moderne » à l'impression */
+  html[data-theme="moderne"] h1{background:none; color:var(--bleu); -webkit-text-fill-color:currentColor}
+  html[data-theme="moderne"] h2{border-image:none; border-bottom:2px solid var(--bordure)}
+  html[data-theme="moderne"] section.session, html[data-theme="moderne"] section.bloc{background-image:none; border-top:none}
+  header.topbar, nav#sommaire, #barre-progression, .voile, .no-print, .btn-corrige{display:none !important}
+  /* Un corrigé masqué à l'écran reste masqué dans le PDF :
+     masquer les corrigés avant l'export produit la « version élève ». */
+  body{background:#fff; font-size:10.5pt; line-height:1.5}
+  main{margin:0; padding:0; display:block}
+  main > *{max-width:none; width:auto}
+  section.session, section.bloc{border:none; padding:0; margin:0}
+
+  /* ---------------------------------------------------------------------
+     A. CHAQUE CHAPITRE COMMENCE SUR UNE NOUVELLE PAGE
+     1) chaque session (section) démarre en haut d'une page ;
+     2) chaque grande partie d'une session (chaque <h2> : Objectifs, Partie
+        théorique, Cas concret, Exercices, Points à retenir) démarre elle aussi
+        sur une page neuve. Le premier <h2> est exclu pour ne pas laisser le
+        titre de la session seul sur une page.
+     Pour revenir à un flux continu à l'intérieur des sessions, il suffit de
+     neutraliser la règle « section.session > h2 » ci-dessous.
+     --------------------------------------------------------------------- */
+  section.bloc, section.session{ break-before:page; page-break-before:always; }
+  main > *:first-child{ break-before:avoid; page-break-before:avoid; }
+  section.session > h2:not(:first-of-type){ break-before:page; page-break-before:always; }
+  /* Les sous-parties (h3) restent dans le flux mais ne sont jamais coupées
+     de leur premier paragraphe (voir règle B ci-dessous). */
+
+  /* ---------------------------------------------------------------------
+     B. LES SOUS-PARTIES ET LES BLOCS NE SONT PLUS COUPÉS EN DEUX
+     break-inside:avoid demande au navigateur de reporter le bloc entier
+     sur la page suivante plutôt que de le scinder.
+     --------------------------------------------------------------------- */
+  .encadre, .exercice, .table-wrap, table, pre,
+  ul.qcm, ol.objectifs, ul.retenir, .meta, li{
+    break-inside:avoid; page-break-inside:avoid;
+  }
+  /* Un titre n'est jamais orphelin en bas de page : il reste avec son texte */
+  h1,h2,h3,h4{ break-after:avoid; page-break-after:avoid; break-inside:avoid; }
+  /* Deux lignes minimum d'un paragraphe de part et d'autre d'une coupure */
+  p, li{ orphans:3; widows:3; }
+  /* Tableaux : lignes insécables + en-tête répété si le tableau change de page */
+  tr, td, th{ break-inside:avoid; page-break-inside:avoid; }
+  thead{ display:table-header-group; }
+  tfoot{ display:table-footer-group; }
+
+  /* --- Lisibilité des schémas ASCII et tableaux denses à l'impression --- */
+  pre{ background:#f4f4f4; color:#111; border:1px solid #ccc; font-size:8pt; line-height:1.3; }
+  table{ font-size:9pt; }
+  table.plan{ font-size:8pt; }
+  a{color:#000; text-decoration:none}
+  a[href^="http"]::after{content:" (" attr(href) ")"; font-size:8pt; color:#555}
+
+  /* ---------------------------------------------------------------------
+     C. CLASSES UTILITAIRES DE PAGINATION (à poser sur n'importe quel bloc)
+       class="saut-page-avant" → force un début de page
+       class="saut-page-apres" → force une fin de page
+       class="insecable"       → interdit la coupure du bloc
+       class="coupure-ok"      → autorise explicitement la coupure
+                                 (utile pour un très long tableau)
+     --------------------------------------------------------------------- */
+  .saut-page-avant{ break-before:page !important; page-break-before:always !important; }
+  .saut-page-apres{ break-after:page !important; page-break-after:always !important; }
+  .insecable{ break-inside:avoid !important; page-break-inside:avoid !important; }
+  .coupure-ok{ break-inside:auto !important; page-break-inside:auto !important; }
+}
+</style>
+<style id="sans-corriges-buildnew">#btn-corriges{display:none!important}</style>
+<style id="styles-images-buildnew">
+/* --- Images du cours (ajouté par buildnew.js) --------------------------- */
+.figure-cours{margin:1.4em auto;text-align:center;max-width:100%}
+.figure-cours .img-cours{max-width:100%;height:auto;border-radius:10px;
+  border:1px solid var(--bordure,#dfe3e8);background:var(--fond-carte,#fff);
+  box-shadow:0 1px 3px rgba(16,24,40,.10)}
+.figure-cours figcaption{margin-top:.5em;font-size:.82rem;
+  color:var(--texte-doux,#5b636b);font-style:italic}
+p > .img-cours{max-width:100%;height:auto;border-radius:8px;vertical-align:middle}
+.galerie-cours{display:grid;gap:14px;margin:1.4em 0;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.galerie-cours .figure-cours{margin:0}
+.galerie-cours .img-cours{width:100%;object-fit:contain}
+/* --- Agrandissement au clic --------------------------------------------- */
+.img-cours[data-zoom]{cursor:zoom-in}
+#loupe-image{position:fixed;inset:0;z-index:9999;display:none;align-items:center;
+  justify-content:center;padding:24px;background:rgba(10,14,20,.88);cursor:zoom-out}
+#loupe-image.ouverte{display:flex}
+#loupe-image img{max-width:96vw;max-height:92vh;border-radius:8px;
+  box-shadow:0 10px 40px rgba(0,0,0,.5)}
+#loupe-image .fermer{position:absolute;top:14px;right:20px;color:#fff;font-size:2rem;
+  line-height:1;background:none;border:0;cursor:pointer;opacity:.85}
+@media print{
+  .figure-cours{break-inside:avoid;page-break-inside:avoid}
+  .figure-cours .img-cours{max-height:11cm;box-shadow:none}
+  .galerie-cours{grid-template-columns:repeat(2,1fr)}
+  #loupe-image{display:none !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ====================== BARRE SUPÉRIEURE ====================== -->
+<header class="topbar">
+  <button class="btn ghost" id="btn-menu" aria-label="Ouvrir le sommaire">☰</button>
+  <!-- Logo de l'établissement : rempli par buildnew.js depuis outils/gabarits/<cfg.logo>.
+       Si le fichier est absent, la balise est simplement retirée. -->
+  
+  <!-- Petit logo maison : retour à l'accueil du site des cours -->
+  <a class="lien-accueil no-print" href="https://jferratier.github.io/Cours/" title="Accueil des cours BTS SIO" aria-label="Accueil des cours BTS SIO">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 12h3v8h5v-6h4v6h5v-8h3L12 3z"/></svg>
+  </a>
+  <div class="titre">
+    L'algorithmique
+    <small><span class="auteur">Jérôme Ferratier</span> · 13 sessions · version étudiant</small>
+  </div>
+  <button class="btn ghost" id="btn-corriges" title="Afficher ou masquer tous les corrigés (raccourci : c)">✅ Corrigés</button>
+  <button class="btn ghost" id="btn-theme" title="Changer de thème (Sobre → Nuit → Moderne)" aria-label="Changer de thème">☀️ Sobre</button>
+  <button class="btn" id="btn-pdf" title="Imprimer / Enregistrer en PDF — pensez à cocher « Graphiques d'arrière-plan » dans la boîte d'impression">🖨️ Export PDF</button>
+  <button class="btn" id="btn-word" title="Télécharger le cours au format Word (.doc)">📄 Export Word</button>
+</header>
+<div id="barre-progression" aria-hidden="true"><div id="barre-remplissage"></div></div>
+<div class="voile" id="voile"></div>
+
+<!-- ====================== SOMMAIRE (généré par JS) ====================== -->
+<nav id="sommaire" aria-label="Sommaire des sessions">
+  <div class="nav-titre">Sommaire</div>
+  <ol id="liste-sommaire"><!-- rempli dynamiquement depuis le tableau PLAN --></ol>
+</nav>
+
+<main>
+  <!-- Carte d'accueil (générée depuis le début du Markdown) -->
+  <section class="bloc" id="accueil">
+    <h1 style="margin-top:0">L'algorithmique</h1>
+    <div class="meta"><span class="puce">Module : Algorithmique</span><span class="puce">Niveau : BTS SIO 2e année</span></div>
+    <p>Un programme, quel que soit le langage, n'est que la traduction d'un <strong>algorithme</strong> : une suite d'instructions qui transforme des données d'entrée en un résultat. Savoir programmer, c'est d'abord savoir écrire cet algorithme ; le langage vient après.</p>
+    <p>Ce module tient sur <strong>six notions</strong> : les variables, les conditions, les boucles, les tableaux, les fonctions, et pour finir les algorithmes classiques de recherche et de tri. Chacune est présentée en <strong>pseudo-code</strong>, la notation utilisée à l'examen, puis traduite en <strong>C#</strong>, le langage de vos projets.</p>
+    <p>Chaque chapitre de théorie est immédiatement suivi de son TP : on n'accumule jamais deux notions sans les avoir pratiquées.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Session</th><th>Objet</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1</strong></td><td>Les bases : variables, types, affectation</td></tr>
+          <tr><td><strong>2</strong></td><td><strong>TP 1</strong> : premiers algorithmes</td></tr>
+          <tr><td><strong>3</strong></td><td>Les conditions</td></tr>
+          <tr><td><strong>4</strong></td><td><strong>TP 2</strong> : les tests</td></tr>
+          <tr><td><strong>5</strong></td><td>Les boucles</td></tr>
+          <tr><td><strong>6</strong></td><td><strong>TP 3</strong> : les répétitions</td></tr>
+          <tr><td><strong>7</strong></td><td>Les tableaux</td></tr>
+          <tr><td><strong>8</strong></td><td><strong>TP 4</strong> : traiter une série de données</td></tr>
+          <tr><td><strong>9</strong></td><td>Les fonctions et les procédures</td></tr>
+          <tr><td><strong>10</strong></td><td><strong>TP 5</strong> : découper un programme</td></tr>
+          <tr><td><strong>11</strong></td><td>Rechercher et trier</td></tr>
+          <tr><td><strong>12</strong></td><td><strong>TP 6</strong> : implémenter et comparer</td></tr>
+          <tr><td><strong>13</strong></td><td><strong>L'essentiel</strong> : tous les points à retenir</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encadre">
+      <span class="etiquette">Pourquoi le pseudo-code si l'on programme en C# ?</span>
+    <p>Parce que le pseudo-code ne se compile pas : il <strong>oblige à réfléchir au raisonnement</strong> au lieu de se battre avec la syntaxe. Un algorithme juste se traduit dans n'importe quel langage en quelques minutes ; un algorithme faux ne se répare dans aucun langage.</p>
+    </div>
+  </section>
+
+  <!-- Plan : <tbody> rempli dynamiquement depuis le tableau PLAN -->
+  <section class="bloc" id="plan">
+    <h2 style="margin-top:0">Plan complet des 13 sessions</h2>
+    <div class="table-wrap">
+      <table class="plan">
+        <thead><tr><th style="width:38px">#</th><th style="width:22%">Titre</th><th>Objectifs pédagogiques</th><th>Notions abordées</th></tr></thead>
+        <tbody id="corps-plan"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ====================== SESSION 1 ====================== -->
+  <section class="session" id="session-1">
+    <h1 style="margin-top:0">Session 1 : Les bases, variables, types, affectation</h1>
+    <div class="meta"><span class="puce">Prérequis : aucun</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Définir</strong> ce qu'est un algorithme et citer ses trois propriétés</li>
+      <li><strong>Déclarer</strong> une variable et choisir son type</li>
+      <li><strong>Saisir</strong> une donnée et <strong>afficher</strong> un résultat</li>
+      <li><strong>Utiliser</strong> les opérateurs, dont la division entière et le modulo</li>
+    </ol>
+    <h2>Partie théorique</h2>
+    <h3>1.1 : Qu'est-ce qu'un algorithme ?</h3>
+    <div class="encadre definition">
+      <span class="etiquette">Algorithme</span>
+    <p>Suite <strong>finie</strong> et <strong>ordonnée</strong> d'instructions <strong>non ambiguës (ou non interpretable)</strong> qui, à partir de données d'entrée, produit un résultat.</p>
+    </div>
+    <p>Trois propriétés, toujours :</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Propriété</th><th>Ce que cela impose</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Fini</strong></td><td>il se termine, en un nombre connu d'étapes</td></tr>
+          <tr><td><strong>Précis</strong></td><td>chaque instruction a un sens unique, pas d'interprétation</td></tr>
+          <tr><td><strong>Effectif</strong></td><td>chaque instruction est réalisable par la machine</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Une recette de cuisine est un algorithme. « Salez à votre goût » n'en est pas une instruction : ce n'est pas précis.</p>
+    <h3>1.2 : La structure d'un algorithme</h3>
+    <p>Trois parties, dans cet ordre.</p>
+    <pre>Algorithme CalculTTC          ← 1. le nom
+
+Variables
+    prixHT   : Réel           ← 2. les déclarations
+    prixTTC  : Réel
+
+Début                         ← 3. le corps
+    Écrire("Prix HT ?")
+    Lire(prixHT)
+    prixTTC ← prixHT * 1.20
+    Écrire("Prix TTC : ", prixTTC)
+Fin</pre>
+    <p>Le même programme en C# :</p>
+    <pre>using System;
+
+class Program
+{
+    static void Main()
+    {
+        double prixHT;
+        double prixTTC;
+
+        Console.WriteLine("Prix HT ?");
+        prixHT = double.Parse(Console.ReadLine());
+        prixTTC = prixHT * 1.20;
+        Console.WriteLine("Prix TTC : " + prixTTC);
+    }
+}</pre>
+    <div class="encadre">
+      <span class="etiquette">Ce que C# ajoute et que le pseudo-code ignore</span>
+    <p><code>using</code>, <code>class</code>, <code>static void Main</code> : ce sont des <strong>contraintes du langage</strong>, pas de l'algorithme. On les écrit une fois et on n'y pense plus. En pseudo-code, <code>Début</code> et <code>Fin</code> suffisent.</p>
+    </div>
+    <h3>1.3 : Les variables et les types</h3>
+    <div class="encadre definition">
+      <span class="etiquette">Variable</span>
+    <p>Emplacement nommé de la mémoire, qui contient une valeur d'un <strong>type</strong> donné et dont le contenu peut changer pendant l'exécution.</p>
+    </div>
+    <p>Une variable a trois caractéristiques : un <strong>nom</strong>, un <strong>type</strong>, une <strong>valeur</strong>.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Type en pseudo-code</th><th>Type C#</th><th>Contient</th><th>Exemple</th></tr></thead>
+        <tbody>
+          <tr><td><code>Entier</code></td><td><code>int</code></td><td>un nombre entier</td><td><code>42</code>, <code>-7</code></td></tr>
+          <tr><td><code>Réel</code></td><td><code>double</code></td><td>un nombre à virgule</td><td><code>3.14</code>, <code>-0.5</code></td></tr>
+          <tr><td><code>Booléen</code></td><td><code>bool</code></td><td>vrai ou faux</td><td><code>Vrai</code>, <code>true</code></td></tr>
+          <tr><td><code>Caractère</code></td><td><code>char</code></td><td>un seul caractère</td><td><code>'A'</code></td></tr>
+          <tr><td><code>Chaîne</code></td><td><code>string</code></td><td>du texte</td><td><code>"Bonjour"</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Nommer une variable</strong> : les règles qui évitent les ennuis :</p>
+    <ul>
+      <li>un nom <strong>parlant</strong> : <code>nbEtudiants</code>, pas <code>n</code> ni <code>x</code> ;</li>
+      <li>pas d'accent, pas d'espace, pas de caractère spécial ;</li>
+      <li>l'usage en C# est le <code>camelCase</code> : première lettre minuscule, majuscule à chaque mot suivant.</li>
+    </ul>
+    <h3>1.4 : L'affectation</h3>
+    <p>L'affectation <strong>range une valeur dans une variable</strong>. Elle se lit toujours <strong>de droite à gauche</strong>.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Pseudo-code</th><th>C#</th></tr></thead>
+        <tbody>
+          <tr><td><code>age ← 20</code></td><td><code>age = 20;</code></td></tr>
+          <tr><td><code>total ← total + 5</code></td><td><code>total = total + 5;</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>1.5 : Lire et écrire</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Pseudo-code</th><th>C#</th></tr></thead>
+        <tbody>
+          <tr><td><code>Écrire("Bonjour")</code></td><td><code>Console.WriteLine("Bonjour");</code></td></tr>
+          <tr><td><code>Lire(age)</code></td><td><code>age = int.Parse(Console.ReadLine());</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><code>Console.ReadLine()</code> renvoie <strong>toujours une chaîne</strong>, même si l'utilisateur tape un nombre. Il faut donc la convertir :</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Vers</th><th>Instruction C#</th></tr></thead>
+        <tbody>
+          <tr><td><code>int</code></td><td><code>int.Parse(...)</code></td></tr>
+          <tr><td><code>double</code></td><td><code>double.Parse(...)</code></td></tr>
+          <tr><td><code>bool</code></td><td><code>bool.Parse(...)</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <pre>Console.WriteLine("Votre âge ?");
+int age = int.Parse(Console.ReadLine());
+Console.WriteLine("Vous avez " + age + " ans.");</pre>
+    <h3>1.6 : Les opérateurs</h3>
+    <p><strong>Arithmétiques</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Opérateur</th><th>Sens</th><th>Exemple</th><th>Résultat</th></tr></thead>
+        <tbody>
+          <tr><td><code>+</code> <code>-</code> <code>*</code></td><td>addition, soustraction, multiplication</td><td><code>3 * 4</code></td><td><code>12</code></td></tr>
+          <tr><td><code>/</code></td><td>division</td><td><code>7.0 / 2.0</code></td><td><code>3.5</code></td></tr>
+          <tr><td><code>DIV</code> / <code>/</code> sur entiers</td><td>quotient entier</td><td><code>7 / 2</code></td><td><strong><code>3</code></strong></td></tr>
+          <tr><td><code>MOD</code> / <code>%</code></td><td>reste de la division</td><td><code>7 % 2</code></td><td><code>1</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encadre attention">
+      <span class="etiquette">La division entière, le piège classique</span>
+    <p>En C#, <code>7 / 2</code> vaut <strong><code>3</code></strong> et non <code>3.5</code> : deux entiers divisés donnent un entier, la partie décimale est <strong>jetée</strong>. Pour obtenir <code>3.5</code>, il faut au moins un réel : <code>7.0 / 2</code>.</p>
+    </div>
+    <p><strong>Priorité</strong>: comme en mathématiques : *, /, % avant + et -. En cas de doute, mettez des parenthèses pour les priorités.</p>
+    <div class="encadre attention">
+      <span class="etiquette">En mathématiques, rien ne doit être soumis à interprétation dans un raisonnement. En algo, c'est pareil Mettez des parenthèses !!!</span>
+    </div>
+    <pre>moyenne ← (note1 + note2 + note3) / 3     ← les parenthèses sont indispensables</pre>
+    <p><strong>Le modulo, deux usages à connaître</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Question</th><th>Test</th></tr></thead>
+        <tbody>
+          <tr><td>Le nombre est-il pair ?</td><td><code>n % 2 = 0</code></td></tr>
+          <tr><td>Est-il divisible par 5 ?</td><td><code>n % 5 = 0</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ====================== SESSION 2 ====================== -->
+  <section class="session" id="session-2">
+    <h1 style="margin-top:0">Session 2 : TP 1, premiers algorithmes</h1>
+    <div class="meta"><span class="puce">Prérequis : session 1</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Écrire</strong> un algorithme complet en pseudo-code</li>
+      <li><strong>Traduire</strong> cet algorithme en C#</li>
+      <li><strong>Tester</strong> le programme et vérifier son résultat</li>
+    </ol>
+    <h2>Cas concret : Mise en situation</h2>
+    <h3>Mini tutoriel : du pseudo-code au programme qui tourne</h3>
+    <p><strong>Étape 1 : écrire l'algorithme, sur papier</strong></p>
+    <p>Trois questions, dans cet ordre, et c'est la méthode, elle ne change jamais :</p>
+    <ol>
+      <li><strong>Que dois-je obtenir ?</strong> le résultat, et son type ;</li>
+      <li><strong>De quoi ai-je besoin ?</strong> les données d'entrée, et leur type ;</li>
+      <li><strong>Comment passer des unes à l'autre ?</strong> le calcul.</li>
+    </ol>
+    <p>Pour un convertisseur euros vers dollars : je veux un <code>Réel</code> (le montant en dollars) ; j'ai besoin d'un <code>Réel</code> (le montant en euros) ; le calcul est une multiplication par le taux.</p>
+    <pre>Algorithme ConversionDevise
+
+Variables
+    euros   : Réel
+    dollars : Réel
+
+Constante TAUX = 1.08
+
+Début
+    Écrire("Montant en euros ?")
+    Lire(euros)
+    dollars ← euros * TAUX
+    Écrire(euros, " EUR = ", dollars, " USD")
+Fin</pre>
+    <p><strong>Étape 2 : créer le projet C#</strong></p>
+    <p>Dans Visual Studio : <em>Fichier</em> → <em>Nouveau</em> → <em>Projet</em> → <strong>Application console (.NET)</strong>. Nommez le projet, validez. Le fichier <code>Program.cs</code> s'ouvre avec un <code>Main</code> vide.</p>
+    <p><strong>Étape 3 : traduire, ligne par ligne</strong></p>
+    <p>On ne réécrit pas : on <strong>traduit</strong>. Chaque ligne de pseudo-code donne une ligne de C#.</p>
+    <pre>using System;
+
+class Program
+{
+    static void Main()
+    {
+        const double TAUX = 1.08;
+
+        Console.WriteLine("Montant en euros ?");
+        double euros = double.Parse(Console.ReadLine());
+        double dollars = euros * TAUX;
+        Console.WriteLine(euros + " EUR = " + dollars + " USD");
+    }
+}</pre>
+    <p><strong>Étape 4 : exécuter et vérifier</strong></p>
+    <p><code>F5</code> lance le programme. Testez avec une valeur dont vous connaissez le résultat : 100 euros doivent donner 108 dollars. <strong>Un programme qui s'exécute n'est pas un programme juste</strong> : il faut vérifier le résultat.</p>
+    <h2>Travail à réaliser</h2>
+    <p>Rendez un fichier <strong><code>tp1_algorithmie.txt</code></strong> contenant, pour chaque exercice, <strong>le pseudo-code puis le code C#</strong>.</p>
+    
+        <div class="exercice">
+    <h3>Exercice : Le périmètre et l'aire</h3>
+    <p>Saisir la longueur et la largeur d'un rectangle, afficher son périmètre et son aire.</p>
+    
+        </div>
+  </section>
+
+  <!-- ====================== SESSION 3 ====================== -->
+  <section class="session" id="session-3">
+    <h1 style="margin-top:0">Session 3 : Les conditions</h1>
+    <div class="meta"><span class="puce">Prérequis : sessions 1 et 2</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Écrire</strong> un test simple, avec ou sans alternative</li>
+      <li><strong>Combiner</strong> plusieurs conditions avec <code>ET</code>, <code>OU</code>, <code>NON</code></li>
+      <li><strong>Enchaîner</strong> des tests avec <code>SinonSi</code> et en respecter l'ordre</li>
+      <li><strong>Utiliser</strong> <code>Selon</code> pour un choix parmi des valeurs fixes</li>
+    </ol>
+    <h2>Partie théorique</h2>
+    <h3>3.1 : Le test simple</h3>
+    <p>Une condition est une expression qui vaut <strong>Vrai</strong> ou <strong>Faux</strong>. Si elle est vraie, le bloc s'exécute.</p>
+    <pre>Si age &gt;= 18 Alors
+    Écrire("Majeur")
+Sinon
+    Écrire("Mineur")
+FinSi</pre>
+    <pre>if (age &gt;= 18)
+{
+    Console.WriteLine("Majeur");
+}
+else
+{
+    Console.WriteLine("Mineur");
+}</pre>
+    <p>Le <code>Sinon</code> est <strong>facultatif</strong> : sans lui, rien ne se passe quand la condition est fausse.</p>
+    <div class="encadre attention">
+      <span class="etiquette">Les accolades ne sont pas décoratives</span>
+    <p>En C#, sans accolades, <code>if</code> ne contrôle que <strong>la première instruction</strong> qui suit. Le code ci-dessous affiche toujours « Bienvenue », même à un mineur :</p>
+    <pre>if (age &gt;= 18)
+    Console.WriteLine("Majeur");
+    Console.WriteLine("Bienvenue");   // hors du if !</pre>
+    <p>Mettez toujours les accolades, même pour une seule ligne.</p>
+    </div>
+    <h3>3.2 : Les opérateurs de comparaison et logiques</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Comparaison</th><th>Pseudo-code</th><th>C#</th></tr></thead>
+        <tbody>
+          <tr><td>égal</td><td><code>=</code></td><td><code>==</code></td></tr>
+          <tr><td>différent</td><td><code>≠</code></td><td><code>!=</code></td></tr>
+          <tr><td>inférieur, supérieur</td><td><code>&lt;</code> <code>&gt;</code></td><td><code>&lt;</code> <code>&gt;</code></td></tr>
+          <tr><td>inférieur ou égal</td><td><code>&lt;=</code></td><td><code>&lt;=</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Logique</th><th>Pseudo-code</th><th>C#</th><th>Vrai quand</th></tr></thead>
+        <tbody>
+          <tr><td>ET</td><td><code>ET</code></td><td><code>&amp;&amp;</code></td><td><strong>les deux</strong> conditions sont vraies</td></tr>
+          <tr><td>OU</td><td><code>OU</code></td><td>`\</td><td>\</td><td>`</td><td><strong>au moins une</strong> est vraie</td></tr>
+          <tr><td>NON</td><td><code>NON</code></td><td><code>!</code></td><td>la condition est fausse</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <pre>Si age &gt;= 18 ET possedePermis Alors
+    Écrire("Peut conduire")
+FinSi</pre>
+    <div class="encadre">
+      <span class="etiquette">Un booléen se teste directement</span>
+    <p><code>Si possedePermis = Vrai</code> est correct mais lourd. <code>Si possedePermis</code> dit la même chose. De même, <code>Si NON possedePermis</code> remplace <code>Si possedePermis = Faux</code>.</p>
+    </div>
+    <p><strong>Un intervalle s'écrit avec deux comparaisons.</strong> <code>Si 0 &lt;= note &lt;= 20</code> n'existe pas en C# ; il faut écrire :</p>
+    <pre>if (note &gt;= 0 &amp;&amp; note &lt;= 20)</pre>
+    <h3>3.3 : Les tests enchaînés</h3>
+    <p>Quand il y a plus de deux cas, on enchaîne avec <code>SinonSi</code> :</p>
+    <pre>Si note &gt;= 16 Alors
+    mention ← "Très bien"
+SinonSi note &gt;= 14 Alors
+    mention ← "Bien"
+SinonSi note &gt;= 12 Alors
+    mention ← "Assez bien"
+SinonSi note &gt;= 10 Alors
+    mention ← "Passable"
+Sinon
+    mention ← "Ajourné"
+FinSi</pre>
+    <pre>if      (note &gt;= 16) mention = "Très bien";
+else if (note &gt;= 14) mention = "Bien";
+else if (note &gt;= 12) mention = "Assez bien";
+else if (note &gt;= 10) mention = "Passable";
+else                 mention = "Ajourné";</pre>
+    <div class="encadre attention">
+      <span class="etiquette">L'ordre des tests décide du résultat</span>
+    <p>Les conditions sont évaluées <strong>de haut en bas</strong>, et <strong>on s'arrête à la première vraie</strong>. Une note de 18 est bien <code>&gt;= 10</code>, mais le test <code>&gt;= 16</code> la capture avant.</p>
+    <p>Inversez l'ordre, <code>&gt;= 10</code> en premier, et <strong>tout le monde est « Passable »</strong>. Le programme compile, s'exécute, ne signale rien, et se trompe systématiquement. Avec des seuils, on commence <strong>toujours</strong> par le plus restrictif.</p>
+    </div>
+    <h3>3.4 : Le choix multiple</h3>
+    <p>Quand on compare <strong>une même variable à des valeurs fixes</strong>, <code>Selon</code> est plus lisible qu'une cascade de <code>SinonSi</code>.</p>
+    <pre>Selon jour Faire
+    Cas 1 : Écrire("Lundi")
+    Cas 2 : Écrire("Mardi")
+    Cas 6, 7 : Écrire("Week-end")
+    Autre : Écrire("Jour invalide")
+FinSelon</pre>
+    <pre>switch (jour)
+{
+    case 1: Console.WriteLine("Lundi"); break;
+    case 2: Console.WriteLine("Mardi"); break;
+    case 6:
+    case 7: Console.WriteLine("Week-end"); break;
+    default: Console.WriteLine("Jour invalide"); break;
+}</pre>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th><code>SinonSi</code></th><th><code>Selon</code></th></tr></thead>
+        <tbody>
+          <tr><td>Compare</td><td>des <strong>conditions</strong> quelconques</td><td><strong>une variable</strong> à des valeurs</td></tr>
+          <tr><td>Convient pour</td><td>des intervalles (<code>note &gt;= 14</code>)</td><td>des valeurs exactes (<code>jour = 2</code>)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encadre attention">
+      <span class="etiquette">Le <code>break</code> est obligatoire en C#</span>
+    <p>Sans <code>break</code>, le compilateur refuse le programme. C'est une sécurité : dans d'autres langages, l'oubli fait exécuter le cas suivant sans prévenir.</p>
+    </div>
+  </section>
+
+  <!-- ====================== SESSION 4 ====================== -->
+  <section class="session" id="session-4">
+    <h1 style="margin-top:0">Session 4 : TP 2, les tests</h1>
+    <div class="meta"><span class="puce">Prérequis : session 3</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Traduire</strong> une règle métier en conditions</li>
+      <li><strong>Ordonner</strong> correctement une série de tests à seuils</li>
+      <li><strong>Combiner</strong> des conditions avec <code>ET</code> et <code>OU</code></li>
+    </ol>
+    <h2>Travail à réaliser</h2>
+    <p>Rendez un fichier <strong><code>tp2_conditions.txt</code></strong> avec, pour chaque exercice, le pseudo-code puis le C#.</p>
+    
+        <div class="exercice">
+    <h3>Exercice 1 : Pair ou impair</h3>
+    <p>Saisir un entier, afficher s'il est pair ou impair.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 2 : La mention au BTS</h3>
+    <p>Saisir une moyenne sur 20, afficher la mention : <code>&gt;= 16</code> Très bien, <code>&gt;= 14</code> Bien, <code>&gt;= 12</code> Assez bien, <code>&gt;= 10</code> Admis, sinon Ajourné.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 3 : L'année bissextile</h3>
+    <p>Une année est bissextile si elle est divisible par 4, <strong>sauf</strong> les années divisibles par 100 qui ne sont pas divisibles par 400. Saisir une année, dire si elle est bissextile.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 4 : Le nombre de jours d'un mois</h3>
+    <p>Saisir un numéro de mois (1 à 12), afficher son nombre de jours. Février vaut 28.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 5 : La remise commerciale</h3>
+    <p>Un client saisit un montant. La remise est de 0 % en dessous de 100 €, 5 % de 100 à 499 €, 10 % de 500 à 999 €, 15 % à partir de 1000 €. Refuser un montant négatif. Afficher la remise et le montant à payer.</p>
+    
+        </div>
+  </section>
+
+  <!-- ====================== SESSION 5 ====================== -->
+  <section class="session" id="session-5">
+    <h1 style="margin-top:0">Session 5 : Les boucles</h1>
+    <div class="meta"><span class="puce">Prérequis : sessions 3 et 4</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Distinguer</strong> les trois boucles et choisir la bonne</li>
+      <li><strong>Écrire</strong> un compteur et un accumulateur</li>
+      <li><strong>Contrôler</strong> une saisie avec une boucle</li>
+      <li><strong>Éviter</strong> la boucle infinie</li>
+    </ol>
+    <h2>Partie théorique</h2>
+    <h3>5.1 : La boucle <code>Pour</code>, quand on sait combien de fois</h3>
+    <pre>Pour i De 1 À 5 Faire
+    Écrire("Tour numéro ", i)
+FinPour</pre>
+    <pre>for (int i = 1; i &lt;= 5; i++)
+{
+    Console.WriteLine("Tour numéro " + i);
+}</pre>
+    <p>Le <code>for</code> de C# contient trois parties, séparées par des points-virgules :</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Partie</th><th>Rôle</th><th>Quand</th></tr></thead>
+        <tbody>
+          <tr><td><code>int i = 1</code></td><td>initialisation</td><td>une seule fois, au début</td></tr>
+          <tr><td><code>i &lt;= 5</code></td><td>condition de continuation</td><td>avant chaque tour</td></tr>
+          <tr><td><code>i++</code></td><td>incrémentation</td><td>après chaque tour</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><code>i++</code> est un raccourci pour <code>i = i + 1</code>.</p>
+    <h3>5.2 : La boucle <code>TantQue</code>, quand on ne sait pas</h3>
+    <pre>TantQue reponse ≠ "oui" Faire
+    Écrire("Continuer ? (oui/non)")
+    Lire(reponse)
+FinTantQue</pre>
+    <pre>while (reponse != "oui")
+{
+    Console.WriteLine("Continuer ? (oui/non)");
+    reponse = Console.ReadLine();
+}</pre>
+    <p>La condition est testée <strong>avant</strong> chaque tour : si elle est fausse dès le départ, le corps ne s'exécute <strong>jamais</strong>.</p>
+    <div class="encadre attention">
+      <span class="etiquette">La boucle infinie</span>
+    <p>Si rien dans le corps ne fait évoluer la condition, la boucle ne s'arrête plus. Le programme se fige, il faut le tuer.</p>
+    <pre>int i = 0;
+while (i &lt; 10)
+{
+    Console.WriteLine(i);   // i n'augmente jamais : boucle infinie
+}</pre>
+    <p><strong>La vérification, avant d'exécuter</strong> : dans le corps de tout <code>while</code>, cherchez la ligne qui rapproche de la sortie. Si vous ne la trouvez pas, elle n'existe pas.</p>
+    </div>
+    <h3>5.3 : La boucle <code>Répéter</code>, au moins une fois</h3>
+    <pre>Répéter
+    Écrire("Entrez une note entre 0 et 20")
+    Lire(note)
+JusquÀ note &gt;= 0 ET note &lt;= 20</pre>
+    <pre>do
+{
+    Console.WriteLine("Entrez une note entre 0 et 20");
+    note = int.Parse(Console.ReadLine());
+} while (note &lt; 0 || note &gt; 20);</pre>
+    <p>La condition est testée <strong>après</strong> : le corps s'exécute donc <strong>au moins une fois</strong>. C'est exactement ce qu'il faut pour une saisie : il faut bien demander une première valeur avant de pouvoir la vérifier.</p>
+    <div class="encadre attention">
+      <span class="etiquette">La condition s'inverse entre les deux notations</span>
+    <p>Le pseudo-code dit <code>JusquÀ</code> <strong>condition de sortie</strong> ; le C# dit <code>while</code> <strong>condition de continuation</strong>. L'une est la négation de l'autre.</p>
+    <p><code>JusquÀ note &gt;= 0 ET note &lt;= 20</code> devient <code>while (note &lt; 0 || note &gt; 20)</code>. Le <code>ET</code> devient <code>OU</code> en même temps que les comparaisons s'inversent : c'est la loi de De Morgan, et c'est une source d'erreur classique.</p>
+    </div>
+    <h3>5.4 : Choisir sa boucle</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>La question</th><th>La boucle</th></tr></thead>
+        <tbody>
+          <tr><td>Je sais <strong>combien de fois</strong> (10 fois, une fois par élément)</td><td><strong><code>Pour</code></strong></td></tr>
+          <tr><td>Je ne sais pas, et <strong>il se peut que ce soit zéro fois</strong></td><td><strong><code>TantQue</code></strong></td></tr>
+          <tr><td>Je ne sais pas, mais <strong>c'est au moins une fois</strong></td><td><strong><code>Répéter</code></strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>En pratique : <code>Pour</code> pour parcourir, <code>TantQue</code> pour attendre un événement, <code>Répéter</code> pour saisir.</p>
+    <h3>5.5 : Les deux motifs à connaître</h3>
+    <p><strong>L'accumulateur</strong> : additionner au fil des tours. On l'initialise à <strong>0</strong> avant la boucle.</p>
+    <pre>somme ← 0
+Pour i De 1 À 10 Faire
+    somme ← somme + i
+FinPour
+Écrire(somme)        ← 55</pre>
+    <p><strong>Le compteur</strong> : compter les cas qui remplissent une condition. Même principe.</p>
+    <pre>nbPairs ← 0
+Pour i De 1 À 20 Faire
+    Si i MOD 2 = 0 Alors
+        nbPairs ← nbPairs + 1
+    FinSi
+FinPour</pre>
+    <div class="encadre attention">
+      <span class="etiquette">L'initialisation, hors de la boucle</span>
+    <p><code>somme ← 0</code> <strong>avant</strong> le <code>Pour</code>. Placée à l'intérieur, elle remettrait le total à zéro à chaque tour, et le résultat vaudrait toujours la dernière valeur ajoutée.</p>
+    <p>Pour chercher un <strong>maximum</strong>, on initialise avec le premier élément, jamais avec 0 : sur des températures négatives, un maximum initialisé à 0 ne descend jamais en dessous.</p>
+    </div>
+    <p><strong>Les boucles imbriquées</strong> : une boucle dans une boucle. La boucle intérieure fait un tour complet à chaque tour de l'extérieure.</p>
+    <pre>Pour ligne De 1 À 3 Faire
+    Pour colonne De 1 À 4 Faire
+        Écrire("*")
+    FinPour
+    Passer à la ligne
+FinPour</pre>
+    <p>Trois lignes de quatre étoiles, soit <strong>douze</strong> affichages : 3 × 4. Deux boucles imbriquées multiplient le nombre de tours. Retenez-le, c'est le fondement du chapitre sur la complexité.</p>
+  </section>
+
+  <!-- ====================== SESSION 6 ====================== -->
+  <section class="session" id="session-6">
+    <h1 style="margin-top:0">Session 6 : TP 3, les répétitions</h1>
+    <div class="meta"><span class="puce">Prérequis : session 5</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Écrire</strong> une boucle de comptage et une boucle d'accumulation</li>
+      <li><strong>Contrôler</strong> une saisie utilisateur</li>
+      <li><strong>Imbriquer</strong> deux boucles</li>
+    </ol>
+    <h2>Travail à réaliser</h2>
+    <p>Rendez un fichier <strong><code>tp3_boucles.txt</code></strong> avec, pour chaque exercice, le pseudo-code puis le C#.</p>
+    
+        <div class="exercice">
+    <h3>Exercice 1 : La table de multiplication</h3>
+    <p>Saisir un entier, afficher sa table de multiplication de 1 à 10.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 2 : La somme des N premiers entiers</h3>
+    <p>Saisir un entier N, afficher la somme de 1 à N.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 3 : La saisie contrôlée</h3>
+    <p>Demander une note entre 0 et 20. Tant que la saisie est invalide, redemander. Afficher la note validée.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 4 : La moyenne d'une série</h3>
+    <p>Saisir des notes une par une jusqu'à ce que l'utilisateur tape <code>-1</code>. Afficher combien de notes ont été saisies et leur moyenne. Si aucune note n'a été saisie, l'indiquer.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 5 : Le triangle d'étoiles</h3>
+    <p>Saisir une hauteur, afficher un triangle : une étoile sur la première ligne, deux sur la deuxième, et ainsi de suite.</p>
+    <pre>*
+**
+***
+****</pre>
+    
+        </div>
+  </section>
+
+  <!-- ====================== SESSION 7 ====================== -->
+  <section class="session" id="session-7">
+    <h1 style="margin-top:0">Session 7 : Les tableaux</h1>
+    <div class="meta"><span class="puce">Prérequis : sessions 5 et 6</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Déclarer</strong> un tableau et accéder à ses éléments</li>
+      <li><strong>Parcourir</strong> un tableau avec <code>Pour</code> et avec <code>foreach</code></li>
+      <li><strong>Appliquer</strong> les quatre motifs de parcours</li>
+      <li><strong>Manipuler</strong> un tableau à deux dimensions</li>
+    </ol>
+    <h2>Partie théorique</h2>
+    <h3>7.1 : Déclarer un tableau</h3>
+    <div class="encadre definition">
+      <span class="etiquette">Tableau</span>
+    <p>Variable qui contient <strong>plusieurs valeurs de même type</strong>, rangées les unes à la suite des autres et accessibles par un <strong>indice</strong>.</p>
+    </div>
+    <p>Sans tableau, stocker 30 notes demanderait 30 variables. Avec, une seule suffit.</p>
+    <pre>Variables
+    notes : Tableau[0..29] de Entier</pre>
+    <pre>int[] notes = new int[30];              // 30 cases, toutes à 0
+int[] notes = { 12, 15, 8, 17, 9 };     // 5 cases, valeurs fournies</pre>
+    <p><strong>L'indice commence à 0.</strong> Un tableau de 30 cases va de <code>notes[0]</code> à <code>notes[29]</code>, jamais <code>notes[30]</code>.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Écriture</th><th>Sens</th></tr></thead>
+        <tbody>
+          <tr><td><code>notes[0]</code></td><td>la <strong>première</strong> case</td></tr>
+          <tr><td><code>notes[4]</code></td><td>la <strong>cinquième</strong> case</td></tr>
+          <tr><td><code>notes.Length</code></td><td>le <strong>nombre</strong> de cases (5)</td></tr>
+          <tr><td><code>notes[notes.Length - 1]</code></td><td>la <strong>dernière</strong> case</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encadre attention">
+      <span class="etiquette"><code>IndexOutOfRangeException</code></span>
+    <p>Accéder à <code>notes[5]</code> dans un tableau de 5 cases <strong>plante le programme à l'exécution</strong>. Le compilateur ne peut pas le détecter : il ne connaît pas la valeur de l'indice.</p>
+    <p>La dernière case est toujours à l'indice <code>Length - 1</code>. Le <code>- 1</code> s'oublie, et c'est l'erreur la plus fréquente sur les tableaux.</p>
+    </div>
+    <h3>7.2 : Parcourir un tableau</h3>
+    <p><strong>Avec <code>Pour</code></strong> : on a l'indice, on peut modifier les cases :</p>
+    <pre>Pour i De 0 À notes.Longueur - 1 Faire
+    Écrire("Note ", i, " : ", notes[i])
+FinPour</pre>
+    <pre>for (int i = 0; i &lt; notes.Length; i++)
+{
+    Console.WriteLine("Note " + i + " : " + notes[i]);
+}</pre>
+    <p><strong>Avec <code>foreach</code></strong> : plus court, mais <strong>en lecture seule</strong> :</p>
+    <pre>foreach (int note in notes)
+{
+    Console.WriteLine(note);
+}</pre>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th><code>for</code></th><th><code>foreach</code></th></tr></thead>
+        <tbody>
+          <tr><td>L'indice</td><td>disponible</td><td>inaccessible</td></tr>
+          <tr><td>Modifier une case</td><td>possible</td><td><strong>impossible</strong></td></tr>
+          <tr><td>Parcours partiel ou à l'envers</td><td>possible</td><td>impossible</td></tr>
+          <tr><td>Quand l'utiliser</td><td>dès qu'on a besoin de l'indice</td><td>pour lire simplement</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encadre">
+      <span class="etiquette">La condition s'écrit <code>i &lt; Length</code>, pas <code>i &lt;= Length</code></span>
+    <p>Avec <code>&lt;=</code>, la boucle irait jusqu'à l'indice <code>Length</code>, qui n'existe pas, et planterait au dernier tour. <code>i &lt; notes.Length</code> couvre exactement 0 à <code>Length - 1</code>.</p>
+    </div>
+    <h3>7.3 : Les quatre motifs de parcours</h3>
+    <p>Presque tout ce qu'on fait sur un tableau est l'un de ces quatre motifs. Ils s'écrivent toujours de la même façon.</p>
+    <p><strong>Additionner</strong></p>
+    <pre>int somme = 0;
+for (int i = 0; i &lt; notes.Length; i++)
+    somme += notes[i];</pre>
+    <p><strong>Chercher le maximum</strong></p>
+    <pre>int max = notes[0];                     // on part du PREMIER élément
+for (int i = 1; i &lt; notes.Length; i++)
+    if (notes[i] &gt; max)
+        max = notes[i];</pre>
+    <p><strong>Compter selon une condition</strong></p>
+    <pre>int nbAdmis = 0;
+for (int i = 0; i &lt; notes.Length; i++)
+    if (notes[i] &gt;= 10)
+        nbAdmis++;</pre>
+    <p><strong>Chercher une valeur</strong></p>
+    <pre>bool trouve = false;
+int position = -1;
+for (int i = 0; i &lt; notes.Length; i++)
+{
+    if (notes[i] == recherche)
+    {
+        trouve = true;
+        position = i;
+    }
+}</pre>
+    <div class="encadre attention">
+      <span class="etiquette">Le maximum s'initialise avec le premier élément</span>
+    <p><code>int max = 0;</code> semble naturel et donne un résultat faux dès qu'un tableau ne contient que des valeurs négatives : le maximum de <code>{-5, -12, -3}</code> serait annoncé à 0, une valeur qui n'est même pas dans le tableau.</p>
+    <p>On part de <code>notes[0]</code>, et on commence la boucle à <code>i = 1</code>.</p>
+    </div>
+    <h3>7.4 : Les tableaux à deux dimensions</h3>
+    <p>Pour représenter un tableau de valeurs à double entrée : des notes par étudiant et par matière, une grille, une image.</p>
+    <pre>Variables
+    notes : Tableau[0..2][0..3] de Entier      ← 3 étudiants, 4 matières</pre>
+    <pre>int[,] notes = new int[3, 4];
+notes[0, 2] = 15;                  // étudiant 0, matière 2
+
+int[,] notes = { {12, 15, 8, 17},
+                 {10, 9, 14, 11},
+                 {18, 16, 13, 20} };</pre>
+    <p>Le parcours demande <strong>deux boucles imbriquées</strong> :</p>
+    <pre>for (int etu = 0; etu &lt; 3; etu++)
+{
+    for (int mat = 0; mat &lt; 4; mat++)
+    {
+        Console.Write(notes[etu, mat] + "\t");
+    }
+    Console.WriteLine();
+}</pre>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Expression</th><th>Valeur</th></tr></thead>
+        <tbody>
+          <tr><td><code>notes.GetLength(0)</code></td><td>le nombre de <strong>lignes</strong> (3)</td></tr>
+          <tr><td><code>notes.GetLength(1)</code></td><td>le nombre de <strong>colonnes</strong> (4)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><code>Length</code> sur un tableau 2D renvoie le nombre <strong>total</strong> de cases (12) : ce n'est presque jamais ce qu'on veut.</p>
+  </section>
+
+  <!-- ====================== SESSION 8 ====================== -->
+  <section class="session" id="session-8">
+    <h1 style="margin-top:0">Session 8 : TP 4, traiter une série de données</h1>
+    <div class="meta"><span class="puce">Prérequis : session 7</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Remplir</strong> et <strong>parcourir</strong> un tableau</li>
+      <li><strong>Produire</strong> des statistiques sur une série</li>
+      <li><strong>Traiter</strong> un tableau à deux dimensions</li>
+    </ol>
+    <h2>Cas concret : Mise en situation</h2>
+    <p>Toutes les questions portent sur le même jeu de données, déclaré une fois pour toutes :</p>
+    <pre>int[] notes = { 12, 8, 15, 17, 6, 11, 19, 9, 14, 10 };</pre>
+    <p>Dix notes. Moyenne 12,1 ; minimum 6 ; maximum 19 ; sept notes supérieures ou égales à 10.</p>
+    <h2>Travail à réaliser</h2>
+    <p>Rendez un fichier <strong><code>tp4_tableaux.txt</code></strong> avec, pour chaque exercice, le pseudo-code puis le C#.</p>
+    
+        <div class="exercice">
+    <h3>Exercice 1 : Afficher le tableau</h3>
+    <p>Afficher chaque note précédée de son numéro, en commençant à 1 pour l'utilisateur.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 2 : Les statistiques</h3>
+    <p>Calculer et afficher la moyenne, la note minimale, la note maximale et le nombre de notes supérieures ou égales à 10.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 3 : Rechercher une note</h3>
+    <p>Saisir une note, dire si elle figure dans le tableau et à quelle position.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 4 : Inverser le tableau</h3>
+    <p>Inverser l'ordre des notes <strong>sans créer de second tableau</strong>, puis les afficher.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 5 : Le tableau à deux dimensions</h3>
+    <p>Trois étudiants, quatre matières. Afficher la moyenne de chaque étudiant.</p>
+    <pre>int[,] notes = { {12, 15, 8, 17},
+                 {10, 9, 14, 11},
+                 {18, 16, 13, 20} };</pre>
+    
+        </div>
+  </section>
+
+  <!-- ====================== SESSION 9 ====================== -->
+  <section class="session" id="session-9">
+    <h1 style="margin-top:0">Session 9 : Les fonctions et les procédures</h1>
+    <div class="meta"><span class="puce">Prérequis : sessions 7 et 8</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Distinguer</strong> une fonction d'une procédure</li>
+      <li><strong>Définir</strong> des paramètres et une valeur de retour</li>
+      <li><strong>Comprendre</strong> la portée des variables</li>
+      <li><strong>Distinguer</strong> passage par valeur et passage par référence</li>
+    </ol>
+    <h2>Partie théorique</h2>
+    <h3>9.1 : Pourquoi découper</h3>
+    <p>Un programme de 300 lignes d'affilée est illisible, impossible à tester, et le même calcul y est recopié trois fois. Le découper en <strong>sous-programmes</strong> apporte trois choses :</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Bénéfice</th><th>Concrètement</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Réutilisation</strong></td><td>le calcul est écrit une fois, appelé partout</td></tr>
+          <tr><td><strong>Lisibilité</strong></td><td><code>CalculerMoyenne(notes)</code> se lit ; dix lignes de boucle non</td></tr>
+          <tr><td><strong>Correction</strong></td><td>une erreur se corrige à un seul endroit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>9.2 : Fonction ou procédure</h3>
+    <div class="encadre definition">
+      <span class="etiquette">Fonction</span>
+    <p>Sous-programme qui <strong>renvoie une valeur</strong>. On l'utilise dans une expression, comme une variable.</p>
+    </div>
+    <div class="encadre definition">
+      <span class="etiquette">Procédure</span>
+    <p>Sous-programme qui <strong>ne renvoie rien</strong>. On l'appelle pour son effet : afficher, modifier, enregistrer.</p>
+    </div>
+    <p><strong>Une fonction</strong></p>
+    <pre>Fonction Carre(n : Entier) : Entier
+Début
+    Retourner n * n
+Fin</pre>
+    <pre>static int Carre(int n)
+{
+    return n * n;
+}
+
+int resultat = Carre(5);        // 25</pre>
+    <p><strong>Une procédure</strong></p>
+    <pre>Procédure AfficherLigne(longueur : Entier)
+Début
+    Pour i De 1 À longueur Faire
+        Écrire("-")
+    FinPour
+Fin</pre>
+    <pre>static void AfficherLigne(int longueur)
+{
+    for (int i = 1; i &lt;= longueur; i++)
+        Console.Write("-");
+    Console.WriteLine();
+}
+
+AfficherLigne(20);</pre>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Fonction</th><th>Procédure</th></tr></thead>
+        <tbody>
+          <tr><td>Renvoie</td><td>une valeur</td><td>rien</td></tr>
+          <tr><td>En C#</td><td>un type (<code>int</code>, <code>bool</code>, <code>double</code>…)</td><td><code>void</code></td></tr>
+          <tr><td>Contient</td><td>un <code>return</code></td><td>pas de <code>return</code> de valeur</td></tr>
+          <tr><td>S'utilise</td><td><code>x = Carre(5);</code></td><td><code>AfficherLigne(20);</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encadre attention">
+      <span class="etiquette">Ne pas confondre afficher et retourner</span>
+    <p>Une fonction qui <strong>affiche</strong> son résultat au lieu de le <strong>retourner</strong> ne sert qu'une fois : on ne peut ni le stocker, ni le réutiliser dans un calcul.</p>
+    <pre>static void Carre(int n) { Console.WriteLine(n * n); }   // inutilisable
+static int  Carre(int n) { return n * n; }               // réutilisable</pre>
+    <p><strong>Règle</strong> : une fonction calcule et retourne ; c'est l'appelant qui décide d'afficher.</p>
+    </div>
+    <h3>9.3 : Paramètres, arguments, portée</h3>
+    <pre>static int Addition(int a, int b)    // a et b : les PARAMÈTRES
+{
+    return a + b;
+}
+
+int total = Addition(3, 5);          // 3 et 5 : les ARGUMENTS</pre>
+    <p>Le <strong>paramètre</strong> est le nom écrit dans la définition ; l'<strong>argument</strong> est la valeur donnée à l'appel. L'ordre compte : le premier argument va dans le premier paramètre.</p>
+    <div class="encadre definition">
+      <span class="etiquette">Portée d'une variable</span>
+    <p>Zone du programme où la variable existe. Une variable déclarée dans une fonction n'existe <strong>que</strong> dans cette fonction : elle est créée à l'appel et détruite au retour.</p>
+    </div>
+    <pre>static int Doubler(int n)
+{
+    int resultat = n * 2;       // resultat n'existe que dans Doubler
+    return resultat;
+}
+
+static void Main()
+{
+    int x = Doubler(5);
+    // Console.WriteLine(resultat);   ← ERREUR : resultat n'existe pas ici
+}</pre>
+    <p>C'est une <strong>protection</strong> : deux fonctions peuvent utiliser une variable <code>i</code> sans jamais se gêner.</p>
+    <h3>9.4 : Par valeur ou par référence</h3>
+    <p>Par défaut, C# passe les arguments <strong>par valeur</strong> : la fonction reçoit une <strong>copie</strong>. La modifier ne change rien à l'original.</p>
+    <pre>static void Incrementer(int n)
+{
+    n = n + 1;                  // modifie la copie
+}
+
+int x = 5;
+Incrementer(x);
+Console.WriteLine(x);           // 5, et non 6</pre>
+    <p>Avec le mot-clé <code>ref</code>, la fonction reçoit la variable <strong>elle-même</strong> :</p>
+    <pre>static void Incrementer(ref int n)
+{
+    n = n + 1;
+}
+
+int x = 5;
+Incrementer(ref x);
+Console.WriteLine(x);           // 6</pre>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mot-clé</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><em>(rien)</em></td><td>par valeur : la fonction lit, ne modifie pas</td></tr>
+          <tr><td><code>ref</code></td><td>la variable doit être <strong>initialisée</strong> avant l'appel, la fonction peut la modifier</td></tr>
+          <tr><td><code>out</code></td><td>la variable <strong>n'a pas besoin</strong> d'être initialisée, la fonction <strong>doit</strong> l'affecter</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encadre">
+      <span class="etiquette">Les tableaux font exception</span>
+    <p>Un tableau passé à une fonction est <strong>toujours</strong> modifiable, même sans <code>ref</code>. Ce qui est copié, c'est l'adresse du tableau, pas son contenu : les deux noms désignent alors les mêmes cases.</p>
+    <p>C'est pour cela que la fonction d'inversion du TP 4 modifie bien le tableau de l'appelant.</p>
+    </div>
+    <h3>9.5 : Où écrire ses fonctions</h3>
+    <p>En C#, les fonctions se déclarent <strong>dans la classe, à côté de <code>Main</code></strong>, avec le mot-clé <code>static</code>.</p>
+    <pre>class Program
+{
+    static void Main()
+    {
+        Console.WriteLine(Carre(5));
+    }
+
+    static int Carre(int n)
+    {
+        return n * n;
+    }
+}</pre>
+    <p>L'ordre n'a pas d'importance : <code>Main</code> peut appeler une fonction écrite plus bas.</p>
+  </section>
+
+  <!-- ====================== SESSION 10 ====================== -->
+  <section class="session" id="session-10">
+    <h1 style="margin-top:0">Session 10 : TP 5, découper un programme</h1>
+    <div class="meta"><span class="puce">Prérequis : session 9</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Écrire</strong> des fonctions courtes et réutilisables</li>
+      <li><strong>Choisir</strong> entre fonction et procédure</li>
+      <li><strong>Réécrire</strong> un programme monolithique en le découpant</li>
+    </ol>
+    <h2>Travail à réaliser</h2>
+    <p>Rendez un fichier <strong><code>tp5_fonctions.txt</code></strong> avec, pour chaque exercice, le pseudo-code puis le C#.</p>
+    
+        <div class="exercice">
+    <h3>Exercice 1 : Les fonctions de base</h3>
+    <p>Écrire trois fonctions : <code>Maximum(a, b)</code> qui renvoie le plus grand de deux entiers, <code>Moyenne(a, b, c)</code> qui renvoie la moyenne de trois entiers, <code>Perimetre(l, L)</code> qui renvoie le périmètre d'un rectangle.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 2 : Les fonctions booléennes</h3>
+    <p>Écrire <code>EstPair(n)</code> et <code>EstPremier(n)</code>, qui renvoient <code>Vrai</code> ou <code>Faux</code>.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 3 : Une fonction qui reçoit un tableau</h3>
+    <p>Écrire <code>SommeTableau(t)</code> qui renvoie la somme des éléments, et <code>MoyenneTableau(t)</code> qui renvoie leur moyenne en réutilisant la première.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 4 : Fonction ou procédure</h3>
+    <p>Écrire <code>AfficherTableau(t)</code> qui affiche les éléments séparés par des espaces, et <code>CompterSuperieurs(t, seuil)</code> qui renvoie le nombre d'éléments strictement supérieurs au seuil. Justifier le choix pour chacune.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 5 : Découper un programme existant</h3>
+    <p>Voici un programme qui fonctionne mais qui est écrit d'un seul bloc. Réécrivez-le en le découpant en fonctions et procédures.</p>
+    <pre>static void Main()
+{
+    int[] t = { 12, 8, 15, 17, 6 };
+
+    int somme = 0;
+    for (int i = 0; i &lt; t.Length; i++) somme += t[i];
+    Console.WriteLine("Somme : " + somme);
+
+    int max = t[0];
+    for (int i = 1; i &lt; t.Length; i++) if (t[i] &gt; max) max = t[i];
+    Console.WriteLine("Max : " + max);
+
+    for (int i = 0; i &lt; t.Length; i++) Console.Write(t[i] + " ");
+    Console.WriteLine();
+}</pre>
+    
+        </div>
+  </section>
+
+  <!-- ====================== SESSION 11 ====================== -->
+  <section class="session" id="session-11">
+    <h1 style="margin-top:0">Session 11 : Rechercher et trier</h1>
+    <div class="meta"><span class="puce">Prérequis : sessions 7 à 10</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Écrire</strong> la recherche séquentielle et la recherche dichotomique</li>
+      <li><strong>Écrire</strong> le tri par sélection et le tri à bulles</li>
+      <li><strong>Comparer</strong> le coût de deux algorithmes</li>
+      <li><strong>Lire</strong> une notation <code>O(n)</code></li>
+    </ol>
+    <h2>Partie théorique</h2>
+    <h3>11.1 : La recherche séquentielle</h3>
+    <p>On parcourt le tableau du début à la fin jusqu'à trouver la valeur.</p>
+    <pre>Fonction RechercheSequentielle(t : Tableau, valeur : Entier) : Entier
+Début
+    Pour i De 0 À t.Longueur - 1 Faire
+        Si t[i] = valeur Alors
+            Retourner i
+        FinSi
+    FinPour
+    Retourner -1
+Fin</pre>
+    <pre>static int RechercheSequentielle(int[] t, int valeur)
+{
+    for (int i = 0; i &lt; t.Length; i++)
+    {
+        if (t[i] == valeur) return i;
+    }
+    return -1;
+}</pre>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Tableau trié requis</td><td><strong>non</strong></td></tr>
+          <tr><td>Meilleur cas</td><td>1 comparaison (première case)</td></tr>
+          <tr><td>Pire cas</td><td><code>n</code> comparaisons (absente, ou dernière case)</td></tr>
+          <tr><td>Cas moyen</td><td><code>n / 2</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>C'est la seule recherche possible sur un tableau non trié.</p>
+    <h3>11.2 : La recherche dichotomique</h3>
+    <p>Sur un tableau <strong>trié</strong>, on peut faire beaucoup mieux : on regarde l'élément du milieu, et l'on élimine <strong>la moitié</strong> du tableau à chaque comparaison.</p>
+    <pre>Fonction RechercheDichotomique(t : Tableau trié, valeur : Entier) : Entier
+Variables
+    debut, fin, milieu : Entier
+Début
+    debut ← 0
+    fin   ← t.Longueur - 1
+
+    TantQue debut &lt;= fin Faire
+        milieu ← (debut + fin) DIV 2
+        Si t[milieu] = valeur Alors
+            Retourner milieu
+        SinonSi t[milieu] &lt; valeur Alors
+            debut ← milieu + 1          ← on cherche à droite
+        Sinon
+            fin ← milieu - 1            ← on cherche à gauche
+        FinSi
+    FinTantQue
+
+    Retourner -1
+Fin</pre>
+    <pre>static int RechercheDichotomique(int[] t, int valeur)
+{
+    int debut = 0;
+    int fin = t.Length - 1;
+
+    while (debut &lt;= fin)
+    {
+        int milieu = (debut + fin) / 2;
+
+        if (t[milieu] == valeur)     return milieu;
+        else if (t[milieu] &lt; valeur) debut = milieu + 1;
+        else                         fin = milieu - 1;
+    }
+    return -1;
+}</pre>
+    <p><strong>Le déroulé, sur <code>{2, 5, 8, 12, 16, 23, 38, 56, 72, 91}</code>, en cherchant 23 :</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tour</th><th>debut</th><th>fin</th><th>milieu</th><th><code>t[milieu]</code></th><th>Décision</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>0</td><td>9</td><td>4</td><td>16</td><td>16 &lt; 23, on va à droite : <code>debut ← 5</code></td></tr>
+          <tr><td>2</td><td>5</td><td>9</td><td>7</td><td>56</td><td>56 &gt; 23, on va à gauche : <code>fin ← 6</code></td></tr>
+          <tr><td>3</td><td>5</td><td>6</td><td>5</td><td>23</td><td>trouvé, on renvoie 5</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Trois comparaisons</strong> au lieu de six pour la recherche séquentielle. Sur 1000 éléments, ce serait <strong>10</strong> au lieu de 500 ; sur un million, <strong>20</strong> au lieu de 500 000.</p>
+    <div class="encadre attention">
+      <span class="etiquette">Deux conditions, et le tableau doit être trié</span>
+    <p>La dichotomie <strong>ne fonctionne que sur un tableau trié</strong>. Sur un tableau quelconque, elle ne plante pas : elle répond « absent » pour des valeurs présentes. Une erreur silencieuse, la pire espèce.</p>
+    <p>Et le <code>+ 1</code> / <code>- 1</code> sur <code>debut</code> et <code>fin</code> sont indispensables : sans eux, si la valeur est absente, <code>milieu</code> ne bouge plus et la boucle devient infinie.</p>
+    </div>
+    <h3>11.3 : Le tri par sélection</h3>
+    <p>Le principe tient en une phrase : <strong>chercher le plus petit élément restant, et le mettre à sa place</strong>.</p>
+    <pre>Procédure TriSelection(t : Tableau)
+Variables
+    i, j, indiceMin, temp : Entier
+Début
+    Pour i De 0 À t.Longueur - 2 Faire
+        indiceMin ← i
+        Pour j De i + 1 À t.Longueur - 1 Faire
+            Si t[j] &lt; t[indiceMin] Alors
+                indiceMin ← j
+            FinSi
+        FinPour
+        temp ← t[i]
+        t[i] ← t[indiceMin]
+        t[indiceMin] ← temp
+    FinPour
+Fin</pre>
+    <pre>static void TriSelection(int[] t)
+{
+    for (int i = 0; i &lt; t.Length - 1; i++)
+    {
+        int indiceMin = i;
+        for (int j = i + 1; j &lt; t.Length; j++)
+        {
+            if (t[j] &lt; t[indiceMin]) indiceMin = j;
+        }
+        int temp = t[i];
+        t[i] = t[indiceMin];
+        t[indiceMin] = temp;
+    }
+}</pre>
+    <p><strong>Le déroulé sur <code>{5, 2, 9, 1}</code> :</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Passe</th><th>On cherche le min dans</th><th>Trouvé</th><th>Après échange</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>[5, 2, 9, 1]</code></td><td>1</td><td><code>[1, 2, 9, 5]</code></td></tr>
+          <tr><td>2</td><td><code>[2, 9, 5]</code></td><td>2</td><td><code>[1, 2, 9, 5]</code></td></tr>
+          <tr><td>3</td><td><code>[9, 5]</code></td><td>5</td><td><code>[1, 2, 5, 9]</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>La partie gauche est triée et définitive ; la partie droite rétrécit.</p>
+    <h3>11.4 : Le tri à bulles</h3>
+    <p>Autre principe : <strong>comparer les voisins deux à deux et les échanger s'ils sont dans le désordre</strong>. À chaque passe, la plus grande valeur « remonte » en fin de tableau.</p>
+    <pre>static void TriBulles(int[] t)
+{
+    for (int i = 0; i &lt; t.Length - 1; i++)
+    {
+        for (int j = 0; j &lt; t.Length - 1 - i; j++)
+        {
+            if (t[j] &gt; t[j + 1])
+            {
+                int temp = t[j];
+                t[j] = t[j + 1];
+                t[j + 1] = temp;
+            }
+        }
+    }
+}</pre>
+    <p><strong>Le <code>- i</code> de la boucle intérieure</strong> : après la passe 1, la plus grande valeur est déjà en place ; après la passe 2, les deux plus grandes. Inutile de les recomparer.</p>
+    <div class="encadre">
+      <span class="etiquette">L'optimisation en une ligne</span>
+    <p>Si une passe complète n'a produit <strong>aucun échange</strong>, le tableau est trié : on peut sortir immédiatement.</p>
+    <pre>bool echange = true;
+for (int i = 0; i &lt; t.Length - 1 &amp;&amp; echange; i++)
+{
+    echange = false;
+    for (int j = 0; j &lt; t.Length - 1 - i; j++)
+        if (t[j] &gt; t[j + 1]) { /* échange */ echange = true; }
+}</pre>
+    <p>Sur un tableau déjà trié, le tri s'arrête après <strong>une</strong> passe au lieu de <code>n</code>.</p>
+    </div>
+    <h3>11.5 : La complexité</h3>
+    <div class="encadre definition">
+      <span class="etiquette">Complexité</span>
+    <p>Ordre de grandeur du <strong>nombre d'opérations</strong> qu'un algorithme effectue, exprimé en fonction de la taille <code>n</code> des données. On la note <code>O(...)</code>.</p>
+    </div>
+    <p>On ne compte pas les secondes (elles dépendent de la machine) mais les <strong>opérations</strong>, et on ne garde que le terme qui domine quand <code>n</code> grandit.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Notation</th><th>Nom</th><th>Exemple</th><th>Pour n = 1000</th></tr></thead>
+        <tbody>
+          <tr><td><code>O(1)</code></td><td>constante</td><td>accéder à <code>t[5]</code></td><td>1</td></tr>
+          <tr><td><code>O(log n)</code></td><td>logarithmique</td><td>recherche dichotomique</td><td>~10</td></tr>
+          <tr><td><code>O(n)</code></td><td>linéaire</td><td>recherche séquentielle, somme</td><td>1 000</td></tr>
+          <tr><td><code>O(n²)</code></td><td>quadratique</td><td>tri par sélection, tri à bulles</td><td>1 000 000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Comment la reconnaître, en pratique :</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Ce que vous voyez dans le code</th><th>Complexité</th></tr></thead>
+        <tbody>
+          <tr><td>aucune boucle</td><td><code>O(1)</code></td></tr>
+          <tr><td>une boucle sur les <code>n</code> éléments</td><td><code>O(n)</code></td></tr>
+          <tr><td><strong>deux boucles imbriquées</strong> sur les <code>n</code> éléments</td><td><code>O(n²)</code></td></tr>
+          <tr><td>on divise le problème en deux à chaque tour</td><td><code>O(log n)</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Le tableau de synthèse du chapitre</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Algorithme</th><th>Complexité</th><th>Tableau trié requis</th><th>Sur 1000 éléments</th></tr></thead>
+        <tbody>
+          <tr><td>Recherche séquentielle</td><td><code>O(n)</code></td><td>non</td><td>~500 comparaisons</td></tr>
+          <tr><td>Recherche dichotomique</td><td><code>O(log n)</code></td><td><strong>oui</strong></td><td>~10 comparaisons</td></tr>
+          <tr><td>Tri par sélection</td><td><code>O(n²)</code></td><td>non</td><td>~500 000 comparaisons</td></tr>
+          <tr><td>Tri à bulles</td><td><code>O(n²)</code></td><td>non</td><td>~500 000 comparaisons</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encadre attention">
+      <span class="etiquette">Ce que la complexité ne dit pas</span>
+    <p><code>O(n²)</code> ne signifie pas « lent ». Sur 10 éléments, un tri quadratique est instantané et parfaitement acceptable.</p>
+    <p>La complexité décrit <strong>comment le coût grandit avec les données</strong>, pas la vitesse absolue. Un <code>O(n²)</code> reste raisonnable sur un petit tableau et devient inutilisable sur un million de lignes : c'est cela qu'elle permet d'anticiper, avant d'écrire le code.</p>
+    </div>
+    <div class="encadre">
+      <span class="etiquette">En production, on n'écrit pas ses tris</span>
+    <p><code>Array.Sort(t)</code> en C# trie en <code>O(n log n)</code>, bien mieux que vos deux tris. On étudie le tri par sélection et le tri à bulles parce qu'ils sont <strong>simples à comprendre</strong> et qu'ils font toucher du doigt ce qu'est une complexité quadratique, pas parce qu'on les utilisera.</p>
+    </div>
+  </section>
+
+  <!-- ====================== SESSION 12 ====================== -->
+  <section class="session" id="session-12">
+    <h1 style="margin-top:0">Session 12 : TP 6, implémenter et comparer</h1>
+    <div class="meta"><span class="puce">Prérequis : session 11</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Implémenter</strong> les quatre algorithmes du chapitre</li>
+      <li><strong>Compter</strong> les opérations réellement effectuées</li>
+      <li><strong>Constater</strong> l'écart entre <code>O(n)</code> et <code>O(log n)</code></li>
+    </ol>
+    <h2>Cas concret : Mise en situation</h2>
+    <p>Le tableau de travail, <strong>trié</strong>, indispensable pour la dichotomie :</p>
+    <pre>int[] t = { 2, 5, 8, 12, 16, 23, 38, 56, 72, 91 };</pre>
+    <h2>Travail à réaliser</h2>
+    <p>Rendez un fichier <strong><code>tp6_tris.txt</code></strong> avec le code C# de chaque exercice et, pour l'exercice 5, le tableau de résultats.</p>
+    
+        <div class="exercice">
+    <h3>Exercice 1 : La recherche séquentielle comptée</h3>
+    <p>Écrire <code>RechercheSequentielle(t, valeur, ref nbComparaisons)</code> qui renvoie l'indice trouvé ou -1, et <strong>remonte le nombre de comparaisons effectuées</strong>.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 2 : La recherche dichotomique comptée</h3>
+    <p>Même chose en dichotomique. Comparer les deux sur les mêmes recherches.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 3 : Le tri par sélection</h3>
+    <p>Implémenter le tri par sélection sur <code>{5, 2, 9, 1, 7}</code> et afficher le tableau <strong>après chaque passe</strong>.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 4 : Le tri à bulles</h3>
+    <p>Implémenter le tri à bulles sur le même tableau, avec l'affichage par passe. Ajouter le compteur d'échanges.</p>
+    
+        </div>
+        <div class="exercice">
+    <h3>Exercice 5 : La comparaison</h3>
+    <p>Remplir ce tableau à partir de vos mesures, puis répondre en une phrase : <strong>quel algorithme choisiriez-vous pour chercher un client dans une base de 100 000 lignes, et à quelle condition ?</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Algorithme</th><th>Comparaisons mesurées</th><th>Complexité</th></tr></thead>
+        <tbody>
+          <tr><td>Recherche séquentielle (valeur absente)</td><td></td><td></td></tr>
+          <tr><td>Recherche dichotomique (valeur absente)</td><td></td><td></td></tr>
+          <tr><td>Tri par sélection</td><td></td><td></td></tr>
+          <tr><td>Tri à bulles</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+        </div>
+  </section>
+
+  <!-- ====================== SESSION 13 ====================== -->
+  <section class="session" id="session-13">
+    <h1 style="margin-top:0">Session 13 : L'essentiel, ce qu'il faut retenir</h1>
+    <div class="meta"><span class="puce">Prérequis : les douze chapitres précédents</span></div>
+    <h2>Objectifs pédagogiques</h2>
+    <ol class="objectifs">
+      <li><strong>Réviser</strong> l'ensemble du module à partir d'une fiche unique</li>
+    </ol>
+    <h2>Les bases</h2>
+    <ul class="retenir">
+      <li>Un <strong>algorithme</strong> est une suite <strong>finie</strong>, <strong>précise</strong> et <strong>effective</strong> d'instructions. Il s'écrit avant le code, pas après.</li>
+      <li>Une variable a un <strong>nom</strong>, un <strong>type</strong>, une <strong>valeur</strong>. L'affectation se lit <strong>de droite à gauche</strong> : <code>total ← total + 5</code> range dans <code>total</code> le résultat du calcul.</li>
+      <li>En C#, <strong><code>=</code> affecte</strong> et <strong><code>==</code> compare</strong>. C'est l'erreur numéro un.</li>
+      <li><strong>Deux entiers divisés donnent un entier</strong> : <code>7 / 2</code> vaut <code>3</code>. Pour une moyenne, forcer le réel avec <code>/ 3.0</code> ou <code>(double)</code>.</li>
+      <li><code>%</code> donne le <strong>reste</strong> : <code>n % 2 == 0</code> teste si un nombre est pair.</li>
+    </ul>
+    <h2>Les conditions</h2>
+    <ul class="retenir">
+      <li>Une condition vaut <strong>Vrai</strong> ou <strong>Faux</strong>. Un booléen se teste directement : <code>if (estValide)</code>, pas <code>if (estValide == true)</code>.</li>
+      <li><code>ET</code> (<code>&amp;&amp;</code>) exige les deux ; <code>OU</code> (<code>||</code>) suffit d'une. Un intervalle s'écrit avec <strong>deux</strong> comparaisons : <code>note &gt;= 0 &amp;&amp; note &lt;= 20</code>.</li>
+      <li>Dans une cascade de <code>SinonSi</code>, <strong>l'ordre décide du résultat</strong> : on commence par le seuil <strong>le plus restrictif</strong>. Une erreur d'ordre ne produit aucun message, seulement des résultats faux.</li>
+      <li><code>Selon</code> / <code>switch</code> compare <strong>une variable à des valeurs exactes</strong> ; les intervalles restent au <code>SinonSi</code>.</li>
+      <li>En C#, mettez <strong>toujours les accolades</strong>, même pour une seule instruction.</li>
+    </ul>
+    <h2>Les boucles</h2>
+    <ul class="retenir">
+      <li><strong><code>Pour</code></strong> quand on sait combien de fois, <strong><code>TantQue</code></strong> quand ce peut être zéro fois, <strong><code>Répéter</code></strong> quand c'est au moins une fois, donc pour toute saisie contrôlée.</li>
+      <li>Un <strong>accumulateur</strong> s'initialise à <code>0</code> <strong>avant</strong> la boucle ; un <strong>maximum</strong> s'initialise avec le <strong>premier élément</strong>, jamais avec <code>0</code>.</li>
+      <li>Dans tout <code>TantQue</code>, il doit exister une ligne qui rapproche de la sortie. Si vous ne la trouvez pas, la boucle est infinie.</li>
+      <li>Entre <code>JusquÀ</code> et <code>while</code>, la condition <strong>s'inverse</strong> : les comparaisons <strong>et</strong> le connecteur logique.</li>
+      <li>Deux boucles imbriquées <strong>multiplient</strong> le nombre de tours.</li>
+    </ul>
+    <h2>Les tableaux</h2>
+    <ul class="retenir">
+      <li>Les indices vont de <strong>0 à <code>Length - 1</code></strong>. La dernière case est <code>t[t.Length - 1]</code>, et la condition de boucle s'écrit <code>i &lt; t.Length</code>.</li>
+      <li>Quatre motifs couvrent presque tout : <strong>additionner</strong>, <strong>chercher le maximum</strong>, <strong>compter</strong>, <strong>rechercher</strong>. Ils s'écrivent toujours pareil.</li>
+      <li>Tout ce qui se calcule en lisant chaque case une fois se calcule dans <strong>la même boucle</strong>.</li>
+      <li>Une position introuvable se code par <strong>-1</strong>, jamais par 0 qui est un indice valide.</li>
+      <li>Un tableau 2D se parcourt avec <strong>deux boucles imbriquées</strong> ; <code>GetLength(0)</code> donne les lignes, <code>GetLength(1)</code> les colonnes. L'emplacement de l'initialisation entre les deux boucles décide du résultat.</li>
+    </ul>
+    <h2>Les fonctions</h2>
+    <ul class="retenir">
+      <li>Une <strong>fonction retourne</strong> une valeur, une <strong>procédure</strong> (<code>void</code>) produit un effet. Le test : « l'appelant a-t-il besoin du résultat ? »</li>
+      <li>Une fonction <strong>calcule et retourne</strong> ; c'est l'appelant qui décide d'afficher. Une fonction qui affiche ne sert qu'une fois.</li>
+      <li>Une variable déclarée dans une fonction <strong>n'existe que là</strong>. C'est une protection, pas une contrainte.</li>
+      <li>Les arguments passent <strong>par valeur</strong> : la fonction reçoit une copie. <code>ref</code> et <code>out</code> passent la variable elle-même. <strong>Les tableaux font exception</strong> : ils sont toujours modifiables.</li>
+      <li>Un bloc qu'on ne sait pas nommer en trois mots fait deux choses : il faut le couper.</li>
+    </ul>
+    <h2>Rechercher et trier</h2>
+    <ul class="retenir">
+      <li>La <strong>recherche séquentielle</strong> est en <code>O(n)</code> et fonctionne sur n'importe quel tableau. La <strong>dichotomique</strong> est en <code>O(log n)</code> mais exige un tableau <strong>trié</strong> ; sinon elle répond faux, sans erreur.</li>
+      <li>Le <strong>tri par sélection</strong> cherche le minimum restant ; le <strong>tri à bulles</strong> échange les voisins. Les deux sont en <code>O(n²)</code>.</li>
+      <li>On reconnaît la complexité à l'œil : une boucle donne <code>O(n)</code>, <strong>deux boucles imbriquées</strong> donnent <code>O(n²)</code>, diviser en deux à chaque tour donne <code>O(log n)</code>.</li>
+      <li>La complexité décrit <strong>comment le coût grandit avec les données</strong>, pas la vitesse absolue. Un <code>O(n²)</code> est parfait sur 10 éléments et inutilisable sur un million.</li>
+      <li>En production, on utilise <code>Array.Sort</code> : on étudie ces tris pour comprendre, pas pour les employer.</li>
+    </ul>
+  </section>
+
+
+  <footer class="no-print" style="color:var(--texte-doux); font-size:.82rem; text-align:center; padding:10px 0 30px">
+    
+  </footer>
+</main>
+
+<script>
+/* ==========================================================================
+   1. SOURCE DE VÉRITÉ : le plan des 24 sessions
+   --------------------------------------------------------------------------
+   Ce tableau alimente à la fois le tableau « Plan » et le sommaire latéral.
+   Pour publier une session : passer "redigee" à true (le lien se dégrise) et
+   ajouter la section HTML correspondante avec l'id "session-N".
+   ========================================================================== */
+const PLAN = [
+  {
+    "n": 1,
+    "redigee": true,
+    "titre": "Les bases : variables, types, affectation",
+    "objectifs": "Définir ce qu'est un algorithme ; déclarer et typer une variable ; saisir et afficher ; utiliser les opérateurs",
+    "notions": "Algorithme, variable, type, affectation, `Lire`, `Écrire`, opérateurs, division entière, `DIV`, `MOD`"
+  },
+  {
+    "n": 2,
+    "redigee": true,
+    "titre": "TP 1 : premiers algorithmes",
+    "objectifs": "Écrire un algorithme court complet ; le traduire en C# ; le tester",
+    "notions": "Déclaration, saisie, calcul, affichage, conversion de type"
+  },
+  {
+    "n": 3,
+    "redigee": true,
+    "titre": "Les conditions",
+    "objectifs": "Écrire un test simple, imbriqué, multiple ; combiner des conditions",
+    "notions": "`Si`, `Sinon`, `SinonSi`, `Selon`, opérateurs de comparaison, `ET`, `OU`, `NON`, `switch`"
+  },
+  {
+    "n": 4,
+    "redigee": true,
+    "titre": "TP 2 : les tests",
+    "objectifs": "Traduire une règle métier en conditions ; ordonner les tests correctement",
+    "notions": "Conditions imbriquées, intervalles, opérateurs logiques"
+  },
+  {
+    "n": 5,
+    "redigee": true,
+    "titre": "Les boucles",
+    "objectifs": "Choisir la bonne boucle ; écrire un compteur et un accumulateur ; éviter la boucle infinie",
+    "notions": "`Pour`, `TantQue`, `Répéter`, `for`, `while`, `do…while`, compteur, accumulateur, sentinelle"
+  },
+  {
+    "n": 6,
+    "redigee": true,
+    "titre": "TP 3 : les répétitions",
+    "objectifs": "Écrire des boucles de comptage et de saisie contrôlée ; imbriquer deux boucles",
+    "notions": "Boucles imbriquées, min/max, validation de saisie"
+  },
+  {
+    "n": 7,
+    "redigee": true,
+    "titre": "Les tableaux",
+    "objectifs": "Déclarer et parcourir un tableau ; appliquer les quatre motifs de parcours ; manipuler un tableau à deux dimensions",
+    "notions": "Tableau, indice, `Length`, parcours, somme, maximum, recherche, tableau 2D"
+  },
+  {
+    "n": 8,
+    "redigee": true,
+    "titre": "TP 4 : traiter une série de données",
+    "objectifs": "Traiter un jeu de notes complet ; produire des statistiques",
+    "notions": "Parcours, agrégats, inversion, matrice"
+  },
+  {
+    "n": 9,
+    "redigee": true,
+    "titre": "Les fonctions et les procédures",
+    "objectifs": "Distinguer fonction et procédure ; définir paramètres et valeur de retour ; comprendre la portée",
+    "notions": "Fonction, procédure, paramètre, argument, `return`, `void`, portée, `ref`, `out`"
+  },
+  {
+    "n": 10,
+    "redigee": true,
+    "titre": "TP 5 : découper un programme",
+    "objectifs": "Écrire une petite bibliothèque de fonctions ; réécrire un programme monolithique",
+    "notions": "Signature, appel, réutilisation, décomposition"
+  },
+  {
+    "n": 11,
+    "redigee": true,
+    "titre": "Rechercher et trier",
+    "objectifs": "Écrire les recherches séquentielle et dichotomique ; écrire deux tris ; comparer leur coût",
+    "notions": "Recherche séquentielle, dichotomie, tri par sélection, tri à bulles, complexité, `O(n)`, `O(n²)`, `O(log n)`"
+  },
+  {
+    "n": 12,
+    "redigee": true,
+    "titre": "TP 6 : implémenter et comparer",
+    "objectifs": "Implémenter les quatre algorithmes ; compter les opérations ; mesurer l'écart",
+    "notions": "Compteur d'opérations, comparaison expérimentale"
+  },
+  {
+    "n": 13,
+    "redigee": true,
+    "titre": "L'essentiel : ce qu'il faut retenir",
+    "objectifs": "Réviser l'ensemble du module à partir d'une fiche unique",
+    "notions": "Synthèse des six chapitres"
+  }
+];
+
+/* ==========================================================================
+   2. GÉNÉRATION DU TABLEAU « PLAN » ET DU SOMMAIRE LATÉRAL
+   ========================================================================== */
+const corpsPlan = document.getElementById('corps-plan');
+const listeSommaire = document.getElementById('liste-sommaire');
+
+PLAN.forEach(function(s){
+  // --- ligne du tableau du plan
+  const tr = document.createElement('tr');
+  tr.innerHTML = '<td>' + s.n + '</td>'
+    + '<td><strong>' + s.titre + '</strong></td>'
+    + '<td>' + s.objectifs + '</td>'
+    + '<td>' + s.notions + '</td>';
+  corpsPlan.appendChild(tr);
+
+  // --- entrée du sommaire : lien actif si rédigée, texte grisé sinon
+  const li = document.createElement('li');
+  if (s.redigee) {
+    li.innerHTML = '<a href="#session-' + s.n + '" data-cible="session-' + s.n + '">'
+      + '<span class="num">' + String(s.n).padStart(2,'0') + '</span>'
+      + '<span>' + s.titre + '</span></a>';
+  } else {
+    li.innerHTML = '<span class="lien-inactif" title="Session non encore rédigée" aria-disabled="true">'
+      + '<span class="num">' + String(s.n).padStart(2,'0') + '</span>'
+      + '<span>' + s.titre + '</span></span>';
+  }
+  listeSommaire.appendChild(li);
+});
+
+/* ==========================================================================
+   3. BARRE DE PROGRESSION DE LECTURE
+   Ratio défilement / hauteur défilable, recalculé au scroll et au redimensionnement.
+   ========================================================================== */
+const remplissage = document.getElementById('barre-remplissage');
+function majProgression(){
+  const h = document.documentElement;
+  const defilable = h.scrollHeight - h.clientHeight;
+  const ratio = defilable > 0 ? (h.scrollTop || document.body.scrollTop) / defilable : 0;
+  remplissage.style.width = Math.min(100, Math.max(0, ratio * 100)) + '%';
+}
+window.addEventListener('scroll', majProgression, {passive:true});
+window.addEventListener('resize', majProgression);
+majProgression();
+
+/* ==========================================================================
+   4. SURLIGNAGE DU LIEN ACTIF DANS LE SOMMAIRE (IntersectionObserver)
+   Fonctionne automatiquement pour toute nouvelle section .session ajoutée.
+   ========================================================================== */
+const sections = document.querySelectorAll('section.session');
+if ('IntersectionObserver' in window && sections.length) {
+  const observateur = new IntersectionObserver(function(entrees){
+    entrees.forEach(function(e){
+      if (!e.isIntersecting) return;
+      document.querySelectorAll('#sommaire a').forEach(function(a){
+        a.classList.toggle('actif', a.dataset.cible === e.target.id);
+      });
+    });
+  }, {rootMargin:'-72px 0px -70% 0px'});
+  sections.forEach(function(s){ observateur.observe(s); });
+}
+
+/* ==========================================================================
+   5. EXPORT PDF  (impression navigateur → « Enregistrer au format PDF »)
+   ========================================================================== */
+document.getElementById('btn-pdf').addEventListener('click', function(){
+  window.print();
+});
+
+/* ==========================================================================
+   5 bis. EXPORT WORD (.doc)
+   --------------------------------------------------------------------------
+   Aucune bibliothèque externe : on fabrique un document HTML aux normes
+   Word (espaces de noms Office), on l'encapsule dans un Blob puis on le
+   télécharge. Word l'ouvre nativement et il reste éditable / convertible
+   en .docx via « Enregistrer sous ».
+   Comme pour le PDF, l'état des corrigés est respecté : masqués à l'écran,
+   ils sont absents du document exporté (version élève).
+   ========================================================================== */
+function exporterWord(){
+  // 1. Copie du contenu, nettoyée des éléments d'interface
+  const contenu = document.querySelector('main').cloneNode(true);
+  contenu.querySelectorAll('.btn-corrige, .no-print, script').forEach(function(e){ e.remove(); });
+  if (document.documentElement.classList.contains('corriges-masques')){
+    contenu.querySelectorAll('.encadre.corrige').forEach(function(e){ e.remove(); });
+  }
+
+  // 2. Feuille de style dédiée à Word (unités en points, toujours en clair)
+  const styles = ''
+    + '@page{size:A4 portrait; margin:2cm}'
+    + 'body{font-family:Calibri,Arial,sans-serif; font-size:11pt; color:#111; line-height:1.4}'
+    + 'h1{font-size:18pt; color:#12395c; page-break-before:always}'
+    + 'h1:first-of-type{page-break-before:avoid}'
+    + 'h2{font-size:14pt; color:#12395c; border-bottom:1pt solid #b9c2cc; padding-bottom:2pt; page-break-before:always}'
+    + 'h3{font-size:12pt; color:#1e6fa8}'
+    + 'h1,h2,h3,h4{page-break-after:avoid; font-family:Calibri,Arial,sans-serif}'
+    + 'p,li{font-size:11pt}'
+    + 'table{border-collapse:collapse; width:100%; font-size:9.5pt}'
+    + 'th,td{border:0.75pt solid #9aa3ad; padding:4pt; vertical-align:top; text-align:left}'
+    + 'th{background:#eef2f6; font-weight:bold}'
+    + 'pre{font-family:Consolas,"Courier New",monospace; font-size:8pt; background:#f4f4f4;'
+    + '     border:0.5pt solid #ccc; padding:6pt}'
+    + '.encadre{border-left:4pt solid #1e6fa8; background:#f4f7fa; padding:6pt 8pt; margin:8pt 0}'
+    + '.encadre.attention{border-left-color:#b3261e; background:#fdf2f1}'
+    + '.encadre.corrige{border-left-color:#177245; background:#f2f8f4}'
+    + '.encadre.definition{border-left-color:#a8410a; background:#fdf6f0}'
+    + '.etiquette{display:block; font-size:8.5pt; font-weight:bold; text-transform:uppercase; color:#555}'
+    + '.puce{font-size:9pt; color:#12395c}'
+    + '.meta{font-size:9pt; color:#555; margin-bottom:8pt}'
+    + 'ul.retenir{list-style:none; padding-left:0}'
+    + 'a{color:#12395c}';
+
+  // 3. Document Word complet
+  const doc = '<html xmlns:o="urn:schemas-microsoft-com:office:office"'
+    + ' xmlns:w="urn:schemas-microsoft-com:office:word"'
+    + ' xmlns="http://www.w3.org/TR/REC-html40"><head>'
+    + '<meta charset="utf-8">'
+    + '<title>' + document.title + '</title>'
+    + '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View>'
+    + '<w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->'
+    + '<style>' + styles + '</style></head><body>'
+    + contenu.innerHTML
+    + '</body></html>';
+
+  // 4. Téléchargement (le BOM \ufeff garantit l'encodage UTF-8 côté Word)
+  const nom = document.title.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')   // sans accents
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'cours';
+  const blob = new Blob(['\ufeff' + doc], {type: 'application/msword'});
+  const url = URL.createObjectURL(blob);
+  const lien = document.createElement('a');
+  lien.href = url;
+  lien.download = nom + '.doc';
+  document.body.appendChild(lien);
+  lien.click();
+  document.body.removeChild(lien);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+}
+document.getElementById('btn-word').addEventListener('click', exporterWord);
+
+/* ==========================================================================
+   5 bis bis. SÉLECTEUR DE THÈME  (Sobre → Nuit → Moderne, en boucle)
+   --------------------------------------------------------------------------
+   Le thème est posé dans l'attribut data-theme de <html> ; tout le reste est
+   géré en CSS par les blocs html[data-theme="..."].
+   Le choix est mémorisé dans localStorage ; à la première visite, la
+   préférence système (mode sombre de l'OS) est respectée.
+   POUR AJOUTER UN THÈME : créer un bloc html[data-theme="mon-theme"] dans le
+   CSS, puis ajouter une entrée ici. Rien d'autre à modifier.
+   ========================================================================== */
+const THEMES = [
+  {id:'sobre',   libelle:'☀️ Sobre'},
+  {id:'nuit',    libelle:'🌙 Nuit'},
+  {id:'moderne', libelle:'✨ Moderne'}
+];
+const btnTheme = document.getElementById('btn-theme');
+
+function appliquerTheme(id){
+  const theme = THEMES.find(function(t){ return t.id === id; }) || THEMES[0];
+  // 'sobre' = thème par défaut défini par :root, donc pas d'attribut nécessaire
+  if (theme.id === 'sobre') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme', theme.id);
+  btnTheme.textContent = theme.libelle;
+  btnTheme.dataset.theme = theme.id;
+  try{ localStorage.setItem('theme-cours', theme.id); }catch(e){/* mode privé */}
+}
+
+// Thème initial : choix mémorisé, sinon préférence système, sinon 'sobre'
+(function themeInitial(){
+  let choix = null;
+  try{ choix = localStorage.getItem('theme-cours'); }catch(e){}
+  if (!choix) {
+    const sombreOS = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    choix = sombreOS ? 'nuit' : 'sobre';
+  }
+  appliquerTheme(choix);
+})();
+
+// Clic : passage au thème suivant, en boucle
+btnTheme.addEventListener('click', function(){
+  const i = THEMES.findIndex(function(t){ return t.id === btnTheme.dataset.theme; });
+  appliquerTheme(THEMES[(i + 1) % THEMES.length].id);
+});
+
+// Raccourci clavier : touche "t" (hors champ de saisie)
+document.addEventListener('keydown', function(e){
+  if (e.key === 't' && !/input|textarea|select/i.test(e.target.tagName)) btnTheme.click();
+});
+
+/* ==========================================================================
+   5 ter. AFFICHAGE / MASQUAGE DES CORRIGÉS
+   --------------------------------------------------------------------------
+   - Bouton global (barre supérieure) : masque ou affiche TOUS les corrigés,
+     y compris les bonnes réponses signalées dans les QCM.
+   - Bouton local : chaque encadré « Corrigé » reçoit son propre bouton pour
+     être révélé individuellement (utile en classe, question par question).
+   - L'état global est mémorisé dans localStorage.
+   - Aucun réglage à faire pour les sessions ajoutées plus tard : tout bloc
+     <div class="encadre corrige"> est détecté automatiquement au chargement.
+   ========================================================================== */
+const btnCorriges = document.getElementById('btn-corriges');
+const blocsCorriges = document.querySelectorAll('.encadre.corrige');
+
+// Un bouton « Afficher / Masquer » est injecté dans chaque encadré de corrigé
+blocsCorriges.forEach(function(bloc){
+  const b = document.createElement('button');
+  b.className = 'btn-corrige';
+  b.type = 'button';
+  b.addEventListener('click', function(){
+    bloc.classList.toggle('masque');
+    majLibelleLocal(bloc, b);
+  });
+  // insertion juste après l'étiquette « Corrigé » du bloc
+  const etiquette = bloc.querySelector('.etiquette');
+  if (etiquette) etiquette.insertAdjacentElement('afterend', b);
+  else bloc.prepend(b);
+  majLibelleLocal(bloc, b);
+});
+
+function majLibelleLocal(bloc, bouton){
+  const masque = bloc.classList.contains('masque');
+  bouton.textContent = masque ? '👁 Afficher le corrigé' : '🙈 Masquer le corrigé';
+  bouton.setAttribute('aria-expanded', String(!masque));
+}
+
+/* Bascule globale : tous les corrigés d'un coup */
+function appliquerCorriges(masquer){
+  document.documentElement.classList.toggle('corriges-masques', masquer);
+  blocsCorriges.forEach(function(bloc){
+    bloc.classList.toggle('masque', masquer);
+    const b = bloc.querySelector('.btn-corrige');
+    if (b) majLibelleLocal(bloc, b);
+  });
+  btnCorriges.textContent = masquer ? '🙈 Corrigés masqués' : '✅ Corrigés visibles';
+  btnCorriges.dataset.masque = masquer ? '1' : '0';
+  btnCorriges.setAttribute('aria-pressed', String(masquer));
+  try{ localStorage.setItem('corriges-masques', masquer ? '1' : '0'); }catch(e){}
+}
+
+// État initial : mémorisé, sinon corrigés visibles
+(function corrigesInitial(){
+  let memo = null;
+  try{ memo = localStorage.getItem('corriges-masques'); }catch(e){}
+  appliquerCorriges(memo === '1');
+})();
+
+btnCorriges.addEventListener('click', function(){
+  appliquerCorriges(btnCorriges.dataset.masque !== '1');
+});
+
+// Raccourci clavier : touche "c" (hors champ de saisie)
+document.addEventListener('keydown', function(e){
+  if (e.key === 'c' && !e.ctrlKey && !e.metaKey
+      && !/input|textarea|select/i.test(e.target.tagName)) btnCorriges.click();
+});
+
+/* ==========================================================================
+   6. SOMMAIRE MOBILE (ouverture / fermeture)
+   ========================================================================== */
+const sommaire = document.getElementById('sommaire');
+const voile = document.getElementById('voile');
+function basculerMenu(ouvrir){
+  sommaire.classList.toggle('ouvert', ouvrir);
+  voile.classList.toggle('visible', ouvrir);
+}
+document.getElementById('btn-menu').addEventListener('click', function(){
+  basculerMenu(!sommaire.classList.contains('ouvert'));
+});
+voile.addEventListener('click', function(){ basculerMenu(false); });
+// Sur mobile, refermer le sommaire après un clic sur un lien
+sommaire.addEventListener('click', function(e){
+  if (e.target.closest('a') && window.innerWidth <= 960) basculerMenu(false);
+});
+// Touche Échap : ferme le sommaire
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') basculerMenu(false);
+});
+</script>
+<div id="loupe-image" role="dialog" aria-modal="true" aria-label="Image agrandie">
+  <button class="fermer" type="button" aria-label="Fermer">&times;</button>
+  <img alt="">
+</div>
+<script>
+/* Agrandissement des images au clic (ajouté par buildnew.js) */
+(function(){
+  var loupe = document.getElementById("loupe-image");
+  if (!loupe) return;
+  var cible = loupe.querySelector("img");
+  document.querySelectorAll(".img-cours").forEach(function(img){
+    img.setAttribute("data-zoom", "1");
+    img.addEventListener("click", function(){
+      cible.src = img.currentSrc || img.src;
+      cible.alt = img.alt || "";
+      loupe.classList.add("ouverte");
+      document.body.style.overflow = "hidden";
+    });
+  });
+  function fermer(){
+    loupe.classList.remove("ouverte"); cible.removeAttribute("src");
+    document.body.style.overflow = "";
+  }
+  loupe.addEventListener("click", fermer);
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") fermer(); });
+})();
+</script>
+<script>
+/* ==========================================================================
+   EXPORT WORD AVEC IMAGES (ajouté par buildnew.js)
+   --------------------------------------------------------------------------
+   L'export d'origine produit un HTML « habillé en .doc » : Word l'ouvre, mais
+   il IGNORE les images en data:URI — elles disparaissent du document.
+   On produit donc un vrai fichier MHTML (multipart/related), le format
+   « Page web à fichier unique » de Word : le texte est une partie MIME, chaque
+   image une autre partie, référencée par un nom de fichier relatif.
+   Word affiche alors toutes les illustrations, et « Enregistrer sous » permet
+   de convertir en .docx.
+   ========================================================================== */
+(function(){
+  var bouton = document.getElementById('btn-word');
+  if (!bouton) return;
+
+  var LARGEUR_MAX = 620;                 // px ≈ 16,4 cm dans une page A4 à marges 2 cm
+  var BASE = 'file:///C:/cours-export/'; // base de résolution des noms d'images
+  var EXTENSIONS = {
+    'image/png':'png', 'image/jpeg':'jpg', 'image/gif':'gif',
+    'image/webp':'webp', 'image/bmp':'bmp', 'image/svg+xml':'svg', 'image/avif':'avif'
+  };
+
+  /* --- styles du document Word (points, toujours en clair) ---------------- */
+  var STYLES = ''
+    + '@page{size:A4 portrait; margin:2cm}'
+    + 'body{font-family:Calibri,Arial,sans-serif; font-size:11pt; color:#111; line-height:1.4}'
+    + 'h1{font-size:18pt; color:#12395c; page-break-before:always}'
+    + 'h1:first-of-type{page-break-before:avoid}'
+    + 'h2{font-size:14pt; color:#12395c; border-bottom:1pt solid #b9c2cc; padding-bottom:2pt;'
+    + '   page-break-before:always}'
+    + 'h3{font-size:12pt; color:#1e6fa8}'
+    + 'h1,h2,h3,h4{page-break-after:avoid; font-family:Calibri,Arial,sans-serif}'
+    + 'p,li{font-size:11pt}'
+    + 'table{border-collapse:collapse; width:100%; font-size:9.5pt}'
+    + 'th,td{border:0.75pt solid #9aa3ad; padding:4pt; vertical-align:top; text-align:left}'
+    + 'th{background:#eef2f6; font-weight:bold}'
+    + 'pre{font-family:Consolas,"Courier New",monospace; font-size:8pt; background:#f4f4f4;'
+    + '     border:0.5pt solid #ccc; padding:6pt}'
+    + '.encadre{border-left:4pt solid #1e6fa8; background:#f4f7fa; padding:6pt 8pt; margin:8pt 0}'
+    + '.encadre.attention{border-left-color:#b3261e; background:#fdf2f1}'
+    + '.encadre.corrige{border-left-color:#177245; background:#f2f8f4}'
+    + '.encadre.definition{border-left-color:#a8410a; background:#fdf6f0}'
+    + '.etiquette{display:block; font-size:8.5pt; font-weight:bold; text-transform:uppercase; color:#555}'
+    + '.puce{font-size:9pt; color:#12395c}'
+    + 'p.meta{font-size:9pt; color:#555; margin:0 0 8pt}'
+    + 'ul.retenir{list-style:none; padding-left:0}'
+    /* --- QCM : la bonne réponse doit rester visible dans Word --- */
+    + 'ul.qcm li.bonne{color:#177245; font-weight:bold}'
+    + 'a{color:#12395c}'
+    /* --- images : centrées, jamais plus larges que la zone imprimable --- */
+    + 'p.figure-cours{text-align:center; margin:10pt 0}'
+    + 'p.figure-cours img{border:0.5pt solid #c9d0d8}'
+    + 'p.legende-cours{text-align:center; font-size:9pt; font-style:italic; color:#555; margin:2pt 0 10pt}';
+
+  /* --- utilitaires MIME --------------------------------------------------- */
+  function base64Utf8(texte){
+    var octets = new TextEncoder().encode(texte);
+    var binaire = '', PAS = 0x8000;
+    for (var i = 0; i < octets.length; i += PAS){
+      binaire += String.fromCharCode.apply(null, octets.subarray(i, i + PAS));
+    }
+    return btoa(binaire);
+  }
+  function plier(b64){                    // lignes de 76 caractères (RFC 2045)
+    return b64.replace(/.{1,76}/g, '$&\r\n');
+  }
+
+  /* --- récupère une image non embarquée (mode --no-base64) ---------------- */
+  function lireDistante(url){
+    return fetch(url).then(function(r){
+      if (!r.ok) throw new Error(r.status);
+      return r.blob();
+    }).then(function(blob){
+      return new Promise(function(ok, ko){
+        var fr = new FileReader();
+        fr.onload = function(){
+          var m = String(fr.result).match(/^data:([^;,]+);base64,(.*)$/);
+          m ? ok({mime: m[1], b64: m[2]}) : ko(new Error('format'));
+        };
+        fr.onerror = ko;
+        fr.readAsDataURL(blob);
+      });
+    });
+  }
+
+  /* --- export ------------------------------------------------------------- */
+  function exporterWordAvecImages(){
+    var principal = document.querySelector('main');
+    if (!principal) return;
+
+    bouton.disabled = true;
+    var libelle = bouton.textContent;
+    bouton.textContent = '⏳ Préparation…';
+
+    // 1. forcer le chargement des images (elles sont en loading="lazy")
+    var origines = Array.prototype.slice.call(principal.querySelectorAll('img'));
+    origines.forEach(function(im, i){
+      im.setAttribute('loading', 'eager');
+      im.setAttribute('data-export-idx', i);
+    });
+
+    Promise.all(origines.map(function(im){
+      if (im.complete && im.naturalWidth) return Promise.resolve();
+      return (im.decode ? im.decode() : Promise.resolve()).catch(function(){});
+    }))
+    .then(function(){
+      // 2. copie nettoyée du contenu
+      var contenu = principal.cloneNode(true);
+      contenu.querySelectorAll('.btn-corrige, .no-print, script, #loupe-image')
+             .forEach(function(e){ e.remove(); });
+      if (document.documentElement.classList.contains('corriges-masques')){
+        contenu.querySelectorAll('.encadre.corrige').forEach(function(e){ e.remove(); });
+      }
+
+      // 3. chaque image devient une pièce MIME + une référence relative
+      var pieces = [], connues = {}, compteur = 0, attentes = [];
+
+      contenu.querySelectorAll('img').forEach(function(img){
+        var source = img.getAttribute('src') || '';
+        var origine = origines[parseInt(img.getAttribute('data-export-idx'), 10)];
+
+        // dimensions réelles, ramenées à la largeur de page
+        var l = (origine && origine.naturalWidth) || 0;
+        var h = (origine && origine.naturalHeight) || 0;
+        if (l > LARGEUR_MAX && h){ h = Math.round(h * LARGEUR_MAX / l); l = LARGEUR_MAX; }
+
+        // Word ignore les classes/styles CSS modernes : on repart propre
+        img.removeAttribute('class');
+        img.removeAttribute('style');
+        img.removeAttribute('loading');
+        img.removeAttribute('data-zoom');
+        img.removeAttribute('data-export-idx');
+        if (l){ img.setAttribute('width', l); img.setAttribute('height', h); }
+
+        function enregistrer(mime, b64){
+          var cle = mime + '|' + b64.length + '|' + b64.slice(0, 64);
+          if (!connues[cle]){
+            compteur++;
+            var nom = 'image' + ('000' + compteur).slice(-3) + '.'
+                    + (EXTENSIONS[mime] || 'png');
+            connues[cle] = nom;
+            pieces.push({nom: nom, mime: mime, b64: b64});
+          }
+          // On NE pose PAS src= tout de suite : le navigateur essaierait de
+          // charger « image001.png » et remplirait la console d'erreurs.
+          // L'attribut est renommé en src juste avant la sérialisation.
+          img.removeAttribute('src');
+          img.setAttribute('data-mht-src', connues[cle]);
+        }
+
+        var embarquee = source.match(/^data:([^;,]+);base64,(.*)$/);
+        if (embarquee){
+          enregistrer(embarquee[1], embarquee[2]);
+        } else if (source && !/^(https?:)?\/\//.test(source)){
+          // image liée (mode --no-base64) : on tente de la lire
+          attentes.push(lireDistante(source)
+            .then(function(r){ enregistrer(r.mime, r.b64); })
+            .catch(function(){ /* on laisse le lien tel quel */ }));
+        }
+      });
+
+      return Promise.all(attentes).then(function(){
+        // 4. les <figure> ne sont pas comprises par Word -> paragraphes
+        contenu.querySelectorAll('figure').forEach(function(fig){
+          var img = fig.querySelector('img');
+          var leg = fig.querySelector('figcaption');
+          var p = document.createElement('p');
+          p.className = 'figure-cours';
+          if (img) p.appendChild(img);
+          var apres = null;
+          if (leg && leg.textContent.trim()){
+            apres = document.createElement('p');
+            apres.className = 'legende-cours';
+            apres.textContent = leg.textContent.trim();
+          }
+          fig.parentNode.insertBefore(p, fig);
+          if (apres) fig.parentNode.insertBefore(apres, fig);
+          fig.remove();
+        });
+        // les pastilles de méta deviennent une ligne de texte séparée par « · »
+        contenu.querySelectorAll('.meta').forEach(function(meta){
+          var textes = [];
+          meta.querySelectorAll('.puce').forEach(function(pu){
+            var t = pu.textContent.replace(/\s+/g, ' ').trim();
+            if (t) textes.push(t);
+          });
+          if (!textes.length) return;
+          var ligne = document.createElement('p');
+          ligne.className = 'meta';
+          ligne.textContent = textes.join('   ·   ');
+          meta.parentNode.replaceChild(ligne, meta);
+        });
+
+        // les grilles CSS (galeries) deviennent de simples suites de paragraphes
+        contenu.querySelectorAll('.galerie-cours').forEach(function(g){
+          while (g.firstChild) g.parentNode.insertBefore(g.firstChild, g);
+          g.remove();
+        });
+
+        // 5. document HTML aux normes Word
+        var html = '<html xmlns:o="urn:schemas-microsoft-com:office:office"'
+          + ' xmlns:w="urn:schemas-microsoft-com:office:word"'
+          + ' xmlns="http://www.w3.org/TR/REC-html40"><head>'
+          + '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'
+          + '<meta name="ProgId" content="Word.Document">'
+          + '<meta name="Generator" content="Microsoft Word 15">'
+          + '<title>' + (document.title || 'Cours') + '</title>'
+          + '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View>'
+          + '<w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->'
+          + '<style>' + STYLES + '</style></head><body>'
+          + contenu.innerHTML.replace(/data-mht-src="/g, 'src="')
+          + '</body></html>';
+
+        // 6. assemblage MHTML (multipart/related)
+        var limite = '----=_NextPart_Cours_' + Date.now().toString(36);
+        var mht = 'MIME-Version: 1.0\r\n'
+          + 'Content-Type: multipart/related; type="text/html"; boundary="' + limite + '"\r\n'
+          + '\r\n'
+          + 'Ce document est une « page web à fichier unique » : ouvrez-le avec Word.\r\n'
+          + '\r\n'
+          + '--' + limite + '\r\n'
+          + 'Content-Type: text/html; charset="utf-8"\r\n'
+          + 'Content-Transfer-Encoding: base64\r\n'
+          + 'Content-Location: ' + BASE + 'document.html\r\n\r\n'
+          + plier(base64Utf8(html));
+
+        pieces.forEach(function(p){
+          mht += '--' + limite + '\r\n'
+            + 'Content-Type: ' + p.mime + '\r\n'
+            + 'Content-Transfer-Encoding: base64\r\n'
+            + 'Content-Location: ' + BASE + p.nom + '\r\n\r\n'
+            + plier(p.b64.replace(/\s+/g, ''));
+        });
+        mht += '--' + limite + '--\r\n';
+
+        // 7. téléchargement
+        var nom = (document.title || 'cours').toLowerCase()
+          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'cours';
+        var blob = new Blob([mht], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var lien = document.createElement('a');
+        lien.href = url;
+        lien.download = nom + '.doc';
+        document.body.appendChild(lien);
+        lien.click();
+        document.body.removeChild(lien);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+        return {images: pieces.length, octets: mht.length};
+      });
+    })
+    .catch(function(e){
+      console.error('Export Word :', e);
+      alert("L'export Word a échoué : " + e.message);
+    })
+    .then(function(){
+      origines.forEach(function(im){ im.removeAttribute('data-export-idx'); });
+      bouton.disabled = false;
+      bouton.textContent = libelle;
+    });
+  }
+
+  // Remplace le gestionnaire d'origine (le clone supprime l'ancien écouteur)
+  var neuf = bouton.cloneNode(true);
+  bouton.parentNode.replaceChild(neuf, bouton);
+  bouton = neuf;
+  bouton.title = 'Télécharger le cours au format Word (.doc) — images incluses';
+  bouton.addEventListener('click', exporterWordAvecImages);
+  window.exporterWordAvecImages = exporterWordAvecImages;
+})();
+</script>
+</body>
+</html>
