@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portfolio fictif de Jon Do, étudiant ingénieur en informatique.">
+<title>Projets - Jon Do</title>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="assets/vendor/bootstrap-icons/bootstrap-icons.min.css">
+<link rel="stylesheet" href="assets/vendor/aos/aos.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="loader"><span></span></div>
+<header class="site-header fixed-top">
+ <nav class="navbar navbar-expand-lg">
+  <div class="container">
+   <a class="brand" href="index.html"><span>&lt;</span>Jon Do<span>/&gt;</span></a>
+   <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-label="Menu"><i class="bi bi-list"></i></button>
+   <div class="offcanvas offcanvas-end" tabindex="-1" id="menu">
+    <div class="offcanvas-header"><a class="brand" href="index.html"><span>&lt;</span>Jon Do<span>/&gt;</span></a>
+     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fermer"></button></div>
+    <div class="offcanvas-body"><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li><li class="nav-item"><a class="nav-link" href="competences.html">Compétences</a></li><li class="nav-item"><a class="nav-link active" href="projets.html">Projets</a></li><li class="nav-item"><a class="nav-link" href="veille.html">Veille Tech</a></li><li class="nav-item"><a class="nav-link" href="glpi.html">GLPI</a></li><li class="nav-item"><a class="nav-link" href="stages.html">Stages</a></li><li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li><li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li></ul></div>
+   </div>
+  </div>
+ </nav>
+</header>
+<main>
+<section class="page-top"><div class="container"><div class="section-title" data-aos="fade-up"><p>Mes réalisations</p><h2>Projets</h2></div><div class="row gy-4"><div class="col-lg-4 col-md-6" data-aos="fade-up"><div class="card glass h-100"><div class="card-body"><div class="icon-badge"><i class="bi bi-calendar-check"></i></div><h3>Réserv'Salle</h3><p>Application web PHP/MySQL de réservation de salles pour un établissement scolaire fictif : authentification, calendrier, gestion des droits.</p><div class="tags"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div></div></div></div><div class="col-lg-4 col-md-6" data-aos="fade-up"><div class="card glass h-100"><div class="card-body"><div class="icon-badge"><i class="bi bi-box-seam"></i></div><h3>StockApp</h3><p>Application de bureau C# (WinForms) de gestion de stock avec alertes de réapprovisionnement et export CSV.</p><div class="tags"><span>C#</span><span>.NET</span><span>SQL Server</span></div></div></div></div><div class="col-lg-4 col-md-6" data-aos="fade-up"><div class="card glass h-100"><div class="card-body"><div class="icon-badge"><i class="bi bi-phone"></i></div><h3>MediaList</h3><p>Application mobile de suivi de lectures et de films, connectée à une API REST Node.js.</p><div class="tags"><span>React Native</span><span>Node.js</span><span>MongoDB</span></div></div></div></div><div class="col-lg-4 col-md-6" data-aos="fade-up"><div class="card glass h-100"><div class="card-body"><div class="icon-badge"><i class="bi bi-globe2"></i></div><h3>Site associatif</h3><p>Site vitrine responsive pour une association sportive fictive, avec formulaire de contact et agenda.</p><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div></div></div></div><div class="col-lg-4 col-md-6" data-aos="fade-up"><div class="card glass h-100"><div class="card-body"><div class="icon-badge"><i class="bi bi-diagram-3"></i></div><h3>API Livraisons</h3><p>API REST documentée (Swagger) pour suivre l'état de livraisons, avec tests unitaires et conteneurisation.</p><div class="tags"><span>ASP.NET Core</span><span>Docker</span><span>xUnit</span></div></div></div></div><div class="col-lg-4 col-md-6" data-aos="fade-up"><div class="card glass h-100"><div class="card-body"><div class="icon-badge"><i class="bi bi-person-badge"></i></div><h3>Ce portfolio</h3><p>Portfolio statique multi-pages, versionné avec Git et déployable sur n'importe quel hébergement.</p><div class="tags"><span>HTML</span><span>Bootstrap</span><span>AOS</span></div></div></div></div></div></div></section>
+</main>
+<footer class="site-footer">
+ <div class="container text-center">
+  <p class="mb-1">© <span id="year"></span> Jon Do — Portfolio fictif réalisé à des fins pédagogiques.</p>
+  <p class="small mb-0">Toutes les données (nom, écoles, entreprises, projets) sont inventées.</p>
+ </div>
+</footer>
+<a href="#" class="to-top" aria-label="Haut de page"><i class="bi bi-arrow-up"></i></a>
+<script src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

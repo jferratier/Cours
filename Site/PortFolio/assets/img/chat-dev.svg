@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Un chat à lunettes qui code sur un ordinateur portable">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="70%">
+      <stop offset="0" stop-color="#2a2550"/><stop offset="1" stop-color="#12132a"/>
+    </radialGradient>
+    <linearGradient id="fur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4a259"/><stop offset="1" stop-color="#e07b39"/>
+    </linearGradient>
+    <linearGradient id="lap" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c9ccda"/><stop offset="1" stop-color="#8d91a8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="100%" r="80%">
+      <stop offset="0" stop-color="#20c9b8" stop-opacity=".45"/><stop offset="1" stop-color="#20c9b8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <!-- étoiles / bulles de code -->
+  <g font-family="Consolas,monospace" font-weight="700" opacity=".55">
+    <text x="40" y="80" font-size="26" fill="#7b5cff">&lt;/&gt;</text>
+    <text x="300" y="70" font-size="24" fill="#ff6a3d">{ }</text>
+    <text x="320" y="150" font-size="18" fill="#20c9b8">01</text>
+    <text x="50" y="160" font-size="18" fill="#20c9b8">;</text>
+  </g>
+  <!-- queue -->
+  <path d="M290 330 C350 320 360 250 320 230" fill="none" stroke="url(#fur)" stroke-width="18" stroke-linecap="round"/>
+  <!-- corps -->
+  <ellipse cx="200" cy="300" rx="105" ry="80" fill="url(#fur)"/>
+  <!-- tête -->
+  <g>
+    <path d="M128 120 L140 60 L182 102 Z" fill="url(#fur)"/>
+    <path d="M272 120 L260 60 L218 102 Z" fill="url(#fur)"/>
+    <path d="M143 108 L148 78 L170 100 Z" fill="#f7c6a3"/>
+    <path d="M257 108 L252 78 L230 100 Z" fill="#f7c6a3"/>
+    <ellipse cx="200" cy="160" rx="82" ry="70" fill="url(#fur)"/>
+    <!-- rayures -->
+    <path d="M200 92 v22 M184 95 l4 18 M216 95 l-4 18" stroke="#c96a2c" stroke-width="5" stroke-linecap="round"/>
+    <!-- museau -->
+    <ellipse cx="200" cy="190" rx="34" ry="24" fill="#fbe3cf"/>
+    <path d="M192 180 h16 l-8 9 z" fill="#e25a7a"/>
+    <path d="M200 189 v6 q-8 8 -15 2 M200 195 q8 8 15 2" fill="none" stroke="#5a3a2a" stroke-width="3" stroke-linecap="round"/>
+    <!-- moustaches -->
+    <g stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".9">
+      <path d="M165 188 l-45 -8 M165 196 l-45 4"/>
+      <path d="M235 188 l45 -8 M235 196 l45 4"/>
+    </g>
+    <!-- yeux -->
+    <ellipse cx="170" cy="150" rx="11" ry="13" fill="#2b2b3a"/>
+    <ellipse cx="230" cy="150" rx="11" ry="13" fill="#2b2b3a"/>
+    <circle cx="174" cy="145" r="4" fill="#fff"/><circle cx="234" cy="145" r="4" fill="#fff"/>
+    <!-- lunettes -->
+    <g fill="#20c9b8" fill-opacity=".12" stroke="#1d1d2b" stroke-width="5">
+      <rect x="146" y="128" width="48" height="42" rx="12"/>
+      <rect x="206" y="128" width="48" height="42" rx="12"/>
+    </g>
+    <path d="M194 146 h12 M146 142 l-14 -6 M254 142 l14 -6" stroke="#1d1d2b" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <!-- lueur écran -->
+  <ellipse cx="200" cy="250" rx="120" ry="60" fill="url(#glow)"/>
+  <!-- ordinateur portable vu de dos -->
+  <path d="M110 245 L290 245 L300 345 L100 345 Z" fill="url(#lap)"/>
+  <circle cx="200" cy="295" r="13" fill="#e9ebf3" opacity=".85"/>
+  <path d="M194 289 q6 -8 12 0 q-6 14 -12 0" fill="#7b5cff"/>
+  <!-- clavier / base -->
+  <rect x="70" y="342" width="260" height="16" rx="6" fill="#6f7390"/>
+  <!-- pattes sur le clavier -->
+  <ellipse cx="135" cy="343" rx="24" ry="13" fill="url(#fur)"/>
+  <ellipse cx="265" cy="343" rx="24" ry="13" fill="url(#fur)"/>
+  <g fill="#f7c6a3"><circle cx="127" cy="347" r="3"/><circle cx="135" cy="349" r="3"/><circle cx="143" cy="347" r="3"/>
+  <circle cx="257" cy="347" r="3"/><circle cx="265" cy="349" r="3"/><circle cx="273" cy="347" r="3"/></g>
+  <!-- tasse de café -->
+  <g transform="translate(322 318)">
+    <rect x="0" y="0" width="30" height="34" rx="5" fill="#ff6a3d"/>
+    <path d="M30 8 q14 0 14 10 q0 10 -14 10" fill="none" stroke="#ff6a3d" stroke-width="5"/>
+    <path d="M8 -6 q4 -8 0 -14 M20 -6 q4 -8 0 -14" stroke="#fff" stroke-width="2.5" fill="none" opacity=".6" stroke-linecap="round"/>
+  </g>
+</svg>

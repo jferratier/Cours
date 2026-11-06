@@ -1,0 +1,115 @@
+/* Portfolio Jon Do — feuille de style */
+:root{
+  --bg:#0f1020; --bg-2:#16182e; --text:#e9e9f5; --muted:#a4a6c2;
+  --c1:#ff6a3d; --c2:#7b5cff; --c3:#20c9b8;
+  --grad:linear-gradient(120deg,var(--c1),var(--c2));
+  --grad-3:linear-gradient(120deg,var(--c1),var(--c2),var(--c3));
+  --radius:18px; --ease:all .35s ease;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:var(--c3);text-decoration:none;transition:var(--ease)} a:hover{color:var(--c1)}
+section{padding:90px 0}
+section:nth-of-type(even){background:var(--bg-2)}
+.page-top{padding-top:140px;min-height:calc(100vh - 90px)}
+h1,h2,h3,h4{font-weight:700}
+h3{font-size:1.25rem} h4{font-size:1.05rem;margin-top:1rem}
+/* loader */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:grid;place-items:center;transition:opacity .4s}
+#loader span{width:48px;height:48px;border-radius:50%;border:4px solid #ffffff22;border-top-color:var(--c1);animation:spin 1s linear infinite}
+#loader.hide{opacity:0;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* header */
+.site-header{transition:var(--ease);padding:14px 0}
+.site-header.scrolled{background:#0f1020e6;backdrop-filter:blur(10px);box-shadow:0 4px 20px #0006;padding:6px 0}
+.brand{font-family:'Caveat',cursive;font-size:1.9rem;color:var(--text)}
+.brand span{color:var(--c1)}
+.navbar .nav-link{color:var(--text);font-weight:400;margin:0 .35rem;position:relative}
+.navbar .nav-link::after{content:"";position:absolute;left:.5rem;right:.5rem;bottom:2px;height:2px;background:var(--grad);transform:scaleX(0);transition:var(--ease)}
+.navbar .nav-link:hover::after,.navbar .nav-link.active::after{transform:scaleX(1)}
+.navbar .nav-link.active{color:#fff}
+.navbar-toggler{color:var(--text);font-size:1.8rem;border:none;box-shadow:none!important}
+.offcanvas{background:var(--bg);color:var(--text)}
+@media(min-width:992px){.offcanvas-header{display:none}}
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:120px;background:radial-gradient(circle at 80% 20%,#7b5cff33,transparent 45%),radial-gradient(circle at 10% 90%,#ff6a3d26,transparent 40%)}
+.hello{font-family:'Caveat',cursive;font-size:1.8rem;color:var(--c3);margin:0}
+.hero h1{font-size:clamp(2.6rem,7vw,4.5rem);line-height:1.1;margin:.2rem 0 1rem}
+.gradient-text{background:var(--grad-3);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-weight:600;color:var(--text)}
+.portrait{width:min(340px,80vw);aspect-ratio:1;margin:auto;border-radius:50%;padding:6px;background:var(--grad-3);animation:float 6s ease-in-out infinite}
+.portrait img{width:100%;height:100%;border-radius:50%;background:var(--bg-2);display:block}
+@keyframes float{50%{transform:translateY(-14px)}}
+.socials{display:flex;gap:.8rem;margin-top:1rem}
+.socials a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid #ffffff33;color:var(--text);font-size:1.15rem}
+.socials a:hover{background:var(--grad);border-color:transparent;color:#fff;transform:translateY(-3px)}
+/* buttons */
+.btn-grad{background:var(--grad);color:#fff;border:none;border-radius:40px;padding:.6rem 1.6rem;font-weight:600}
+.btn-grad:hover{color:#fff;filter:brightness(1.1);transform:translateY(-2px)}
+.btn-outline-grad{border:2px solid var(--c2);color:var(--text);border-radius:40px;padding:.5rem 1.5rem;font-weight:600}
+.btn-outline-grad:hover{background:var(--c2);color:#fff}
+/* titles */
+.section-title{text-align:center;margin-bottom:3rem}
+.section-title p{font-family:'Caveat',cursive;font-size:1.6rem;color:var(--c3);margin:0}
+.section-title h2{font-size:clamp(1.9rem,4vw,2.6rem);display:inline-block;position:relative;padding-bottom:.4rem}
+.section-title h2::after{content:"";position:absolute;left:20%;right:20%;bottom:0;height:3px;border-radius:3px;background:var(--grad)}
+/* cards */
+.glass{background:#ffffff0a;border:1px solid #ffffff1a;border-radius:var(--radius);color:var(--text);transition:var(--ease)}
+.glass:hover{border-color:#7b5cff88;box-shadow:0 10px 30px #0005}
+.glass p,.glass li{color:var(--muted)}
+.card-body{padding:2rem}
+.icon-badge{width:64px;height:64px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-size:1.7rem;color:#fff;margin-bottom:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
+.tags span{font-size:.8rem;padding:.15rem .7rem;border-radius:20px;background:#7b5cff26;color:#cfc4ff}
+.date{display:inline-block;font-size:.8rem;font-weight:600;padding:.1rem .7rem;border-radius:20px;background:var(--grad);color:#fff;margin-bottom:.5rem}
+.role{color:var(--c3)!important;font-weight:600}
+.about-img{width:220px;border-radius:var(--radius);border:3px solid var(--c2);background:var(--bg)}
+blockquote footer{color:var(--c3);font-size:.9rem}
+/* timeline */
+.timeline{list-style:none;max-width:760px;margin:auto;padding:0 0 0 2rem;border-left:3px solid var(--c2)}
+.timeline li{position:relative;margin-bottom:2rem}
+.timeline li::before{content:"";position:absolute;left:calc(-2rem - 9px);top:6px;width:15px;height:15px;border-radius:50%;background:var(--c1);box-shadow:0 0 0 4px var(--bg)}
+.timeline p{color:var(--muted);margin:0}
+/* skills */
+.skill{margin-top:1rem}
+.bar{height:8px;border-radius:8px;background:#ffffff14;overflow:hidden;margin-top:.3rem}
+.bar div{height:100%;width:0;background:var(--grad);border-radius:8px;transition:width 1.4s ease}
+.bar.on div{width:var(--v)}
+.checklist{list-style:none;padding:0}
+.checklist li{padding-left:1.7rem;position:relative;margin:.35rem 0}
+.checklist li::before{content:"\F26E";font-family:'bootstrap-icons';position:absolute;left:0;color:var(--c3)}
+.steps li{margin:.35rem 0;color:var(--muted)}
+.article{border-left:3px solid var(--c1);padding-left:1rem;margin-top:1.4rem}
+/* forms */
+.form-control{background:#ffffff0d;border:1px solid #ffffff26;color:var(--text);border-radius:12px}
+.form-control:focus{background:#ffffff14;color:var(--text);border-color:var(--c2);box-shadow:0 0 0 .2rem #7b5cff40}
+.form-control::placeholder{color:var(--muted)}
+/* footer */
+.site-footer{padding:30px 0;border-top:1px solid #ffffff1a;color:var(--muted);background:var(--bg)}
+.to-top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;opacity:0;visibility:hidden;transition:var(--ease);z-index:999}
+.to-top.show{opacity:1;visibility:visible} .to-top:hover{color:#fff;transform:translateY(-3px)}
+/* print CV */
+@media print{
+  body{background:#fff;color:#000}
+  .site-header,.site-footer,.to-top,.no-print,.section-title,#loader{display:none!important}
+  section{padding:0;background:#fff!important}
+  .page-top .row:first-of-type{display:none}
+  .glass{border:none;background:#fff}.glass p,.glass li{color:#000}
+}
+
+/* ---- Grille compétences / outils ---- */
+.intro{color:var(--muted);margin-bottom:1.5rem}
+.page-top + section{padding-top:40px}
+.tech-card{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:1.8rem .8rem;border:1px solid #ffffff1f;border-radius:var(--radius);background:#ffffff08;transition:var(--ease);text-align:center}
+.tech-card img{width:64px;height:64px;object-fit:contain;transition:var(--ease)}
+.tech-card img.mono{filter:invert(1)}
+.tech-card .bi{font-size:56px;line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tech-card span{letter-spacing:.12em;font-size:1rem;font-weight:400}
+.tech-card:hover{transform:translateY(-6px);border-color:var(--c2);box-shadow:0 12px 30px #7b5cff33;background:#ffffff10}
+.tech-card:hover img{transform:scale(1.1)}
+.method-card{height:100%;display:flex;align-items:center;gap:.8rem;padding:1rem 1.2rem;border-radius:14px;border:1px solid #ffffff1f;background:#ffffff08;transition:var(--ease)}
+.method-card .bi{font-size:1.5rem;color:var(--c3)}
+.method-card:hover{border-color:var(--c1);transform:translateY(-3px)}
+/* portrait chat : remplir le cercle */
+.portrait img,.about-img{object-fit:cover}
