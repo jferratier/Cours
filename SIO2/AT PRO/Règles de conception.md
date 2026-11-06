@@ -43,6 +43,14 @@ Les frameworks CSS suivants peuvent être utilisés pour concevoir l'interface u
 
 - [Font Awesome](https://fontawesome.com/) : bibliothèque d'icônes utilisable dans le respect des conditions de licence de la version choisie.
 
+### 3.3. fonctionnalités attendues
+
+- Trois CRUD : gestion des champs, des cultures (KC) et des réserves d'eau.
+- Respecter le schéma UML joint aux règles de conception.
+- Authentification et gestion des utilisateurs : une page d'authentification ainsi qu'un CRUD de gestion des utilisateurs, accessible uniquement à l'administrateur.
+- Page d'accueil : un tableau de bord (Dashboard) présentant les principales informations et indicateurs de l'application.
+- Journalisation des actions : mise en place d'un trigger alimentant automatiquement une table logs dans la base de données. Cette table devra enregistrer les actions effectuées sur les tables champs, cultures et reserve_eau, en précisant notamment l'utilisateur à l'origine de l'action, le type d'opération réalisée (création, modification ou suppression) ainsi que la date et l'heure de l'opération.
+
 ---
 
 ## 4. Vérification avant livraison
