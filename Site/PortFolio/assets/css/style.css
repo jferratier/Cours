@@ -113,3 +113,30 @@ blockquote footer{color:var(--c3);font-size:.9rem}
 .method-card:hover{border-color:var(--c1);transform:translateY(-3px)}
 /* portrait chat : remplir le cercle */
 .portrait img,.about-img{object-fit:cover}
+
+/* ---- Veille technologique ---- */
+.subject .icon-badge{width:76px;height:76px;font-size:2rem}
+.method-big small{font-size:.85rem;font-weight:400;color:var(--muted)}
+.tool-cat{font-size:1.1rem;color:var(--c3);text-align:center;margin-bottom:.5rem}
+.tech-card{cursor:default}
+.steps-line{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:1rem}
+.steps-line>div{display:flex;flex-direction:column;align-items:center;gap:.4rem;min-width:110px;padding:1rem;border-radius:14px;border:1px solid #ffffff1f;background:#ffffff08}
+.steps-line>div .bi{font-size:1.6rem;color:var(--c1)}
+.steps-line .arrow{color:var(--c2);font-size:1.3rem}
+/* frise alternée */
+.frise{position:relative;max-width:1000px;margin:2rem auto 0}
+.frise::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:3px;transform:translateX(-50%);background:var(--grad-3);border-radius:3px}
+.frise-item{position:relative;width:50%;padding:0 3rem 2.5rem}
+.frise-item.left{left:0;text-align:right}
+.frise-item.right{left:50%}
+.frise-dot{position:absolute;top:0;width:46px;height:46px;border-radius:50%;background:var(--bg);border:3px solid var(--c2);display:grid;place-items:center;color:var(--c1);font-size:1.2rem;z-index:1}
+.frise-item.left .frise-dot{right:-23px}
+.frise-item.right .frise-dot{left:-23px}
+.frise-card{background:#ffffff0a;border:1px solid #ffffff1a;border-radius:var(--radius);padding:1.2rem 1.4rem;transition:var(--ease)}
+.frise-card:hover{border-color:var(--c2);transform:translateY(-4px)}
+.frise-card p{color:var(--muted);margin:0}
+@media(max-width:767px){
+ .frise::before{left:22px}
+ .frise-item,.frise-item.right{width:100%;left:0;text-align:left;padding:0 0 2rem 64px}
+ .frise-item.left .frise-dot,.frise-item.right .frise-dot{left:0;right:auto}
+}
