@@ -1,0 +1,103 @@
+
+
+
+Exercice : Le périmètre et l'aire
+----------------------------------------
+Algorithme Rectangle
+Variables
+    longueur, largeur, perimetre, aire : Réel
+Début
+    Écrire("Longueur ?")   Lire(longueur)
+    Écrire("Largeur ?")    Lire(largeur)
+    perimetre ← 2 * (longueur + largeur)
+    aire      ← longueur * largeur
+    Écrire("Périmètre : ", perimetre)
+    Écrire("Aire : ", aire)
+Fin
+
+
+Exercice 1 : Pair ou impair
+----------------------------------------
+Algorithme Pairimpair
+Variables
+ n : reel
+ Écrire("Donne moi un entier ")   Lire(n)
+
+Si n MOD 2 = 0 Alors
+    Écrire(n, " est pair")
+Sinon
+    Écrire(n, " est impair")
+FinSi
+
+Exercice 2 : La mention au BTS
+----------------------------------------
+Algorithme MentionBTS
+Variables
+ moyenne : reel
+ mention : chaine
+ Écrire("Donne moi une moyenne ")   Lire(moyenne)
+
+Si moyenne >= 16 Alors        mention ← "Très bien"
+SinonSi moyenne >= 14 Alors   mention ← "Bien"
+SinonSi moyenne >= 12 Alors   mention ← "Assez bien"
+SinonSi moyenne >= 10 Alors   mention ← "Admis"
+Sinon                         mention ← "Ajourné"
+FinSi
+Écrire(mention)
+
+Exercice 3 : L'année bissextile
+----------------------------------------
+Algorithme Calculbissextile
+Variables
+ annee : reel
+ Écrire("Quelle année ")   Lire(annee)
+
+Si (annee MOD 4 = 0 ET annee MOD 100 ≠ 0) OU (annee MOD 400 = 0) Alors
+    Écrire("Bissextile")
+Sinon
+    Écrire("Non bissextile")
+FinSi
+
+
+Exercice 4 : Le nombre de jours d'un mois
+----------------------------------------
+Algorithme CalculMois
+Variables
+ mois : reel
+ Écrire("Quelle année ")   Lire(mois)
+
+Selon mois Faire
+    Cas 1, 3, 5, 7, 8, 10, 12 : Écrire(31)
+    Cas 4, 6, 9, 11           : Écrire(30)
+    Cas 2                     : Écrire(28)
+    Autre                     : Écrire("Mois invalide")
+FinSelon
+
+
+Exercice 5 : La remise commerciale
+----------------------------------------
+Si montant < 0 Alors
+    Écrire("Montant invalide")
+Sinon
+    Si montant >= 1000 Alors     taux ← 0.15
+    SinonSi montant >= 500 Alors taux ← 0.10
+    SinonSi montant >= 100 Alors taux ← 0.05
+    Sinon                        taux ← 0
+    FinSi
+    remise   ← montant * taux
+    aPayer   ← montant - remise
+    Écrire("Remise : ", remise)
+    Écrire("À payer : ", aPayer)
+FinSi
+
+
+Exercice 1 : La table de multiplication
+----------------------------------------
+Algorithme CalculMois
+Variables
+    n : Tableau[0àX] de Entierbleau
+Écrire("Quelle table ?")   Lire(n)
+
+Pour i De 1 À 10 Faire
+    Écrire(n, " x ", i, " = ", n * i)
+FinPour
