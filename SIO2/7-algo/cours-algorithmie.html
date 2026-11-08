@@ -1043,6 +1043,20 @@ JusquÀ note &gt;= 0 ET note &lt;= 20</pre>
         </tbody>
       </table>
     </div>
+    <p>//nb itérations connues<br>
+Pour i De 1 À 5 Faire<br>
+    ....<br>
+FinPour<br>
+<br>
+//0 à nb itérations inconnues<br>
+TantQue reponse ≠ "oui" Faire<br>
+    ...<br>
+FinTantQue<br>
+<br>
+//1 à nb itérations inconnues<br>
+Répéter<br>
+    ....<br>
+JusquÀ note >= 0 ET note <= 20</p>
     <p>En pratique : <code>Pour</code> pour parcourir, <code>TantQue</code> pour attendre un événement, <code>Répéter</code> pour saisir.</p>
     <h3>5.5 : Les deux motifs à connaître</h3>
     <p><strong>L'accumulateur</strong> : additionner au fil des tours. On l'initialise à <strong>0</strong> avant la boucle.</p>
@@ -1123,8 +1137,8 @@ FinPour</pre>
     <div class="meta"><span class="puce">Prérequis : sessions 5 et 6</span></div>
     <h2>Objectifs pédagogiques</h2>
     <ol class="objectifs">
-      <li><strong>Déclarer</strong> un tableau et accéder à ses éléments</li>
-      <li><strong>Parcourir</strong> un tableau avec <code>Pour</code> et avec <code>foreach</code></li>
+      <li><strong>Déclarer</strong> un tableau et accéder à ses éléments, en pseudo-code et en C#</li>
+      <li><strong>Parcourir</strong> un tableau avec <code>Pour</code> et avec <code>PourChaque</code></li>
       <li><strong>Appliquer</strong> les quatre motifs de parcours</li>
       <li><strong>Manipuler</strong> un tableau à deux dimensions</li>
     </ol>
@@ -1135,29 +1149,36 @@ FinPour</pre>
     <p>Variable qui contient <strong>plusieurs valeurs de même type</strong>, rangées les unes à la suite des autres et accessibles par un <strong>indice</strong>.</p>
     </div>
     <p>Sans tableau, stocker 30 notes demanderait 30 variables. Avec, une seule suffit.</p>
+    <p>En pseudo-code, on déclare le tableau avec ses <strong>bornes d'indices</strong> et le type de ses cases :</p>
     <pre>Variables
-    notes : Tableau[0..29] de Entier</pre>
+    notes : Tableau[0..29] de Entier       ← 30 cases, indices 0 à 29</pre>
+    <p>Quand les valeurs sont connues d'avance, on les affecte d'un coup :</p>
+    <pre>Variables
+    notes : Tableau[0..4] de Entier
+Début
+    notes ← {12, 15, 8, 17, 9}</pre>
     <pre>int[] notes = new int[30];              // 30 cases, toutes à 0
 int[] notes = { 12, 15, 8, 17, 9 };     // 5 cases, valeurs fournies</pre>
     <p><strong>L'indice commence à 0.</strong> Un tableau de 30 cases va de <code>notes[0]</code> à <code>notes[29]</code>, jamais <code>notes[30]</code>.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Écriture</th><th>Sens</th></tr></thead>
+        <thead><tr><th>Pseudo-code</th><th>C#</th><th>Sens</th></tr></thead>
         <tbody>
-          <tr><td><code>notes[0]</code></td><td>la <strong>première</strong> case</td></tr>
-          <tr><td><code>notes[4]</code></td><td>la <strong>cinquième</strong> case</td></tr>
-          <tr><td><code>notes.Length</code></td><td>le <strong>nombre</strong> de cases (5)</td></tr>
-          <tr><td><code>notes[notes.Length - 1]</code></td><td>la <strong>dernière</strong> case</td></tr>
+          <tr><td><code>notes[0]</code></td><td><code>notes[0]</code></td><td>la <strong>première</strong> case</td></tr>
+          <tr><td><code>notes[4]</code></td><td><code>notes[4]</code></td><td>la <strong>cinquième</strong> case</td></tr>
+          <tr><td><code>notes[2] ← 14</code></td><td><code>notes[2] = 14;</code></td><td><strong>écrire</strong> dans la troisième case</td></tr>
+          <tr><td><code>notes.Longueur</code></td><td><code>notes.Length</code></td><td>le <strong>nombre</strong> de cases (5)</td></tr>
+          <tr><td><code>notes[notes.Longueur - 1]</code></td><td><code>notes[notes.Length - 1]</code></td><td>la <strong>dernière</strong> case</td></tr>
         </tbody>
       </table>
     </div>
     <div class="encadre attention">
       <span class="etiquette"><code>IndexOutOfRangeException</code></span>
     <p>Accéder à <code>notes[5]</code> dans un tableau de 5 cases <strong>plante le programme à l'exécution</strong>. Le compilateur ne peut pas le détecter : il ne connaît pas la valeur de l'indice.</p>
-    <p>La dernière case est toujours à l'indice <code>Length - 1</code>. Le <code>- 1</code> s'oublie, et c'est l'erreur la plus fréquente sur les tableaux.</p>
+    <p>La dernière case est toujours à l'indice <code>Longueur - 1</code>. Le <code>- 1</code> s'oublie, et c'est l'erreur la plus fréquente sur les tableaux.</p>
     </div>
     <h3>7.2 : Parcourir un tableau</h3>
-    <p><strong>Avec <code>Pour</code></strong> : on a l'indice, on peut modifier les cases :</p>
+    <p><strong>Avec <code>Pour</code>, pour lire</strong> : on a l'indice, on peut afficher la position avec la valeur.</p>
     <pre>Pour i De 0 À notes.Longueur - 1 Faire
     Écrire("Note ", i, " : ", notes[i])
 FinPour</pre>
@@ -1165,14 +1186,27 @@ FinPour</pre>
 {
     Console.WriteLine("Note " + i + " : " + notes[i]);
 }</pre>
-    <p><strong>Avec <code>foreach</code></strong> : plus court, mais <strong>en lecture seule</strong> :</p>
+    <p><strong>Avec <code>Pour</code>, pour remplir</strong> : c'est le même parcours, mais chaque case reçoit une valeur saisie.</p>
+    <pre>Pour i De 0 À notes.Longueur - 1 Faire
+    Écrire("Note n°", i + 1, " ?")
+    Lire(notes[i])
+FinPour</pre>
+    <pre>for (int i = 0; i &lt; notes.Length; i++)
+{
+    Console.WriteLine("Note n°" + (i + 1) + " ?");
+    notes[i] = int.Parse(Console.ReadLine());
+}</pre>
+    <p><strong>Avec <code>PourChaque</code></strong> : plus court, mais <strong>en lecture seule</strong>. On reçoit directement chaque valeur, sans son indice.</p>
+    <pre>PourChaque note Dans notes Faire
+    Écrire(note)
+FinPourChaque</pre>
     <pre>foreach (int note in notes)
 {
     Console.WriteLine(note);
 }</pre>
     <div class="table-wrap">
       <table>
-        <thead><tr><th></th><th><code>for</code></th><th><code>foreach</code></th></tr></thead>
+        <thead><tr><th></th><th><code>Pour</code> / <code>for</code></th><th><code>PourChaque</code> / <code>foreach</code></th></tr></thead>
         <tbody>
           <tr><td>L'indice</td><td>disponible</td><td>inaccessible</td></tr>
           <tr><td>Modifier une case</td><td>possible</td><td><strong>impossible</strong></td></tr>
@@ -1182,55 +1216,96 @@ FinPour</pre>
       </table>
     </div>
     <div class="encadre">
-      <span class="etiquette">La condition s'écrit <code>i &lt; Length</code>, pas <code>i &lt;= Length</code></span>
-    <p>Avec <code>&lt;=</code>, la boucle irait jusqu'à l'indice <code>Length</code>, qui n'existe pas, et planterait au dernier tour. <code>i &lt; notes.Length</code> couvre exactement 0 à <code>Length - 1</code>.</p>
+      <span class="etiquette">La borne : incluse en pseudo-code, exclue en C#</span>
+    <p><code>Pour i De 0 À notes.Longueur - 1</code> va <strong>jusqu'à</strong> <code>Longueur - 1</code> compris. Le <code>for</code> de C# exprime la même chose avec une condition de continuation : <code>i &lt; notes.Length</code>.</p>
+    <p>Écrire <code>i &lt;= notes.Length</code> en C# ferait un tour de trop, sur l'indice <code>Length</code> qui n'existe pas, et le programme planterait au dernier tour. Les deux écritures justes, <code>À Longueur - 1</code> et <code>&lt; Length</code>, sont équivalentes ; il ne faut pas les mélanger.</p>
     </div>
     <h3>7.3 : Les quatre motifs de parcours</h3>
     <p>Presque tout ce qu'on fait sur un tableau est l'un de ces quatre motifs. Ils s'écrivent toujours de la même façon.</p>
     <p><strong>Additionner</strong></p>
+    <pre>somme ← 0
+Pour i De 0 À notes.Longueur - 1 Faire
+    somme ← somme + notes[i]
+FinPour</pre>
     <pre>int somme = 0;
 for (int i = 0; i &lt; notes.Length; i++)
     somme += notes[i];</pre>
     <p><strong>Chercher le maximum</strong></p>
-    <pre>int max = notes[0];                     // on part du PREMIER élément
+    <pre>max ← notes[0]                       ← on part du PREMIER élément
+Pour i De 1 À notes.Longueur - 1 Faire
+    Si notes[i] &gt; max Alors
+        max ← notes[i]
+    FinSi
+FinPour</pre>
+    <pre>int max = notes[0];
 for (int i = 1; i &lt; notes.Length; i++)
     if (notes[i] &gt; max)
         max = notes[i];</pre>
     <p><strong>Compter selon une condition</strong></p>
+    <pre>nbAdmis ← 0
+Pour i De 0 À notes.Longueur - 1 Faire
+    Si notes[i] &gt;= 10 Alors
+        nbAdmis ← nbAdmis + 1
+    FinSi
+FinPour</pre>
     <pre>int nbAdmis = 0;
 for (int i = 0; i &lt; notes.Length; i++)
     if (notes[i] &gt;= 10)
         nbAdmis++;</pre>
     <p><strong>Chercher une valeur</strong></p>
-    <pre>bool trouve = false;
-int position = -1;
-for (int i = 0; i &lt; notes.Length; i++)
+    <p>On ne sait pas combien de cases il faudra lire : on s'arrête <strong>dès qu'on a trouvé</strong>. C'est donc un <code>TantQue</code>, avec deux raisons de sortir.</p>
+    <pre>position ← -1
+i ← 0
+TantQue i &lt; notes.Longueur ET position = -1 Faire
+    Si notes[i] = recherche Alors
+        position ← i
+    FinSi
+    i ← i + 1
+FinTantQue</pre>
+    <pre>int position = -1;
+int i = 0;
+while (i &lt; notes.Length &amp;&amp; position == -1)
 {
     if (notes[i] == recherche)
-    {
-        trouve = true;
         position = i;
-    }
+    i++;
 }</pre>
+    <p>À la sortie, <code>position</code> vaut l'indice de la <strong>première</strong> occurrence, ou <strong>-1</strong> si la valeur est absente.</p>
+    <div class="encadre">
+      <span class="etiquette">Pourquoi -1, et pourquoi pas de <code>break</code></span>
+    <p><strong>-1</strong> est une valeur impossible pour un indice : c'est la convention universelle pour dire « pas trouvé », celle de <code>IndexOf</code> en C#. Le 0, lui, est un indice valide : il ne peut pas servir de signal.</p>
+    <p>En C#, on rencontre souvent un <code>for</code> interrompu par <code>break</code>. Le résultat est le même, mais <code>break</code> n'existe pas en pseudo-code : à l'examen, l'arrêt s'écrit dans la <strong>condition</strong> du <code>TantQue</code>.</p>
+    </div>
     <div class="encadre attention">
       <span class="etiquette">Le maximum s'initialise avec le premier élément</span>
-    <p><code>int max = 0;</code> semble naturel et donne un résultat faux dès qu'un tableau ne contient que des valeurs négatives : le maximum de <code>{-5, -12, -3}</code> serait annoncé à 0, une valeur qui n'est même pas dans le tableau.</p>
-    <p>On part de <code>notes[0]</code>, et on commence la boucle à <code>i = 1</code>.</p>
+    <p><code>max ← 0</code> semble naturel et donne un résultat faux dès qu'un tableau ne contient que des valeurs négatives : le maximum de <code>{-5, -12, -3}</code> serait annoncé à 0, une valeur qui n'est même pas dans le tableau. Pour un minimum, c'est pire : partir de 0 sur des notes positives donne toujours 0.</p>
+    <p>On part de <code>notes[0]</code>, et on commence la boucle à l'indice 1.</p>
     </div>
     <h3>7.4 : Les tableaux à deux dimensions</h3>
-    <p>Pour représenter un tableau de valeurs à double entrée : des notes par étudiant et par matière, une grille, une image.</p>
-    <pre>Variables
-    notes : Tableau[0..2][0..3] de Entier      ← 3 étudiants, 4 matières</pre>
+    <p>Pour représenter un tableau de valeurs à double entrée : des notes par étudiant et par matière, une grille, une image. Le premier indice désigne la <strong>ligne</strong>, le second la <strong>colonne</strong>.</p>
+    <pre>Constante NB_ETU = 3
+Constante NB_MAT = 4
+
+Variables
+    notes : Tableau[0..NB_ETU - 1][0..NB_MAT - 1] de Entier   ← 3 étudiants, 4 matières
+Début
+    notes[0][2] ← 15                                        ← étudiant 0, matière 2</pre>
     <pre>int[,] notes = new int[3, 4];
 notes[0, 2] = 15;                  // étudiant 0, matière 2
 
 int[,] notes = { {12, 15, 8, 17},
                  {10, 9, 14, 11},
                  {18, 16, 13, 20} };</pre>
-    <p>Le parcours demande <strong>deux boucles imbriquées</strong> :</p>
-    <pre>for (int etu = 0; etu &lt; 3; etu++)
+    <p>Le parcours demande <strong>deux boucles imbriquées</strong> : la boucle extérieure parcourt les lignes, la boucle intérieure les colonnes de la ligne en cours.</p>
+    <pre>Pour etu De 0 À NB_ETU - 1 Faire
+    Pour mat De 0 À NB_MAT - 1 Faire
+        Écrire(notes[etu][mat], "  ")  sans passer à la ligne
+    FinPour
+    Passer à la ligne
+FinPour</pre>
+    <pre>for (int etu = 0; etu &lt; notes.GetLength(0); etu++)
 {
-    for (int mat = 0; mat &lt; 4; mat++)
+    for (int mat = 0; mat &lt; notes.GetLength(1); mat++)
     {
         Console.Write(notes[etu, mat] + "\t");
     }
@@ -1238,14 +1313,20 @@ int[,] notes = { {12, 15, 8, 17},
 }</pre>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Expression</th><th>Valeur</th></tr></thead>
+        <thead><tr><th>Pseudo-code</th><th>C#</th><th>Valeur</th></tr></thead>
         <tbody>
-          <tr><td><code>notes.GetLength(0)</code></td><td>le nombre de <strong>lignes</strong> (3)</td></tr>
-          <tr><td><code>notes.GetLength(1)</code></td><td>le nombre de <strong>colonnes</strong> (4)</td></tr>
+          <tr><td><code>notes[etu][mat]</code></td><td><code>notes[etu, mat]</code></td><td>la case ligne <code>etu</code>, colonne <code>mat</code></td></tr>
+          <tr><td><code>NB_ETU</code></td><td><code>notes.GetLength(0)</code></td><td>le nombre de <strong>lignes</strong> (3)</td></tr>
+          <tr><td><code>NB_MAT</code></td><td><code>notes.GetLength(1)</code></td><td>le nombre de <strong>colonnes</strong> (4)</td></tr>
+          <tr><td><code>NB_ETU * NB_MAT</code></td><td><code>notes.Length</code></td><td>le nombre <strong>total</strong> de cases (12)</td></tr>
         </tbody>
       </table>
     </div>
-    <p><code>Length</code> sur un tableau 2D renvoie le nombre <strong>total</strong> de cases (12) : ce n'est presque jamais ce qu'on veut.</p>
+    <div class="encadre attention">
+      <span class="etiquette">Une virgule, pas deux paires de crochets</span>
+    <p>En C#, une case d'un tableau <code>int[,]</code> s'écrit <code>notes[etu, mat]</code>. Recopier le pseudo-code <code>notes[etu][mat]</code> ne compile pas : cette écriture désigne un autre type de tableau (un tableau de tableaux).</p>
+    <p>Et <code>Length</code> sur un tableau 2D renvoie le nombre <strong>total</strong> de cases (12) : comme borne de boucle, ce n'est presque jamais ce qu'on veut.</p>
+    </div>
   </section>
 
   <!-- ====================== SESSION 8 ====================== -->
@@ -1255,15 +1336,64 @@ int[,] notes = { {12, 15, 8, 17},
     <h2>Objectifs pédagogiques</h2>
     <ol class="objectifs">
       <li><strong>Remplir</strong> et <strong>parcourir</strong> un tableau</li>
-      <li><strong>Produire</strong> des statistiques sur une série</li>
+      <li><strong>Produire</strong> des statistiques sur une série en un seul parcours</li>
       <li><strong>Traiter</strong> un tableau à deux dimensions</li>
+      <li><strong>Vérifier</strong> un algorithme en le déroulant à la main avant de le coder</li>
     </ol>
     <h2>Cas concret : Mise en situation</h2>
-    <p>Toutes les questions portent sur le même jeu de données, déclaré une fois pour toutes :</p>
+    <p>Toutes les questions portent sur le même jeu de données, déclaré une fois pour toutes.</p>
+    <pre>Variables
+    notes : Tableau[0..9] de Entier
+Début
+    notes ← {12, 8, 15, 17, 6, 11, 19, 9, 14, 10}</pre>
     <pre>int[] notes = { 12, 8, 15, 17, 6, 11, 19, 9, 14, 10 };</pre>
-    <p>Dix notes. Moyenne 12,1 ; minimum 6 ; maximum 19 ; sept notes supérieures ou égales à 10.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Indice</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr></thead>
+        <tbody>
+          <tr><td><code>notes[i]</code></td><td>12</td><td>8</td><td>15</td><td>17</td><td>6</td><td>11</td><td>19</td><td>9</td><td>14</td><td>10</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Dix notes. Somme 121 ; moyenne 12,1 ; minimum 6 ; maximum 19 ; sept notes supérieures ou égales à 10.</p>
+    
+    <h3>Mini tutoriel : dérouler un parcours à la main</h3>
+    <p>Avant d'écrire une ligne de C#, on vérifie l'algorithme <strong>sur papier</strong>, avec un tableau de suivi. C'est ce qu'on attend à l'examen, et c'est la façon la plus rapide de trouver une erreur de borne.</p>
+    <p><strong>Étape 1 : écrire le pseudo-code</strong></p>
+    <p>On veut la somme des notes. C'est le motif « additionner » de la session 7 :</p>
+    <pre>somme ← 0
+Pour i De 0 À notes.Longueur - 1 Faire
+    somme ← somme + notes[i]
+FinPour
+Écrire("Somme : ", somme)</pre>
+    <p><strong>Étape 2 : dérouler à la main</strong></p>
+    <p>Une ligne par tour de boucle, une colonne par variable. On note la valeur <strong>à la fin</strong> du tour.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tour</th><th><code>i</code></th><th><code>notes[i]</code></th><th><code>somme</code></th></tr></thead>
+        <tbody>
+          <tr><td>avant la boucle</td><td></td><td></td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>12</td><td>12</td></tr>
+          <tr><td>2</td><td>1</td><td>8</td><td>20</td></tr>
+          <tr><td>3</td><td>2</td><td>15</td><td>35</td></tr>
+          <tr><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+          <tr><td>10</td><td>9</td><td>10</td><td><strong>121</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Le dernier tour a bien <code>i = 9</code>, c'est-à-dire <code>Longueur - 1</code> : la borne est juste. Dix tours pour dix cases.</p>
+    <p><strong>Étape 3 : traduire, ligne par ligne</strong></p>
+    <p>Comme au TP 1, on ne réécrit pas : on traduit. Seule la borne change de forme.</p>
+    <pre>int somme = 0;
+for (int i = 0; i &lt; notes.Length; i++)    // À Longueur - 1  devient  &lt; Length
+{
+    somme = somme + notes[i];
+}
+Console.WriteLine("Somme : " + somme);</pre>
+    <p><strong>Étape 4 : exécuter et comparer</strong></p>
+    <p>Le programme doit afficher <strong>121</strong>, la valeur trouvée à la main. Si ce n'est pas le cas, l'erreur est dans la traduction, pas dans l'algorithme : on sait où chercher.</p>
     <h2>Travail à réaliser</h2>
-    <p>Rendez un fichier <strong><code>tp4_tableaux.txt</code></strong> avec, pour chaque exercice, le pseudo-code puis le C#.</p>
+    <p>Rendez un fichier <strong><code>tp4_tableaux.txt</code></strong> avec, pour chaque exercice, <strong>le pseudo-code puis le C#</strong>. Le pseudo-code n'est pas facultatif : un C# juste sans pseudo-code ne vaut que la moitié des points.</p>
     
         <div class="exercice">
     <h3>Exercice 1 : Afficher le tableau</h3>
@@ -1277,7 +1407,7 @@ int[,] notes = { {12, 15, 8, 17},
         </div>
         <div class="exercice">
     <h3>Exercice 3 : Rechercher une note</h3>
-    <p>Saisir une note, dire si elle figure dans le tableau et à quelle position.</p>
+    <p>Saisir une note, dire si elle figure dans le tableau et à quelle position (numérotée à partir de 1). La recherche s'arrête à la première occurrence. Testez avec 17, 12, 10 et 7.</p>
     
         </div>
         <div class="exercice">
@@ -1288,6 +1418,15 @@ int[,] notes = { {12, 15, 8, 17},
         <div class="exercice">
     <h3>Exercice 5 : Le tableau à deux dimensions</h3>
     <p>Trois étudiants, quatre matières. Afficher la moyenne de chaque étudiant.</p>
+    <pre>Constante NB_ETU = 3
+Constante NB_MAT = 4
+
+Variables
+    notes : Tableau[0..NB_ETU - 1][0..NB_MAT - 1] de Entier
+Début
+    notes ← { {12, 15,  8, 17},
+              {10,  9, 14, 11},
+              {18, 16, 13, 20} }</pre>
     <pre>int[,] notes = { {12, 15, 8, 17},
                  {10, 9, 14, 11},
                  {18, 16, 13, 20} };</pre>
@@ -1813,11 +1952,11 @@ for (int i = 0; i &lt; t.Length - 1 &amp;&amp; echange; i++)
     </ul>
     <h2>Les tableaux</h2>
     <ul class="retenir">
-      <li>Les indices vont de <strong>0 à <code>Length - 1</code></strong>. La dernière case est <code>t[t.Length - 1]</code>, et la condition de boucle s'écrit <code>i &lt; t.Length</code>.</li>
+      <li>Les indices vont de <strong>0 à <code>Longueur - 1</code></strong>. En pseudo-code, la borne est <strong>incluse</strong> (<code>Pour i De 0 À t.Longueur - 1</code>) ; en C#, elle est <strong>exclue</strong> (<code>i &lt; t.Length</code>).</li>
       <li>Quatre motifs couvrent presque tout : <strong>additionner</strong>, <strong>chercher le maximum</strong>, <strong>compter</strong>, <strong>rechercher</strong>. Ils s'écrivent toujours pareil.</li>
       <li>Tout ce qui se calcule en lisant chaque case une fois se calcule dans <strong>la même boucle</strong>.</li>
-      <li>Une position introuvable se code par <strong>-1</strong>, jamais par 0 qui est un indice valide.</li>
-      <li>Un tableau 2D se parcourt avec <strong>deux boucles imbriquées</strong> ; <code>GetLength(0)</code> donne les lignes, <code>GetLength(1)</code> les colonnes. L'emplacement de l'initialisation entre les deux boucles décide du résultat.</li>
+      <li>Une recherche s'arrête dans la <strong>condition du <code>TantQue</code></strong> ; une position introuvable se code par <strong>-1</strong>, jamais par 0 qui est un indice valide.</li>
+      <li>Un tableau 2D se parcourt avec <strong>deux boucles imbriquées</strong> ; <code>notes[etu][mat]</code> en pseudo-code devient <code>notes[etu, mat]</code> en C#, <code>GetLength(0)</code> donne les lignes, <code>GetLength(1)</code> les colonnes. L'emplacement de l'initialisation entre les deux boucles décide du résultat.</li>
     </ul>
     <h2>Les fonctions</h2>
     <ul class="retenir">
@@ -1899,14 +2038,14 @@ const PLAN = [
     "redigee": true,
     "titre": "Les tableaux",
     "objectifs": "Déclarer et parcourir un tableau ; appliquer les quatre motifs de parcours ; manipuler un tableau à deux dimensions",
-    "notions": "Tableau, indice, `Length`, parcours, somme, maximum, recherche, tableau 2D"
+    "notions": "Tableau, indice, `Longueur` / `Length`, `Pour` et `PourChaque` / `foreach`, somme, maximum, comptage, recherche avec `TantQue`, tableau 2D"
   },
   {
     "n": 8,
     "redigee": true,
     "titre": "TP 4 : traiter une série de données",
-    "objectifs": "Traiter un jeu de notes complet ; produire des statistiques",
-    "notions": "Parcours, agrégats, inversion, matrice"
+    "objectifs": "Traiter un jeu de notes complet en pseudo-code puis en C# ; produire des statistiques ; dérouler un algorithme à la main",
+    "notions": "Tableau de suivi, parcours, agrégats, recherche, inversion, tableau 2D"
   },
   {
     "n": 9,

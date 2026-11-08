@@ -101,3 +101,70 @@ Variables
 Pour i De 1 À 10 Faire
     Écrire(n, " x ", i, " = ", n * i)
 FinPour
+
+
+
+
+
+
+Exercice parcour Matrice : 
+----------------------------------------
+Algorithme CalculMatrice
+Variables
+    grille : Tableau[1à4][1à4] de Entierbleau
+    compteurCroix : Entier
+    compteurRonds : Entier
+
+Pour i De 1 À 4 Faire
+    Pour j De 1 À 4 Faire
+        Si grille[i][j] = O Alors 
+            compteurRonds <- compteurRonds + 1
+        FinSi
+        Si grille[i][j] = X Alors 
+            compteurCroix <-> compteurCroix + 1
+        FinSi
+    FinPour
+FinPour
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Exercice Calcul du premier à 3 : 
+----------------------------------------
+Algorithme Calcul du premier à 3
+Variables
+    grille : Tableau[1à4][1à4] de Entierbleau
+    compteurCroix : Entier
+    compteurRonds : Entier
+
+    i <- 1
+    compteurCroix <- 0
+    compteurRonds <- 0
+
+    TantQue compteurRonds <= 2 OU compteurCroix <= 2 Faire
+    i <- i +1
+        Pour j De 1 À 4 Faire
+            Si grille[i][j] = O Alors 
+                compteurRonds <- compteurRonds + 1
+            FinSi
+            Si grille[i][j] = X Alors 
+                compteurCroix <- compteurCroix + 1
+            FinSi
+        FinPour
+    Fin
+    TantQueEcrire ( " Arret à la ligne " , i )
+
+
+
